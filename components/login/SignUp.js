@@ -1,136 +1,110 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image,ScrollView,  } from "react-native";
 import React, { useState } from "react";
- 
+import LoginStyle from "./LoginStyle";
+import Icon from "react-native-vector-icons/Ionicons";
 
-export default function SignUp({navigation}) {
+export default function SignUp({ navigation, name,LogOtp,forgot }) {
+  const [password, setPassword] = useState("");
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
+  const changeIcon = () => {
+    setIsPasswordSecure(!isPasswordSecure);
+  };
+
+  
 
   return (
     <>
-      <View style={styles.container}>
-        <Text style={styles.title}>Sign Up</Text>
+  <ScrollView automaticallyAdjustKeyboardInsets={true}  showsVerticalScrollIndicator={false}
+        style={{
+            flex: 1, 
+
+        }}
+        contentContainerStyle={{
+            flexGrow: 1,
+        }}>
+      <View style={LoginStyle.container}>
+     
+        <Text style={LoginStyle.title}> {name ? name : "Sign Up"} </Text>
         <View>
-          <Text style={styles.lebelText}>Mobile no</Text>
-          <TextInput placeholder="Mobile no" style={styles.TextInput} />
+          <Text style={LoginStyle.lebelText}>Mobile no</Text>
+          <TextInput placeholder="Mobile no" style={LoginStyle.TextInput} />
         </View>
         <View>
-          <Text style={styles.lebelText}>Password </Text>
-          <TextInput placeholder="password" style={styles.TextInput} />
+          <Text style={LoginStyle.lebelText}>Password </Text>
+          <Icon
+            name={isPasswordSecure ? "eye-off-outline" : "eye-outline"}
+            size={24}
+            style={{ position: "absolute", right: 20, bottom: 20 }}
+            onPress={changeIcon}
+          />
+          <TextInput
+            placeholder="password"
+            style={LoginStyle.TextInput}
+            secureTextEntry={isPasswordSecure}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          ></TextInput>
         </View>
-        <Text style={{ paddingLeft: "63%", color: "#F0CE1B" }}>
-          
-          Forgot Password 
-        </Text>
+        {name ? (
+          <Text
+            style={LoginStyle.inputFieldBaseText}
+            onPress={forgot ? () => forgot() : () => navigation.navigate("ForgetPassword")}
+          >
+             Forgot Password
+          </Text>
+        ) : (
+          ""
+        )}
 
         <View>
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text>Get otp</Text>
+          <TouchableOpacity style={LoginStyle.loginBtn} onPress={LogOtp ? () => LogOtp() : () => navigation.navigate("Otp")}>
+            <Text >Get otp</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.accountHave}>
-          <Text>
-           
-            Already have an account?
-            <Text style={{ color: "#F0CE1B" }} onPress={() =>
-        navigation.navigate('Login' )
-      } > Login</Text> 
+        {name ? (
+          <Text style={{ marginTop: 10 }}> </Text>
+        ) : (
+          <View style={LoginStyle.accountHave}>
+            <Text>
+              Already have an account?
+              <Text
+                style={{ color: "#F0CE1B" }}
+                onPress={() => navigation.navigate("Login")}
+              >
+                {" "}
+                Login
+              </Text>
+            </Text>
+          </View>
+        )}
+        <View style={LoginStyle.horizontalSection}>
+          <View style={LoginStyle.horizontalLine} />
+          <View>
+            <Text style={{ width: 50, textAlign: "center" }}>OR</Text>
+          </View>
+          <View style={LoginStyle.horizontalLine} />
+        </View>
+        <View style={{ marginTop: 20 }}>
+          <Text
+            style={{
+              color: "#F0CE1B",
+              textAlign: "center",
+              paddingHorizontal: 20,
+            }}
+          >
+            {name ? "Login with" : "Sign up with"}
           </Text>
-        </View>
-        <View style={styles.horizontalSection}>
-        <View style={styles.horizontalLine} />
-        <View>
-          <Text style={{ width: 50, textAlign: "center" }}>OR</Text>
-        </View>
-        <View style={styles.horizontalLine} />
-      </View>
-      <View style={{marginTop:20}} >
-        <Text
-          style={{
-            color: "#F0CE1B",
-            textAlign: "center",
-            paddingHorizontal: 20,
-          }}
-        >
-          Sign up with
-        </Text>
 
-        <Image
-          source={require("../../assets/images/login/g-logo.png")}
-          style={styles.imageStyle}
-        />
+          <Image
+            source={require("../../assets/images/login/g-logo.png")}
+            style={LoginStyle.imageStyle}
+          />
+        </View>
+    
       </View>
-      </View>
-     
-     
+      </ScrollView>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 50,
-  },
-  lebelText: {
-    paddingBottom: 10,
-    color: "#F0CE1B",
-  },
-
-  accountHave: {
-    marginLeft: 50,
-    paddingVertical: 20,
-  },
-  loginBtn: {
-    width: "50%",
-    borderRadius: 8,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#F0CE1B",
-    marginLeft: "25%",
-  },
-
-  horizontalSection: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  horizontalLine: { height: 1, width: "30%", backgroundColor: "black" },
-
-  imageStyle: {
-    width: 30,
-    height: 15,
-    alignSelf: "center",
-    margin:20,
-    padding:20
-  },
-
-  TextInput: {
-    width: "100%",
-    height: 45,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: "#F0CE1B",
-    marginBottom: 10,
-    padding: 10,
-  },
-
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    padding: 20,
-  },
-});

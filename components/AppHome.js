@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-const Home = ( ) => {
+const AppHome = ( ) => {
     return (
         <View style={styles.container}>
              <Text> Helo</Text>
@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2c3e50',
+      
     },
 });
 
 //make this component available to the app
-export default Home;
+export default AppHome;
