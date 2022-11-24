@@ -1,6 +1,7 @@
-import { TouchableOpacity, Text, View, TextInput } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import React from "react";
 import LoginStyle from "./LoginStyle";
+import InputField from "./InputField";
 
 export default function ForgetPassword({navigation}) {
   return (
@@ -13,7 +14,7 @@ export default function ForgetPassword({navigation}) {
       </View>
       <View style={{marginVertical:40}}>
         <Text style={LoginStyle.lebelText}>Mobile no</Text>
-        <TextInput placeholder="Mobile no" style={LoginStyle.TextInput} />
+        <InputField placeholder="Mobile no" style={LoginStyle.InputField} />
         <Text style={[LoginStyle.inputFieldBaseText,{paddingLeft:'53%'}]} onPress={() =>
         navigation.navigate('CreatePassword' )
       }>Create New Password</Text>

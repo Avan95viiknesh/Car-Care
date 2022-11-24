@@ -17,14 +17,19 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   loginBtn: {
-    width: "50%",
+    width: "40%",
     borderRadius: 8,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: "#F0CE1B",
-    marginLeft: "25%",
+    marginLeft: "30%",
+  },
+
+  btnText: {
+     color:'#000',
+     fontSize:15,
   },
 
   horizontalSection: {
@@ -51,7 +56,10 @@ export default StyleSheet.create({
     borderColor: "#F0CE1B",
     marginBottom: 10,
     padding: 10,
+    
+    
   },
+  
 
   inputFieldBaseText: {
     paddingLeft: "63%",
@@ -59,12 +67,14 @@ export default StyleSheet.create({
     fontSize: 14,
   },
 
+ iconstyle:{ position: "absolute", right: 20, bottom: 20 },
+
   container: {
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#FFFFFF",
     padding: 20,
-   
+    height: "100%",
     
   },
 
@@ -74,11 +84,12 @@ export default StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     borderColor: "#F0CE1B",
+    textAlign: "center",
   },
 
   otpText: {
     color: "#F0CE1B",
-    fontSize: 16,
+    fontSize: 14,
   },
 
   otpBoxContainer: {
@@ -92,6 +103,20 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginVertical: 40,
+  },
+
+  popCard: {
+    position: "absolute",
+    top: 260,
+    left: 60,
+    borderRadius: 20,
+    width: 250,
+    height: 250,
+    alignItems: "center",
+    backgroundColor: "#e0ffff",
+    justifyContent: "center",
+    zIndex: 1000,
+    filter: "blur",
   },
 
   verificationText: {

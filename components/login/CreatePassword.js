@@ -1,6 +1,7 @@
-import { TouchableOpacity, Text, View, TextInput } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import React from "react";
 import LoginStyle from "./LoginStyle";
+import InputField from "./InputField";
 
 export default function CreatePassword() {
   return (
@@ -11,12 +12,12 @@ export default function CreatePassword() {
       </View>
       <View style={{marginVertical:40}}>
         <Text style={LoginStyle.lebelText}>New  password</Text>
-        <TextInput placeholder="Mobile no" style={[LoginStyle.TextInput,{marginBottom:0}]} />
+        <InputField placeholder="Mobile no" style={[LoginStyle.InputField,{marginBottom:0}]} />
       
       </View>
       <View>
           <Text style={LoginStyle.lebelText}>Confirm Password </Text>
-          <TextInput placeholder="password" style={LoginStyle.TextInput} />
+          <InputField placeholder="password" style={LoginStyle.InputField} />
         </View>
       <View>
         <TouchableOpacity style={LoginStyle.loginBtn}>

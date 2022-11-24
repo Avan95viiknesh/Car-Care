@@ -6,8 +6,8 @@ import Login from "./components/login/Login";
 import ForgetPassword from "./components/login/ForgetPassword";
 import CreatePassword from "./components/login/CreatePassword";
 import Otp from "./components/login/Otp";
-import Main from "./components/Main";
-import AppHome from "./components/AppHome";
+import Main from './components/AppComponents/Main'
+import AppHome from './components/AppComponents/AppHome'
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +20,7 @@ export default function Home() {
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="CreatePassword" component={CreatePassword} />
         <Stack.Screen name="Otp" component={Otp} />
-        <Stack.Screen name="Main" component={Main}  />
+        <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="AppHome" component={AppHome}  />
       </Stack.Navigator>
     </NavigationContainer>

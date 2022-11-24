@@ -1,5 +1,3 @@
-import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./AppHome";
 import About from "./About";
@@ -12,26 +10,27 @@ const Tab = createBottomTabNavigator();
 const Main = () => {
   return (
     <>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator  >
         <Tab.Screen
-          name="home"
+          name='Hello User'
           component={Home}
+          
           options={{
-            tabBarIcon: () => <Ionicons name="home" size={30} color="#900" />,
+            tabBarIcon: () => <Ionicons name="home" size={30} color="#F0CE1B" />,
           }}
         />
         <Tab.Screen
           name="Offers"
           component={Offer}
           options={{
-            tabBarIcon: () => <Ionicons name="cart" size={30} color="#900" />,
+            tabBarIcon: () => <Ionicons name="cart" size={30} color="#F0CE1B" />,
           }}
         />
         <Tab.Screen
           name="About"
           component={About}
           options={{
-            tabBarIcon: () => <Ionicons name="heart" size={30} color="#900" />,
+            tabBarIcon: () => <Ionicons name="heart" size={30} color="#F0CE1B" />,
           }}
         />
 
@@ -39,7 +38,7 @@ const Main = () => {
           name="Profile"
           component={Profile}
           options={{
-            tabBarIcon: () => <Ionicons name="person" size={30} color="#900" />,
+            tabBarIcon: () => <Ionicons name="person" size={30} color="#F0CE1B" />,
           }}
         />
       </Tab.Navigator>
