@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text,Image} from "react-native";
 import Home from "./AppHome";
 import About from "./About";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -12,10 +13,11 @@ const Main = () => {
     <>
       <Tab.Navigator  >
         <Tab.Screen
-          name='Hello User'
+          name='Home'
           component={Home}
-          
           options={{
+            
+            headerTitle:  ()=> <Image  source={require('../../assets/images/App/Home/tab-icon.png')} />,
             tabBarIcon: () => <Ionicons name="home" size={30} color="#F0CE1B" />,
           }}
         />

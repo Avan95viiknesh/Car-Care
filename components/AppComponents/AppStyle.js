@@ -19,11 +19,7 @@ export default StyleSheet.create({
     height: 120,
     resizeMode: "contain",
   },
-  cardImage: {
-    height: 50,
-    width: 50,
-    resizeMode: "cover",
-  },
+ 
 
   cardContainer: {
      
@@ -32,7 +28,7 @@ export default StyleSheet.create({
   },
 
   cardSection: {
-     borderRadius:10, margin:3, borderColor: 'white', borderWidth: 1, height: 80, width: 76,
+     borderRadius:10, margin:3, borderColor: '#FFFFFF', borderWidth: 1, height: 80, width: 76,
   },
 
 cardDetails : {
@@ -42,6 +38,15 @@ cardDetails : {
   alignItems:'center',
   padding:10,
   
+},
+cardTextstyle:{
+  fontSize: 10,
+  textAlign: "center",
+  color: "#000",
+  fontWeight: 'bold',
+  lineHeight:10,
+  color:'#474747',
+  marginTop:1
 }
 
 
