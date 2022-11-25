@@ -107,16 +107,16 @@ export default StyleSheet.create({
 
   popCard: {
     position: "absolute",
-    top: 260,
-    left: 60,
+    top: 220,
+    left: 55,
     borderRadius: 20,
     width: 250,
     height: 250,
     alignItems: "center",
-    backgroundColor: "#e0ffff",
+    backgroundColor: "#ffff00",
     justifyContent: "center",
     zIndex: 1000,
-    filter: "blur",
+    color:'#000'
   },
 
   verificationText: {

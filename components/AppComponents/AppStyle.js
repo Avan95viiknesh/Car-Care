@@ -5,6 +5,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems:'center',
     backgroundColor: "#FFFFFF",
     padding: 20,
     height: "100%",
@@ -28,7 +29,7 @@ export default StyleSheet.create({
   },
 
   cardSection: {
-     borderRadius:10, margin:3, borderColor: '#FFFFFF', borderWidth: 1, height: 80, width: 76,
+     borderRadius:10, margin:3, borderColor: '#F0CE1B', borderWidth: 1, height: 80, width: 76,
   },
 
 cardDetails : {

@@ -1,27 +1,30 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
+
   container: {
-    flex: 1,
-    marginTop: 50,
-    backgroundColor: "#FFFFFF",
+    flex: 1,  
+    padding: 20,
+    height: "100%",
+    
   },
 
   cardSection: {
     borderRadius: 10,
     margin: 3,
     borderColor: "grey",
-    borderWidth: 1,
- 
-    height: 180,
+    borderWidth: 2,
+    height: 200,
     width: 300,
+     
   },
 
   cardlist: {
     flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent:'space-between',
     padding: 10,
+     
   },
 
   scheduleBtn: {
@@ -40,7 +43,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#FFFF",
-    borderColor:'#0000',
+    borderColor:'#000',
     borderWidth: 1,
     width: 120,
     height:40,
