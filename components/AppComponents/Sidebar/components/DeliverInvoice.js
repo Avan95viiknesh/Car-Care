@@ -4,17 +4,17 @@ import SidebarStyle from "./SibebarStyle";
 
 export default function DeliverInvoice() {
   return (
-    <View style={SidebarStyle.container}>
+    <View style={[SidebarStyle.container,{padding:30 }]}>
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           marginVertical: 20,
         }}
       >
-        <Text>
+        <Text style={{fontSize:18, fontWeight:'bold'}}>
           Abdul {"\n"}
-          (RG nagar)
+        <Text style={{fontWeight:'normal', fontSize:16}}>(RG nagar)</Text>
         </Text>
 
         <Text>Payed!</Text>
@@ -22,9 +22,9 @@ export default function DeliverInvoice() {
       <Text
         style={{
           height: 1,
-          width: "80%",
+          width: "90%",
           backgroundColor: "gray",
-          marginLeft: 30,
+          marginLeft: 10,
           marginVertical: 20,
         }}
       ></Text>
@@ -33,7 +33,7 @@ export default function DeliverInvoice() {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             marginVertical: 10,
           }}
         >
@@ -41,7 +41,7 @@ export default function DeliverInvoice() {
           <Text>Akil(Anna nagar)</Text>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={{ color: "#1A30AC" }}>Car name</Text>
           <Text>Hundai</Text>
         </View>
@@ -49,7 +49,7 @@ export default function DeliverInvoice() {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             marginVertical: 10,
           }}
         >
@@ -57,19 +57,19 @@ export default function DeliverInvoice() {
           <Text>TN0123</Text>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={{ color: "#1A30AC" }}>Payment</Text>
           <Text>Cash</Text>
         </View>
       </View>
 
-      <Text  style={{  fontWeight:'bold', fontSize:18, marginLeft:30, marginVertical:20 }}> Payment details</Text>
+      <Text  style={{  fontWeight:'bold', fontSize:18, marginVertical:20 }}> Payment details</Text>
 
       <View>
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             marginVertical: 10,
           }}
         >
@@ -78,7 +78,7 @@ export default function DeliverInvoice() {
           <Text>50Rs</Text>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={{ color: "#1A30AC" }}>Water wash</Text>
           <Text style={SidebarStyle.horizontalLinePayment}></Text>
           <Text>150Rs</Text>
@@ -87,7 +87,7 @@ export default function DeliverInvoice() {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             marginVertical: 10,
           }}
         >
@@ -97,7 +97,7 @@ export default function DeliverInvoice() {
         </View>
       </View>
 
-      <View style={{ flexDirection: "row", justifyContent: "space-around", marginVertical:20 }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical:20 }}>
           <Text style={{  fontWeight:'bold', fontSize:18 }}>Total</Text>
           <Text style={SidebarStyle.horizontalLinePayment}></Text>
           <Text>700Rs</Text>

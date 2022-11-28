@@ -72,7 +72,7 @@ const DATA = [
   },
 ];
 
-const AppHome = ({ navigation }) => {
+const AppHome = () => {
   return (
  
       <View>
