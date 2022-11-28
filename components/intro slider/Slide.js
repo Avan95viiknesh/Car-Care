@@ -19,8 +19,8 @@ const Slide = ({navigation}) => {
     setShowRealApp(true);
   };
 
-  const onSkip = (skip) => {
-    skip.style.color = 'blue'
+  const onSkip = ( ) => {
+ 
     setShowRealApp(true);
   };
 

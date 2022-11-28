@@ -108,7 +108,7 @@ export default StyleSheet.create({
   popCard: {
     position: "absolute",
     top: 220,
-    left: 55,
+    left: 80,
     borderRadius: 20,
     width: 250,
     height: 250,
