@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1,  
     padding: 20,
     height: "100%",
-    
+    width: "100%",
   },
 
   cardSection: {
@@ -16,7 +16,17 @@ export default StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     height: 200,
-    width: 300,
+    width: '100%',
+     
+  },
+
+  cardSectionDelivery: {
+    borderRadius: 10,
+    margin: 3,
+    borderColor: "grey",
+    borderWidth: 2,
+    height: 150,
+    width: '100%',
      
   },
 
@@ -54,4 +64,13 @@ export default StyleSheet.create({
     color:'#000',
     fontSize:15,
  },
+
+ horizontalLinePayment:{
+ 
+    height: 1,
+    width: "40%",
+    marginVertical: 10,
+    borderStyle: 'dashed',
+    borderWidth:1
+ }
 });

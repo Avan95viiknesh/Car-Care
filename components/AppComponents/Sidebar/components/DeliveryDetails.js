@@ -3,6 +3,6 @@ import React from "react";
 import ScheduleApp from "./ScheduleApp";
 import SidebarStyle from "./SibebarStyle";
 
-export default function DeliveryDetails() {
-  return <ScheduleApp delivery='delivery' />;
+export default function DeliveryDetails({navigation}) {
+  return <ScheduleApp delivery='delivery'  deliveryInvoice={() => navigation.navigate("DeliverInvoice")} />;
 }
