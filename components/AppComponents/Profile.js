@@ -4,13 +4,20 @@ import LoginStyle from "../login/LoginStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function Profile({ navigation }) {
+
+  const NavigateService = ( ) => {
+    
+      navigation.navigate("MyService")
+     
+  }
+
   const ProfileList = [
     {
       id: 1,
-      name: "My Service",
-      icon: <Ionicons name="construct" color="#F0CE1B" size={24} />,
+      name:<Text onPress={NavigateService}>My Service</Text>,
+      icon: <Ionicons name="construct" color="#F0CE1B" size={24} onPress={NavigateService} />,
       Arrow: (
-        <Ionicons name="chevron-forward-outline" color="#F0CE1B" size={24} />
+        <Ionicons name="chevron-forward-outline" color="#F0CE1B" size={24}  onPress={NavigateService} />
       ),
     },
     {

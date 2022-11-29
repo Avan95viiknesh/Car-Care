@@ -74,8 +74,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#FFFFFF",
     padding: 20,
-    height: "100%",
-    
+     
   },
 
   otpBox: {
@@ -113,7 +112,7 @@ export default StyleSheet.create({
     width: 250,
     height: 250,
     alignItems: "center",
-    backgroundColor: "#ffff00",
+    backgroundColor: "#F0CE1B",
     justifyContent: "center",
     zIndex: 1000,
     color:'#000'

@@ -16,8 +16,15 @@ export default StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     height: 200,
-    width: '100%',
      
+     
+  },
+
+  cardlist: {
+    flexDirection: "column",
+    justifyContent:'space-between',
+    padding: 10, 
+    width: '100%', 
   },
 
   cardSectionDelivery: {
@@ -26,16 +33,11 @@ export default StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     height: 150,
-    width: '100%',
+    
      
   },
 
-  cardlist: {
-    flexDirection: "column",
-    justifyContent:'space-between',
-    padding: 10,
-     
-  },
+ 
 
   scheduleBtn: {
      
@@ -43,9 +45,9 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F0CE1B",
-    width: 120,
+    width: '40%',
     height:40,
-    paddingHorizontal:10
+     
   },
   cancelBtn: {
      
@@ -55,9 +57,9 @@ export default StyleSheet.create({
     backgroundColor: "#FFFF",
     borderColor:'#000',
     borderWidth: 1,
-    width: 120,
+    width: '40%',
     height:40,
-    paddingHorizontal:10
+    
   },
 
   btnText: {

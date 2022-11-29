@@ -117,40 +117,28 @@ const slides = [
     key: 's1',
     text: ' Provide Quality Service ',
     title: ' Service Priority',
-    image: {
-      uri:
-        'https://www.onedios.com/blog/wp-content/uploads/2021/04/muscular-car-service-worker-repairing-vehicle_146671-19605.jpg',
-    },
+    image: require("../.././assets/images/slider/car-1.jpg"),
     backgroundColor: '#F0CE1B',
   },
   {
     key: 's2',
     title: '20 Point Check-up',
     text: 'full body check-up',
-    image: {
-      uri:
-        'https://globalautoexpo.com/wp-content/uploads/2022/06/Car-Servicing-Provider.jpg',
-    },
+    image: require("../.././assets/images/slider/car-2.jpg"),
     backgroundColor: '#F0CE1B',
   },
   {
     key: 's3',
     title: 'Service At Your Home',
     text: 'Door step service when you need ',
-    image: {
-      uri:
-        'https://www.doorstepcarservice.in/wp-content/uploads/2021/05/CAR-repair-740x740.png',
-    },
+    image: require("../.././assets/images/slider/car-3.png"),
     backgroundColor: '#F0CE1B',
   },
   {
     key: 's4',
     title: 'Great Offers',
     text: 'Enjoy Great offers on our all services',
-    image: {
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_discount.png',
-    },
+    image: require("../.././assets/images/slider/car-4.png"),
     backgroundColor: '#F0CE1B',
   },
    

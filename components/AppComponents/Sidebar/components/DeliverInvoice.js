@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import SidebarStyle from "./SibebarStyle";
 
-export default function DeliverInvoice() {
+export default function DeliverInvoice({upcoming}) {
   return (
     <View style={[SidebarStyle.container,{padding:30 }]}>
       <View
@@ -17,7 +17,12 @@ export default function DeliverInvoice() {
         <Text style={{fontWeight:'normal', fontSize:16}}>(RG nagar)</Text>
         </Text>
 
-        <Text>Payed!</Text>
+      {
+         upcoming ? (<Text style={{color:'red'}} >Not Payed!</Text> ) : (   <Text >Payed!</Text> )
+            
+       
+          
+      }
       </View>
       <Text
         style={{

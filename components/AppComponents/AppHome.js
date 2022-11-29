@@ -4,10 +4,12 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from "react-native";
 import InputField from "../../components/login/InputField";
 import Icon from "react-native-vector-icons/Ionicons";
 import AppStyle from "./AppStyle";
+import LoginStyle from "../login/LoginStyle";
 
 const DATA = [
   {
@@ -74,8 +76,9 @@ const DATA = [
 
 const AppHome = () => {
   return (
- 
-      <View>
+ <ScrollView>
+  
+  <View style={LoginStyle.container}>
         <View style={{ margin: 20 }}>
           <InputField placeholder="Search" />
           <Icon
@@ -115,6 +118,7 @@ const AppHome = () => {
           />
         </View>
       </View>
+ </ScrollView>
  
   );
 };

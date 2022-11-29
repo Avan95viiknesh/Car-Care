@@ -5,7 +5,8 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
-  Pressable
+  Pressable,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import InputField from "../../../login/InputField";
@@ -19,26 +20,44 @@ const sheduleDetails = [
     ownerName: "Akil (Anna nagar) ",
     carName: "Hyundai",
     carNo: "TN0123",
+    date:' 12 / 03 / 21',
+    time: '10.3',
+    status: "confirmed",
   },
   {
     id: "2",
     ownerName: "Suren (Saidapet)",
     carName: "Honda",
     carNo: "TN0456",
+    date: '1 / 08 / 22',
+    time:' 11.0',
+    status: "confirmed",
   },
   {
     id: "3",
     ownerName: "John (Tambaram)",
     carName: "Maruti",
     carNo: "TN0789",
+    date: '11 / 05 / 21',
+    time:' 4.0',
+    status: "upcoming",
   },
 ];
 
-export default function ScheduleApp({ delivery, navigation,deliveryInvoice }) {
+export default function ScheduleApp({
+  delivery,
+  navigation,
+  deliveryInvoice,
+  upcoming,
+  upcomingInvoice,
+}) {
+
+
+
   return (
     <>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={SidebarStyle.container}>
+      <ScrollView>
+        <View>
           <View style={{ margin: 20 }}>
             <InputField placeholder="Search" />
             <Icon
@@ -60,117 +79,75 @@ export default function ScheduleApp({ delivery, navigation,deliveryInvoice }) {
               Recent delivered cars{" "}
               <Text style={{ color: "green" }}> (10)</Text>{" "}
             </Text>
+          ) : upcoming ? (
+            <></>
           ) : (
             ""
           )}
 
-          <View>
+          <View style={[LoginStyle.container, { backgroundColor: "#F9F9F9" }]}>
             <FlatList
               data={sheduleDetails}
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+              Style={LoginStyle.container}
               renderItem={({ item }) => (
                 <View
                   style={
-                    delivery
+                    delivery || upcoming
                       ? SidebarStyle.cardSectionDelivery
                       : SidebarStyle.cardSection
                   }
                 >
                   <Pressable
                     style={SidebarStyle.cardlist}
-                  
                     onPress={
-                      deliveryInvoice
-                        ? () => deliveryInvoice()
-                        : () => navigation.navigate("DeliveryDetails")
+                      delivery || item.status === "confirmed"
+                      ?  () => navigation.navigate("DeliveryDetails") : '' 
                     }
                   >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text style={{ color: "blue", fontWeight: "bold" }}>
-                        {" "}
-                        Owner Name{" "}
-                      </Text>
-                      <Text style={{ fontWeight: "bold" }}>
-                        {item.ownerName}{" "}
+                    <View style={styles.textContainer}>
+                      <Text style={styles.textStyle}>Owner Name</Text>
+                      <Text style={{ fontWeight: "bold", width: "50%" }}>
+                        {item.ownerName}
                       </Text>
                     </View>
 
                     <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        paddingVertical: 6,
-                      }}
+                      style={[styles.textContainer, { paddingVertical: 6 }]}
                     >
-                      <Text style={{ color: "blue", fontWeight: "bold" }}>
-                        {" "}
-                        Car Name
-                      </Text>
-                      <Text>{item.carName} </Text>
+                      <Text style={styles.textStyle}>Car Name</Text>
+                      <Text style={{ width: "50%" }}>{item.carName} </Text>
                     </View>
 
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text style={{ color: "blue", fontWeight: "bold" }}>
-                        {" "}
-                        Car No
-                      </Text>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.textStyle}>Car No</Text>
 
-                      <Text>{item.carNo}</Text>
+                      <Text style={{ width: "50%" }}>{item.carNo}</Text>
                     </View>
                   </Pressable>
 
-                  <Text
-                    style={{
-                      height: 1,
-                      width: "80%",
-                      backgroundColor: "blue",
-                      marginLeft: 30,
-                    }}
-                  ></Text>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginTop: 10,
-                      marginHorizontal: 10,
-                    }}
-                  >
+                  <Text style={styles.horzontalLine}></Text>
+                  <View style={styles.dateAtime}>
                     <Text>
                       <Icon name="calendar-outline" size={18} />{" "}
-                      <Text> 12/03/21</Text>
+                      <Text> {item.date} </Text>
                     </Text>
-                    <Text style={{ marginHorizontal: 10 }}>
-                      <Icon name="time" size={18} /> <Text>10.30am </Text>
+                    <Text>
+                      <Icon name="time" size={18} /> <Text>{item.time}</Text>
                     </Text>
                     <Text>
                       <Icon name="ellipse" size={10} color="green" />{" "}
-                      <Text>{delivery ? "Delivered" : "Confirmed"} </Text>
+                      <Text>{item.status} </Text>
                     </Text>
                   </View>
 
-                  {delivery ? (
+                  {delivery || upcoming ? (
                     ""
                   ) : (
                     <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        marginVertical: 10,
-                      }}
+                      style={[
+                        styles.textContainer,
+                        { marginHorizontal: 25, marginBottom: 10 },
+                      ]}
                     >
                       <TouchableOpacity style={SidebarStyle.cancelBtn}>
                         <Text>Cancel</Text>
@@ -190,4 +167,30 @@ export default function ScheduleApp({ delivery, navigation,deliveryInvoice }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  textStyle: {
+    color: "blue",
+    fontWeight: "bold",
+    width: "50%",
+  },
+
+  horzontalLine: {
+    height: 1,
+    width: "80%",
+    backgroundColor: "blue",
+    marginLeft: 30,
+  },
+
+  dateAtime: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 10,
+    width: "100%",
+  },
+});
