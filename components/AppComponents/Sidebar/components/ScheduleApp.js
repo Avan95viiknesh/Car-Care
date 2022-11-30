@@ -20,8 +20,8 @@ const sheduleDetails = [
     ownerName: "Akil (Anna nagar) ",
     carName: "Hyundai",
     carNo: "TN0123",
-    date:' 12 / 03 / 21',
-    time: '10.3',
+    date:' 12/03/21',
+    time: '10.30',
     status: "confirmed",
   },
   {
@@ -29,8 +29,8 @@ const sheduleDetails = [
     ownerName: "Suren (Saidapet)",
     carName: "Honda",
     carNo: "TN0456",
-    date: '1 / 08 / 22',
-    time:' 11.0',
+    date: '1/08/22',
+    time:' 11.00',
     status: "confirmed",
   },
   {
@@ -38,8 +38,8 @@ const sheduleDetails = [
     ownerName: "John (Tambaram)",
     carName: "Maruti",
     carNo: "TN0789",
-    date: '11 / 05 / 21',
-    time:' 4.0',
+    date: '11/05/21',
+    time:' 4.00',
     status: "upcoming",
   },
 ];
@@ -100,8 +100,8 @@ export default function ScheduleApp({
                   <Pressable
                     style={SidebarStyle.cardlist}
                     onPress={
-                      delivery || item.status === "confirmed"
-                      ?  () => navigation.navigate("DeliveryDetails") : '' 
+                      deliveryInvoice  
+                      ? () => deliveryInvoice() : () => navigation.navigate("DeliveryDetails") 
                     }
                   >
                     <View style={styles.textContainer}>
@@ -136,7 +136,7 @@ export default function ScheduleApp({
                     </Text>
                     <Text>
                       <Icon name="ellipse" size={10} color="green" />{" "}
-                      <Text>{item.status} </Text>
+                      <Text>{delivery ? item.status = 'Delivered' : upcoming ? item.status = 'upcoimg' : 'Confirmed'} </Text>
                     </Text>
                   </View>
 
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   dateAtime: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     marginTop: 10,
     width: "100%",
   },

@@ -5,11 +5,13 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  LogBox,
 } from "react-native";
 import InputField from "../../components/login/InputField";
 import Icon from "react-native-vector-icons/Ionicons";
 import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
+import React, { useEffect } from "react";
 
 const DATA = [
   {
@@ -75,10 +77,14 @@ const DATA = [
 ];
 
 const AppHome = () => {
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
   return (
- <ScrollView>
-  
-  <View style={LoginStyle.container}>
+    <>
+      <ScrollView>
+      <View style={LoginStyle.container}>
         <View style={{ margin: 20 }}>
           <InputField placeholder="Search" />
           <Icon
@@ -106,20 +112,18 @@ const AppHome = () => {
               alignItems: "center",
             }}
             renderItem={({ item }) => (
-           
-                <TouchableOpacity style={AppStyle.cardSection}>
-                  <View style={AppStyle.cardDetails}>
-                    <Text>{item.icon} </Text>
-                    <Text style={AppStyle.cardTextstyle}>{item.name}</Text>
-                  </View>
-                </TouchableOpacity>
-              
+              <TouchableOpacity style={AppStyle.cardSection}>
+                <View style={AppStyle.cardDetails}>
+                  <Text>{item.icon} </Text>
+                  <Text style={AppStyle.cardTextstyle}>{item.name}</Text>
+                </View>
+              </TouchableOpacity>
             )}
           />
         </View>
       </View>
- </ScrollView>
- 
+      </ScrollView>
+    </>
   );
 };
 

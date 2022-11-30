@@ -7,13 +7,16 @@ import {
   TextInput,
   Pressable,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import LoginStyle from "./LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import InputField from "./InputField";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function SignUp({ navigation, name, LogOtp, forgot }) {
+export default function SignUp({ navigation, name, LogOtp,LogHome, forgot }) {
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
@@ -21,18 +24,45 @@ export default function SignUp({ navigation, name, LogOtp, forgot }) {
     setIsPasswordSecure(!isPasswordSecure);
   };
 
+const setData = async () => {
+  if(mobile.length <= 9){
+    Alert.alert('warning', 'Please enter your number');
+  }else if(password.length <= 5){
+    Alert.alert('warning', 'Please enter valid Password');
+  }else {
+    try {
+      const dataVal =  [['mobileNo', mobile], ['password', password]]
+      await AsyncStorage.setItem("datas", JSON.stringify(dataVal));
+     
+       if( name == LogOtp){
+        navigation.navigate("Otp") 
+       }else    {
+        LogHome()
+       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  setMobile('')
+  setPassword('')
+}
+
   return (
     <>
       <SafeAreaView style={LoginStyle.container}>
         <ScrollView>
+<Image source={require('../../../Car-Care/assets/car-care.jpg')} style={LoginStyle.headerImage}  />
+
           <View style={{ marginTop: 120, height: "100%" }}>
             <Text style={LoginStyle.title}> {name ? name : "Sign Up"} </Text>
             <View>
               <Text style={LoginStyle.lebelText}>Mobile no</Text>
-              <InputField
-                placeholder="Mobile no"
-                style={LoginStyle.InputField}
-              />
+              <TextInput
+                  placeholder="Mobile no"
+                  style={LoginStyle.TextInput}
+                  value={mobile}
+                  onChangeText={(val) => setMobile(val)}
+                />
             </View>
             <View>
               <Text style={LoginStyle.lebelText}>Password </Text>
@@ -71,22 +101,23 @@ export default function SignUp({ navigation, name, LogOtp, forgot }) {
             <View>
               <TouchableOpacity
                 style={LoginStyle.loginBtn}
-                onPress={
-                  LogOtp ? () => LogOtp() : () => navigation.navigate("Otp")
-                }
+               onPress={
+                setData
+                } 
               >
-                <Text>Get otp</Text>
+                <Text> {name ? 'Login' :'Get otp'}</Text>
               </TouchableOpacity>
             </View>
+
 
             {name ? (
               <Text style={{ marginTop: 10 }}> </Text>
             ) : (
               <View style={LoginStyle.accountHave}>
-                <Text>
+                <Text style={{fontSize:15}}>
                   Already have an account?
                   <Text
-                    style={{ color: "#F0CE1B" }}
+                    style={{ color: "#F0CE1B", fontSize:14 }}
                     onPress={() => navigation.navigate("Login")}
                   >
                     {" "}

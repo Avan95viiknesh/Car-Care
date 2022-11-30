@@ -11,9 +11,11 @@ import AppHome from "./components/AppComponents/AppHome";
 import DeliverInvoice from "./components/AppComponents/Sidebar/components/DeliverInvoice";
 import DeliveryDetails from "./components/AppComponents/Sidebar/components/DeliveryDetails";
 import Slide from "./components/intro slider/Slide";
-import MyService from "./components/AppComponents/MyService";
+import MyService from "./components/AppComponents/profileComponents/MyService" 
 import Upcoming from "./components/AppComponents/Sidebar/components/Upcoming";
 import UpcomingInvoice from "./components/AppComponents/Sidebar/components/UpcomingInvoice";
+import ContactUs from "./components/AppComponents/profileComponents/ContactUs";
+import Settings from "./components/AppComponents/profileComponents/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +24,8 @@ export default function Home() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Slider" component={Slide} />
+        <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="CreatePassword" component={CreatePassword} />
         <Stack.Screen name="Otp" component={Otp} />
@@ -54,6 +56,16 @@ export default function Home() {
           name="UpcomingInvoice"
           component={UpcomingInvoice}
           options={{ title: "Upcoming ", headerShown: true }}
+        />
+        <Stack.Screen
+          name="ContactUs"
+          component={ContactUs}
+          options={{ title: "Contact-us ", headerShown: true }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{ title: "Settings ", headerShown: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

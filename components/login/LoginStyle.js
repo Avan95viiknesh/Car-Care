@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
+headerImage :{
+  width:100, height:120, position:'absolute', right: 140, top : 10
+},
+
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -13,8 +18,9 @@ export default StyleSheet.create({
   },
 
   accountHave: {
-    marginLeft: 50,
-    paddingVertical: 20,
+    marginLeft: 90,
+    paddingVertical: 30,
+    
   },
   loginBtn: {
     width: "40%",
