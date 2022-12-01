@@ -243,22 +243,28 @@ export default function Profile({ navigation, settings }) {
           )}
         />
       </View>
-
-      <TouchableOpacity
-        style={[
-          LoginStyle.loginBtn,
-          {
-            marginLeft: 0,
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-          },
-        ]}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={[LoginStyle.btnText, { fontSize: 15 }]}>Log out</Text>
-        <Ionicons name="power-outline" color="black" size={22} />
-      </TouchableOpacity>
+{
+  settings ? '' : (
+    
+    <TouchableOpacity
+    style={[
+      LoginStyle.loginBtn,
+      {
+        marginLeft: 0,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        width:100,
+        height:40
+      },
+    ]}
+    onPress={() => navigation.navigate("Login")}
+  >
+    <Text style={[LoginStyle.btnText, { fontSize: 14 }]}>Log out</Text>
+    <Ionicons name="power-outline" color="black" size={20} />
+  </TouchableOpacity>
+  )
+}
     </View>
   );
 }

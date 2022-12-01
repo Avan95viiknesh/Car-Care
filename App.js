@@ -4,6 +4,7 @@ import Upcoming from "./components/AppComponents/Sidebar/components/Upcoming";
 import Home from "./Home";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
 
 export default function App() {
   return (
