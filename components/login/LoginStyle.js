@@ -62,7 +62,7 @@ headerImage :{
     borderColor: "#F0CE1B",
     marginBottom: 10,
     padding: 10,
-    
+    backgroundColor:'#FFF'
     
   },
   

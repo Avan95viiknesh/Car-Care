@@ -4,13 +4,21 @@ import Profile from "./Profile";
 import Offer from "./Offer";
 import ScheduleApp from "./Sidebar/components/ScheduleApp";
 import AppHome from "./AppHome";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../../redux/action";
+import {  View } from "react-native";
+
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+  const {theme} = useSelector((state) => state.themeReducer)
+
   return (
     <>
-      <Tab.Navigator
+     
+     <Tab.Navigator
+     style={{backgroundColor: theme == 'light' ? 'white' : 'black'}}
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -32,6 +40,7 @@ const Main = () => {
         })}
       >
         <Tab.Screen
+          style={{color: theme == 'light' ? 'black' : 'white'}}
           name="Home"
           component={AppHome}
           options={{
@@ -44,6 +53,7 @@ const Main = () => {
 
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
+   
     </>
   );
 };

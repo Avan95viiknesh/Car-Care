@@ -12,6 +12,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../../redux/action"; 
+
 
 const DATA = [
   {
@@ -77,14 +80,17 @@ const DATA = [
 ];
 
 const AppHome = () => {
+ 
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
+ 
 
+const {theme} = useSelector((state) => state.themeReducer)
   return (
     <>
-      <ScrollView>
-      <View style={LoginStyle.container}>
+      <ScrollView >
+      <View style={{  padding: 20,  backgroundColor: theme == 'light' ? 'white' : 'black'  }}>
         <View style={{ margin: 20 }}>
           <InputField placeholder="Search" />
           <Icon
@@ -100,7 +106,7 @@ const AppHome = () => {
           />
         </View>
         <View>
-          <Text style={AppStyle.selectText}>Select Service</Text>
+          <Text style={[AppStyle.selectText,{color: theme == 'light' ? 'black' : 'white'}]}>Select Service</Text>
         </View>
 
         <View>
@@ -114,8 +120,8 @@ const AppHome = () => {
             renderItem={({ item }) => (
               <TouchableOpacity style={AppStyle.cardSection}>
                 <View style={AppStyle.cardDetails}>
-                  <Text>{item.icon} </Text>
-                  <Text style={AppStyle.cardTextstyle}>{item.name}</Text>
+                  <Text style={{color: theme == 'light' ? 'black' : 'white'}}>{item.icon} </Text>
+                  <Text style={[AppStyle.cardTextstyle,{color: theme == 'light' ? 'black' : 'white'}]}>{item.name}</Text>
                 </View>
               </TouchableOpacity>
             )}

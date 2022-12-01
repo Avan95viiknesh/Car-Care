@@ -9,27 +9,31 @@ import {
 import React from "react";
 import InputField from "../../login/InputField";
 import LoginStyle from "../../login/LoginStyle";
+import { useSelector } from "react-redux";
 
 export default function ContactUs() {
+
+  const {theme} = useSelector((state) => state.themeReducer)
+
   return (
     <>
-      <ScrollView>
-        <View style={LoginStyle.container}>
+    
+        <View style={[LoginStyle.container,{backgroundColor: theme == 'light' ? 'white' : 'black' }]}>
           <View>
-            <Text style={styles.headingText}>Get in touch </Text>
+            <Text style={[styles.headingText,{color: theme == 'light' ? 'black' : 'white'}]}>Get in touch </Text>
           </View>
           <View>
-            <Text style={styles.text}> Your name</Text>
+            <Text style={[styles.text,{color: theme == 'light' ? 'black' : 'white'}]}> Your name</Text>
             <InputField />
           </View>
 
           <View>
-            <Text style={styles.text}> Your email address</Text>
+            <Text style={[styles.text,{color: theme == 'light' ? 'black' : 'white'}]}> Your email address</Text>
             <InputField />
           </View>
 
           <View>
-            <Text style={styles.text}>Message</Text>
+            <Text style={[styles.text,{color: theme == 'light' ? 'black' : 'white'}]}>Message</Text>
             <TextInput
               style={[
                 LoginStyle.TextInput,
@@ -40,11 +44,11 @@ export default function ContactUs() {
 
           <View>
             <TouchableOpacity style={LoginStyle.loginBtn}>
-              <Text style={{fontSize:18}}>Send</Text>
+              <Text style={{fontSize:18,}}>Send</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+     
     </>
   );
 }

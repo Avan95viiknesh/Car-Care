@@ -13,6 +13,9 @@ import InputField from "../../../login/InputField";
 import Icon from "react-native-vector-icons/Ionicons";
 import SidebarStyle from "./SibebarStyle";
 import LoginStyle from "../../../login/LoginStyle";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../../../../redux/action";
+
 
 const sheduleDetails = [
   {
@@ -52,12 +55,12 @@ export default function ScheduleApp({
   upcomingInvoice,
 }) {
 
-
+  const {theme} = useSelector((state) => state.themeReducer)
 
   return (
     <>
       <ScrollView>
-        <View>
+        <View style={{    backgroundColor: theme == 'light' ? 'white' : 'black'  }}>
           <View style={{ margin: 20 }}>
             <InputField placeholder="Search" />
             <Icon
@@ -74,6 +77,7 @@ export default function ScheduleApp({
                 marginBottom: 20,
                 fontWeight: "bold",
                 fontSize: 20,
+                color: theme == 'light' ? 'black' : 'white'
               }}
             >
               Recent delivered cars{" "}
@@ -85,7 +89,7 @@ export default function ScheduleApp({
             ""
           )}
 
-          <View style={[LoginStyle.container, { backgroundColor: "#F9F9F9" }]}>
+          <View style={[LoginStyle.container, {  backgroundColor: theme == 'light' ? 'white' : 'black'  }]}>
             <FlatList
               data={sheduleDetails}
               Style={LoginStyle.container}
@@ -106,7 +110,7 @@ export default function ScheduleApp({
                   >
                     <View style={styles.textContainer}>
                       <Text style={styles.textStyle}>Owner Name</Text>
-                      <Text style={{ fontWeight: "bold", width: "50%" }}>
+                      <Text style={{ fontWeight: "bold", width: "50%",color: theme == 'light' ? 'black' : 'white' }}>
                         {item.ownerName}
                       </Text>
                     </View>
@@ -115,13 +119,13 @@ export default function ScheduleApp({
                       style={[styles.textContainer, { paddingVertical: 6 }]}
                     >
                       <Text style={styles.textStyle}>Car Name</Text>
-                      <Text style={{ width: "50%" }}>{item.carName} </Text>
+                      <Text style={{ width: "50%",color: theme == 'light' ? 'black' : 'white' }}>{item.carName} </Text>
                     </View>
 
                     <View style={styles.textContainer}>
                       <Text style={styles.textStyle}>Car No</Text>
 
-                      <Text style={{ width: "50%" }}>{item.carNo}</Text>
+                      <Text style={{ width: "50%", color: theme == 'light' ? 'black' : 'white' }}>{item.carNo}</Text>
                     </View>
                   </Pressable>
 
@@ -129,14 +133,14 @@ export default function ScheduleApp({
                   <View style={styles.dateAtime}>
                     <Text>
                       <Icon name="calendar-outline" size={18} />{" "}
-                      <Text> {item.date} </Text>
+                      <Text  style={{color: theme == 'light' ? 'black' : 'white'}}> {item.date} </Text>
                     </Text>
                     <Text>
-                      <Icon name="time" size={18} /> <Text>{item.time}</Text>
+                      <Icon name="time" size={18} style={{color: theme == 'light' ? 'black' : 'white'}} /> <Text style={{color: theme == 'light' ? 'black' : 'white'}}>{item.time}</Text>
                     </Text>
                     <Text>
                       <Icon name="ellipse" size={10} color="green" />{" "}
-                      <Text>{delivery ? item.status = 'Delivered' : upcoming ? item.status = 'upcoimg' : 'Confirmed'} </Text>
+                      <Text style={{color: theme == 'light' ? 'black' : 'white'}}>{delivery ? item.status = 'Delivered' : upcoming ? item.status = 'upcoimg' : 'Confirmed'} </Text>
                     </Text>
                   </View>
 
@@ -174,15 +178,16 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
-    color: "blue",
+     color: "#F0CE1B",
     fontWeight: "bold",
     width: "50%",
+     
   },
 
   horzontalLine: {
     height: 1,
     width: "80%",
-    backgroundColor: "blue",
+    backgroundColor: "white",
     marginLeft: 30,
   },
 
