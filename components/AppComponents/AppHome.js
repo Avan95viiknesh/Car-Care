@@ -16,11 +16,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action"; 
 
 
+
+const AppHome = ({navigation}) => {
+ 
+ 
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+ 
 const DATA = [
   {
     id: 1,
     name: "Car Service",
-    icon: <Icon name="car-sport-outline" color="#F0CE1B" size={24} />,
+    icon: <Icon name="car-sport-outline" color="#F0CE1B" size={24} onPress={() => navigation.navigate("CarService")} />,
   },
   {
     id: 2,
@@ -79,12 +87,6 @@ const DATA = [
   },
 ];
 
-const AppHome = () => {
- 
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
- 
 
 const {theme} = useSelector((state) => state.themeReducer)
   return (
@@ -134,3 +136,5 @@ const {theme} = useSelector((state) => state.themeReducer)
 };
 
 export default AppHome;
+
+

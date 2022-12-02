@@ -5,6 +5,8 @@ import Home from "./Home";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
+import CarService from "./components/AppComponents/HomepageComponents/CarService";
+import SignUp from "./components/login/SignUp";
 
 export default function App() {
   return (

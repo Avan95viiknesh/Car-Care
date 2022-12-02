@@ -10,7 +10,8 @@ headerImage :{
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 50,
+    marginTop :60
+    
   },
   lebelText: {
     paddingBottom: 10,

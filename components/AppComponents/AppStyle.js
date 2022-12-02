@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
 
   cardSection: {
-     borderRadius:10, margin:3, borderColor: '#F0CE1B', borderWidth: 1, height: 80, width: 76,
+     borderRadius:10, margin:3, borderColor: '#F0CE1B', borderWidth: 1, height: 80, width: 76,   cursor:'pointer'
   },
 
 cardDetails : {
