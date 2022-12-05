@@ -1,11 +1,32 @@
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import LoginStyle from "../login/LoginStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation, settings }) {
+  const [userName, setUserName] = useState("");
+  const [userNum, setUserNum] = useState("");
+
+  useEffect(() => {
+    getUserName();
+  }, []);
+
+  const getUserName = () => {
+    try {
+      AsyncStorage.getItem("userName").then((value) => {
+        if (value != null) {
+          setUserName(value);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   const { theme } = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 
@@ -35,6 +56,7 @@ export default function Profile({ navigation, settings }) {
           <Text
             onPress={NavigateService}
             style={{ color: theme == "light" ? "black" : "white" }}
+          
           >
             My Service
           </Text>
@@ -75,9 +97,7 @@ export default function Profile({ navigation, settings }) {
           <Text
             onPress={NavigateSettings}
             style={{ color: theme == "light" ? "black" : "white" }}
-          >
-            Settings{" "}
-          </Text>
+          >Settings{" "}    </Text>
         ),
         settingsName: (
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
@@ -172,10 +192,7 @@ export default function Profile({ navigation, settings }) {
         profileName: (
           <Text
             style={{ color: theme == "light" ? "black" : "white" }}
-            onPress={() => changeTheme()}
-          >
-            Dark Mode{" "}
-          </Text>
+            onPress={() => changeTheme()}>Dark Mode{" "}     </Text>
         ),
       },
       icon: {
@@ -211,7 +228,7 @@ export default function Profile({ navigation, settings }) {
               marginBottom: 5,
             }}
           >
-            Hello, User
+        { `Hi ${userName}`}
           </Text>
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
             +91 0123456789

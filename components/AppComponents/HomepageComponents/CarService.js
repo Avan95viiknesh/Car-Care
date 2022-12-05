@@ -11,6 +11,7 @@ import LoginStyle from "../../login/LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
+import { Formik } from 'formik';
 
 export default function CarService() {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
@@ -49,6 +50,11 @@ export default function CarService() {
 
   return (
     <ScrollView>
+        <Formik
+     initialValues={{ name:'', number: '', mobile:'' }}
+     onSubmit={values => console.log(values)}
+   >  
+     {({ handleChange, handleBlur, handleSubmit, values }) => (
       <View style={styles.container}>
         <View>
           <Text style={styles.headingText}>Car Service </Text>
@@ -60,6 +66,9 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Name"
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
             />
           </View>
           <View>
@@ -67,6 +76,9 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Veh No"
+              onChangeText={handleChange('number')}
+              onBlur={handleBlur('number')}
+              value={values.number}
             />
           </View>
         </View>
@@ -77,6 +89,9 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder=" Enter your number"
+              onChangeText={handleChange('mobile')}
+              onBlur={handleBlur('mobile')}
+              value={values.mobile}
             />
           </View>
           <View>
@@ -93,6 +108,7 @@ export default function CarService() {
               setOpen={setOpen}
               setValue={setValue}
               setItems={setItems}
+              
             />
           </View>
         </View>
@@ -163,12 +179,15 @@ export default function CarService() {
         <View>
           <TouchableOpacity
             style={[LoginStyle.loginBtn, { marginVertical: 10, }]}
+            onPress={handleSubmit}
           >
             <Text>Book Service</Text>
           </TouchableOpacity>
         </View>
         <Text></Text>
       </View>
+           )}
+      </Formik>
     </ScrollView>
   );
 }

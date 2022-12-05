@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { DataTable } from "react-native-paper";
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function MyService() {
   return (
@@ -18,34 +19,36 @@ export default function MyService() {
             <DataTable.Title>Vehicle Name</DataTable.Title>
             <DataTable.Title>Reg No</DataTable.Title>
             <DataTable.Title>Service Type</DataTable.Title>
+            <DataTable.Title>Actions  </DataTable.Title>
           </DataTable.Header>
-          <DataTable.Row style={styles.tableRow}>
+      
             <FlatList
               data={serviceList}
               renderItem={({ item }) => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginVertical: 5,
-                  }}
-                >
-                  <DataTable.Cell>
-                    <Text style={styles.tabelCell}>{item.name}</Text>
+                <View>
+                      <DataTable.Row style={styles.tableRow}> 
+                  <DataTable.Cell  style={styles.tabelCell}>
+                  {item.name} 
                   </DataTable.Cell>
-                  <DataTable.Cell>
-                    <Text style={styles.tabelCell}>{item.VehicleName}</Text>
+                  <DataTable.Cell style={styles.tabelCell}>
+               {item.VehicleName} 
                   </DataTable.Cell>
-                  <DataTable.Cell>
-                    <Text style={styles.tabelCell}>{item.RegNo}</Text>
+                  <DataTable.Cell style={styles.tabelCell}>
+                 {item.RegNo} 
                   </DataTable.Cell>
-                  <DataTable.Cell>
-                    <Text style={styles.tabelCell}>{item.serviceType}</Text>
+                  <DataTable.Cell style={styles.tabelCell}>
+           {item.serviceType} 
                   </DataTable.Cell>
+                  <DataTable.Cell style={[styles.tabelCell,{flexDirection:'row', justifyContent:'space-between'}]}>
+                  <Icon name="eye-outline" size={20}   /> 
+                   <Icon name="trash-outline" size={20} /> 
+                </DataTable.Cell>
+                </DataTable.Row>
                 </View>
               )}
+              
             />
-          </DataTable.Row>
+
         </DataTable>
       </View>
     </>
@@ -55,19 +58,18 @@ export default function MyService() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    width: "100%",
   },
   tableHeader: {
     backgroundColor: "#c0c0c0",
   },
-  tableRow: {
-    height: 130,
-
-    backgroundColor: "#F0CE1B",
+  tableRow:{
+ 
+    borderColor: "#c0c0c0",
   },
   tabelCell: {
-    borderBottomWidth: 1,
-    borderColor: "#F0CE1B",
+    
+    padding: 10,
+    
   },
 });
 

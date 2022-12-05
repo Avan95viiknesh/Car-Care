@@ -4,16 +4,13 @@ import Profile from "./Profile";
 import Offer from "./Offer";
 import ScheduleApp from "./Sidebar/components/ScheduleApp";
 import AppHome from "./AppHome";
-import { useSelector } from "react-redux";
-import React,{useState,useEffect} from "react";
-import {  Text } from "react-native";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { ScrollView, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
-  const {theme} = useSelector((state) => state.themeReducer)
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
@@ -32,13 +29,9 @@ const Main = () => {
     }
   };
 
-  console.log(userName);
-
   return (
     <>
-     
-     <Tab.Navigator
-     style={{backgroundColor: theme == 'light' ? 'white' : 'black'}}
+      <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -56,20 +49,21 @@ const Main = () => {
             return <Ionicons name={iconName} size={size} color={"#F0CE1B"} />;
           },
 
-          tabBarActiveTintColor: "#F0CE1B",
+          tabBarActiveTintColor: "#000",
+          tabBarInactiveTintColor: "#000",
+          tabBarShowLabel:false,
+          tabBarStyle: { backgroundColor: "#FFF" },
         })}
       >
         <Tab.Screen
-          style={{color: theme == 'light' ? 'black' : 'white'}}
-          name= {userName}
-          component={AppHome}   
+          name="Home"
+          component={AppHome}
+          options={{ headerTitle: `Hi ${userName}` }}
         />
         <Tab.Screen name="Offers" component={Offer} />
         <Tab.Screen name="Schedule appoinment" component={ScheduleApp} />
-
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
-   
     </>
   );
 };

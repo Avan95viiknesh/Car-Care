@@ -18,6 +18,7 @@ import ContactUs from "./components/AppComponents/profileComponents/ContactUs";
 import Settings from "./components/AppComponents/profileComponents/Settings";
 import CarService from "./components/AppComponents/HomepageComponents/CarService";
 import TyreWheel from "./components/AppComponents/HomepageComponents/TyreWheel";
+import { SafeAreaView } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,8 @@ export default function Home() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+  
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Slider" component={Slide} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -81,6 +83,7 @@ export default function Home() {
           options={{ title: "Tyre & WheelCare", headerShown: true }}
         />
       </Stack.Navigator>
+ 
     </NavigationContainer>
   );
 }

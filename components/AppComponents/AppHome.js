@@ -111,7 +111,7 @@ const {theme} = useSelector((state) => state.themeReducer)
           <Text style={[AppStyle.selectText,{color: theme == 'light' ? 'black' : 'white'}]}>Select Service</Text>
         </View>
 
-        <View>
+        <View >
           <FlatList
             data={DATA}
             numColumns={4}

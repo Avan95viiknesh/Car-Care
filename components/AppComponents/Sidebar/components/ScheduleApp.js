@@ -16,6 +16,7 @@ import SidebarStyle from "./SibebarStyle";
 import LoginStyle from "../../../login/LoginStyle";
 import { useSelector } from "react-redux";
 import DatePicker from "react-native-neat-date-picker";
+import UpcomingInvoice from "./UpcomingInvoice";
 
 const sheduleDetails = [
   {
@@ -25,7 +26,7 @@ const sheduleDetails = [
     carNo: "TN0123",
     date: " 12/03/21",
     time: "10.30",
-    status: "confirmed",
+    status: "Confirmed",
   },
   {
     id: "2",
@@ -34,7 +35,7 @@ const sheduleDetails = [
     carNo: "TN0456",
     date: "1/08/22",
     time: " 11.00",
-    status: "confirmed",
+    status: "Confirmed",
   },
   {
     id: "3",
@@ -43,7 +44,7 @@ const sheduleDetails = [
     carNo: "TN0789",
     date: "11/05/21",
     time: " 4.00",
-    status: "upcoming",
+    status: "Upcoming",
   },
 ];
 
@@ -76,12 +77,19 @@ export default function ScheduleApp({
   };
 
 
-  const openDatePickerSingle = () => setShowDatePickerSingle(true);
+  const openDatePickerSingle = (item,index) => {
+    setShowDatePickerSingle(true);
+    setShowDatePickerSingle(index)
+  }
+
+
+
+
   const onCancelSingle = () => {
  
     setShowDatePickerSingle(false);
   };
-
+ 
   const onConfirmSingle = (output) => {
     
     setShowDatePickerSingle(false);
@@ -131,7 +139,7 @@ export default function ScheduleApp({
             <FlatList
               data={searchTerm}
               Style={LoginStyle.container}
-              renderItem={({ item }) => (
+              renderItem={({ item,index }) => (
                 <View
                   style={
                     delivery || upcoming
@@ -141,11 +149,15 @@ export default function ScheduleApp({
                 >
                   <Pressable
                     style={SidebarStyle.cardlist}
-                    onPress={
-                      deliveryInvoice
-                        ? () => deliveryInvoice()
-                        : () => navigation.navigate("DeliveryDetails")
-                    }
+                    onPress={ item.status === 'Confirmed' ? deliveryInvoice
+                      ? () => deliveryInvoice()
+                      : () => navigation.navigate("DeliveryDetails") :
+
+                      upcomingInvoice ? () => upcomingInvoice() :
+                      () => navigation.navigate("Upcoming")
+
+
+}
                   >
                     <View style={styles.textContainer}>
                       <Text style={styles.textStyle}>Owner Name</Text>
@@ -191,7 +203,7 @@ export default function ScheduleApp({
                   <Text style={styles.horzontalLine}></Text>
                   <View style={styles.dateAtime}>
                     <Text>
-                      <Icon name="calendar-outline" size={18} onPress={openDatePickerSingle} />{" "}
+                      <Icon name="calendar-outline" size={18} onPress={openDatePickerSingle(index)} />{" "}
                       <DatePicker
                         isVisible={showDatePickerSingle}
                         mode={"single"}
@@ -222,11 +234,7 @@ export default function ScheduleApp({
                       <Text
                         style={{ color: theme == "light" ? "black" : "white" }}
                       >
-                        {delivery
-                          ? (item.status = "Delivered")
-                          : upcoming
-                          ? (item.status = "upcoimg")
-                          : "Confirmed"}{" "}
+                        { item.status  }{" "}
                       </Text>
                     </Text>
                   </View>
