@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   Pressable,
-  SafeAreaView,
+  LogBox,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "../../../login/InputField";
 import Icon from "react-native-vector-icons/Ionicons";
 import SidebarStyle from "./SibebarStyle";
@@ -82,6 +82,11 @@ export default function ScheduleApp({
     setShowDatePickerSingle(index)
   }
 
+  useEffect(() => {
+
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+
+  }, []);
 
 
 

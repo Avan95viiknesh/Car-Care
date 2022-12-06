@@ -25,6 +25,10 @@ export default function CarService() {
     { label: "Paid Service", value: "Paid" },
     { label: "Free Checkup", value: "Checkup" },
   ]);
+const [ownerName, setOwnerName] = useState();
+const [vehNo, setVehNo] = useState();
+const [contact, setContact] = useState();
+
 
   const openDatePickerSingle = () => setShowDatePickerSingle(true);
   const openDatePickerSingle2 = () => setShowDatePickerSingle2(true);
@@ -48,13 +52,14 @@ export default function CarService() {
     setData(output.dateString);
   };
 
+  const handleSubmit =() => {
+    console.log(ownerName,vehNo,contact,value,date,data);
+   
+  }
+
   return (
     <ScrollView>
-        <Formik
-     initialValues={{ name:'', number: '', mobile:'' }}
-     onSubmit={values => console.log(values)}
-   >  
-     {({ handleChange, handleBlur, handleSubmit, values }) => (
+    
       <View style={styles.container}>
         <View>
           <Text style={styles.headingText}>Car Service </Text>
@@ -66,9 +71,8 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Name"
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
+              onChangeText={(text) =>setOwnerName(text)}
+              value={ownerName}
             />
           </View>
           <View>
@@ -76,9 +80,9 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Veh No"
-              onChangeText={handleChange('number')}
-              onBlur={handleBlur('number')}
-              value={values.number}
+              onChangeText={(text) => setVehNo (text)}
+          
+              value={vehNo}
             />
           </View>
         </View>
@@ -89,9 +93,8 @@ export default function CarService() {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder=" Enter your number"
-              onChangeText={handleChange('mobile')}
-              onBlur={handleBlur('mobile')}
-              value={values.mobile}
+              onChangeText={(text) => setContact (text)}           
+              value={contact}
             />
           </View>
           <View>
@@ -118,7 +121,7 @@ export default function CarService() {
             <Text style={styles.labelText}>Booking Date</Text>
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
-              placeholder={date}
+              value={date}
             />
 
             <Icon
@@ -132,7 +135,7 @@ export default function CarService() {
             <Text style={styles.labelText}>Expected Delivery</Text>
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
-              placeholder={data}
+              value={data}
             />
             <Icon
               name="calendar-outline"
@@ -186,8 +189,7 @@ export default function CarService() {
         </View>
         <Text></Text>
       </View>
-           )}
-      </Formik>
+         
     </ScrollView>
   );
 }
