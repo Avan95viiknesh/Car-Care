@@ -39,7 +39,7 @@ export default function MyService() {
                   rowData.map((cellData, cellIndex) => (
                     <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text}/>
                   ))
-                }
+                }    
               </TableWrapper>
             ))
           }
