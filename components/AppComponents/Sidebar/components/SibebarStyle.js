@@ -68,11 +68,6 @@ export default StyleSheet.create({
  },
 
  horizontalLinePayment:{
- 
-    height: 1,
-    width: "40%",
-    marginVertical: 10,
-    borderStyle: 'dashed',
-    borderWidth:1
+  
  }
 });

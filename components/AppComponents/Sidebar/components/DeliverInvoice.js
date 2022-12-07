@@ -18,7 +18,7 @@ const handleIncrement = () => {
 
   return (
    <SafeAreaView>
-     <View style={ {padding:20,  paddingTop:60, backgroundColor: theme == 'light' ? 'white' : 'black', justifyContent:'center',  }}>
+     <View style={ {padding:20, height:'100%', width:'100%' , paddingTop:60, backgroundColor: theme == 'light' ? 'white' : 'black', justifyContent:'center',  }}>
       <View
         style={{
           flexDirection: "row",
@@ -121,7 +121,7 @@ const handleIncrement = () => {
             <Text> Conform</Text>
            </TouchableOpacity>) : ''
         }
-      <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical:20, marginBottom: 160, }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical:20,   }}>
           <Text style={{  fontWeight:'bold', fontSize:18,color: theme == 'light' ? 'black' : 'white' }}>Total</Text>
           <Text style={SidebarStyle.horizontalLinePayment}></Text>
          {

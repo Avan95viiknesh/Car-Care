@@ -1,115 +1,59 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  FlatList,
-  Text,
-} from "react-native";
-import React from "react";
-import { DataTable } from "react-native-paper";
-import Icon from "react-native-vector-icons/Ionicons";
+import React, { Component } from 'react';
+import { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
 export default function MyService() {
-  return (
-    <>
-      <View>
-        <DataTable style={styles.container}>
-          <DataTable.Header style={styles.tableHeader}>
-            <DataTable.Title>Name</DataTable.Title>
-            <DataTable.Title>Vehicle Name</DataTable.Title>
-            <DataTable.Title>Reg No</DataTable.Title>
-            <DataTable.Title>Service Type</DataTable.Title>
-       
-            <DataTable.Title>Actions</DataTable.Title>
-          </DataTable.Header>
+  
+  const [dataTable, setDataTable] = useState(  {
+    tableHead: ['Head', 'Head2', 'Head3', 'Head4'],
+    tableData: [
+      ['1', '2', '3', '4'],
+      ['a', 'b', 'c', 'd'],
+      ['1', '2', '3', '4'],
+      ['a', 'b', 'c', 'd']
+    ]
+  })
 
-          <FlatList
-            data={serviceList}
-            renderItem={({ item }) => (
-              <View>
-                <DataTable.Row style={styles.tableRow}>
-                  <DataTable.Cell style={styles.tabelCell}>
-                    {item.name}
-                  </DataTable.Cell>
-                  <DataTable.Cell style={styles.tabelCell}>
-                    {item.VehicleName}
-                  </DataTable.Cell>
-                  <DataTable.Cell style={styles.tabelCell}>
-                    {item.RegNo}
-                  </DataTable.Cell>
-                  <DataTable.Cell style={styles.tabelCell}>
-                    {item.serviceType}
-                  </DataTable.Cell>
-                  <DataTable.Cell>
-             
-                      <Icon name="eye-outline" size={20} />
-                      <Icon name="trash-outline" size={20} />
-                
-                  </DataTable.Cell>
-                </DataTable.Row>
-              </View>
-            )}
-          />
-        </DataTable>
+  const alertIndex = (index) => {
+    Alert.alert(`This is row ${index + 1}`);
+  }
+
+ 
+    const element = (data, index) => (
+      <TouchableOpacity onPress={() => this._alertIndex(index)}>
+        <View style={styles.btn}>
+          <Text style={styles.btnText}>button</Text>
+        </View>
+      </TouchableOpacity>
+    );
+
+    return (
+      <View style={styles.container}>
+        <Table borderStyle={{borderColor: 'transparent'}}>
+          <Row data={dataTable.tableHead} style={styles.head} textStyle={styles.text}/>
+          {
+            dataTable.tableData.map((rowData, index) => (
+              <TableWrapper key={index} style={styles.row}>
+                {
+                  rowData.map((cellData, cellIndex) => (
+                    <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text}/>
+                  ))
+                }
+              </TableWrapper>
+            ))
+          }
+        </Table>
       </View>
-    </>
-  );
-}
+    )
+  }
+
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10, 
-  
-  },
-  tableHeader: {
-    backgroundColor:'#F0CE1B',
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-  },
-  tableRow: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    backgroundColor:'#edcf8e',
-  },
-
-  tabelCell: {
-    borderRightWidth:1,
-    borderRightColor: 'gray',
- 
-  },
+  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+  head: { height: 40, backgroundColor: '#808B97' },
+  text: { margin: 6 },
+  row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
+  btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
+  btnText: { textAlign: 'center', color: '#fff' }
 });
-
-const serviceList = [
-  {
-    id: 1,
-    name: "John David",
-    VehicleName: "Hyundai",
-    RegNo: "TN0123",
-    serviceType: "First Service",
-    actions:''
-  },
-  {
-    id: 2,
-    name: "Rahim",
-    VehicleName: "Maruti",
-    RegNo: "TN0348",
-    serviceType: "Third Service",
-    actions:''
-  },
-  {
-    id: 3,
-    name: "Vignesh Murugan",
-    VehicleName: "Jaguar",
-    RegNo: "TN1208",
-    serviceType: "Paid Service",
-    actions:''
-  },
-  {
-    id: 4,
-    name: "John Abdul Praba",
-    VehicleName: "BMW",
-    RegNo: "TN2574",
-    serviceType: "Second Service",
-    actions:''
-  },
-];
