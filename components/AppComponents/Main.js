@@ -113,6 +113,7 @@ const Main = () => {
         ref={drawer}
         drawerWidth={300}
         renderNavigationView={navigationView}
+        
       >
         <Tab.Navigator
           screenOptions={({ route }) => ({

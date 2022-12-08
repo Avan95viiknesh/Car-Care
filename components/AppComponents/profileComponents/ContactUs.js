@@ -35,9 +35,11 @@ export default function ContactUs() {
           <View>
             <Text style={[styles.text,{color: theme == 'light' ? 'black' : 'white'}]}>Message</Text>
             <TextInput
+            multiline={true}
+            textAlignVertical="top"
               style={[
                 LoginStyle.TextInput,
-                { height: 150, justifyContent: "flex-start" },
+                { padding: 10, height: 130,  },
               ]}
             />
           </View>

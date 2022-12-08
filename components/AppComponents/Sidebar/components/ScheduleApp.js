@@ -8,6 +8,7 @@ import {
   Pressable,
   LogBox,
   TextInput,
+  Alert
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import InputField from "../../../login/InputField";
@@ -102,6 +103,27 @@ export default function ScheduleApp({
       console.log(output);
     setDate(output.dateString);
   };
+
+
+const alertPopup = () => {
+  Alert.alert(
+
+    "Are you sure you want to cancel..?",
+    " ",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
+
+
+}
+
+
 
   return (
     <>
@@ -253,10 +275,10 @@ export default function ScheduleApp({
                         { marginHorizontal: 25, marginBottom: 10 },
                       ]}
                     >
-                      <TouchableOpacity style={SidebarStyle.cancelBtn}>
+                      <TouchableOpacity style={SidebarStyle.cancelBtn} onPress={alertPopup} >
                         <Text>Cancel</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={SidebarStyle.scheduleBtn}>
+                      <TouchableOpacity style={SidebarStyle.scheduleBtn} onPress={() => navigation.navigate("CarService")}>
                         <Text style={SidebarStyle.btnText}>Reschedule</Text>
                       </TouchableOpacity>
                     </View>

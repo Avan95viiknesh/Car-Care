@@ -11,7 +11,8 @@ import LoginStyle from "../../login/LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
-import { Formik } from 'formik';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 export default function CarService() {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
@@ -28,7 +29,42 @@ export default function CarService() {
 const [ownerName, setOwnerName] = useState();
 const [vehNo, setVehNo] = useState();
 const [contact, setContact] = useState();
+const [hours, setHours] = React.useState(0);
+const [minutes, setMinutes] = React.useState(0);
 
+
+const [dateNow, setDateNow] = useState(new Date())
+const [mode, setMode] = useState('dateNow');
+const [show, setShow] = useState(false);
+const [textShow, setTextShow] = useState('Empty')
+
+
+const showMode = (currentMode) => {
+  setShow(true);
+  setMode(currentMode)
+}
+
+const onChangeTimeDate = () => {
+const currentdate = selectedDate || dateNow;
+setDateNow(currentdate);
+
+let tempDate = new Date(currentdate);
+let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+let fTime = 'Hours :' + tempDate.getHours() + '| Minutes' + tempDate.getMinutes(); 
+setTextShow(fDate + '\n' + fTime)
+
+console.log(fDate +'('+ fTime + ')' )
+}
+
+
+  const handleChangeTime = (  { hours , minutes }) => {
+    setHours(hours);
+    setMinutes( minutes);
+  };
+  // const handleReset = () => {
+  //   setHours(0);
+  //   setMinutes(0);
+  // };
 
   const openDatePickerSingle = () => setShowDatePickerSingle(true);
   const openDatePickerSingle2 = () => setShowDatePickerSingle2(true);
@@ -53,8 +89,9 @@ const [contact, setContact] = useState();
   };
 
   const handleSubmit =() => {
-    console.log(ownerName,vehNo,contact,value,date,data);
-   
+ 
+    console.log(ownerName,vehNo,contact,value,date,data,values);
+   ('')
   }
 
   return (
@@ -144,7 +181,40 @@ const [contact, setContact] = useState();
               onPress={openDatePickerSingle2}
             />
           </View>
+          
         </View>
+
+        <View>
+            <Text style={styles.labelText}>Expected Time</Text>
+             
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            {/* <TimePicker
+        value={{ hours, minutes }}
+        onChange={handleChangeTime}
+        
+        zeroPadding
+         
+     
+      /> */}
+
+<Text style={styles.labelText}> {textShow} </Text>
+       </View>
+
+            <Icon
+              name="time-outline"
+              size={18}
+              style={{ position: "absolute", left: 10, bottom: 20 }}
+             onPress={() => showMode('time')} 
+            />
+
+            {
+              show && ( <DateTimePicker testID = 'dateTimePicker' value ={dateNow} mode={mode} is24Hour ={true} display ='default' onChange ={onChangeTimeDate} /> )
+            }
+
+            
+          </View>
+
+
 
         <DatePicker
           placeholder="select date"
@@ -189,7 +259,7 @@ const [contact, setContact] = useState();
         </View>
         <Text></Text>
       </View>
-         
+      
     </ScrollView>
   );
 }
