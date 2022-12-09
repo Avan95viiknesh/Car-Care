@@ -5,24 +5,31 @@ import {
   View,
   Alert,
   Modal,
-  Pressable,
+  TextInput,
+  TouchableOpacity,
+  
 } from "react-native";
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Data } from "../../data/Datas";
 import DeliverInvoice from "../Sidebar/components/DeliverInvoice";
 import SibebarStyle from "../Sidebar/components/SibebarStyle";
+import DatePicker from "react-native-neat-date-picker";
+import Icon from "react-native-vector-icons/Ionicons";
+import LoginStyle from "../../login/LoginStyle";
+import DatePickerSet from "../datepicker/DatePickerSet";
 
 export default function MyService({ navigation }) {
+  
   const [show, setShow] = useState(false);
+  const [dateFilter, setDateFilter] = useState({});
+  const [data, setData] = useState(Data);
 
   const getInvoice = (item) => {
     setShow(true);
-     
   };
 
- // const filterObj = Data.filter((e) => e.status == 'Confirmed');
-
+  // const filterObj = Data.filter((e) => e.status == 'Confirmed');
 
   const alertPopup = () => {
     Alert.alert("Are you sure you want to delete..?", " ", [
@@ -35,10 +42,10 @@ export default function MyService({ navigation }) {
     ]);
   };
 
-  const itemData = ({ item, index }) => {
+  const itemData = ({ item, index, value }) => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <View style={{ width: 30,height:40, backgroundColor: "#F0CE1B" }}>
+        <View style={{ width: 30, height: 40, backgroundColor: "#F0CE1B" }}>
           <Text>{item.id} </Text>
         </View>
 
@@ -52,6 +59,9 @@ export default function MyService({ navigation }) {
 
         <View style={{ width: 70, backgroundColor: "#F0CE1B" }}>
           <Text>{item.service} </Text>
+        </View>
+        <View style={{ width: 50, backgroundColor: "#F0CE1B" }}>
+          <Text>{item.date} </Text>
         </View>
 
         <View style={{ width: 70, backgroundColor: "#F0CE1B" }}>
@@ -76,41 +86,68 @@ export default function MyService({ navigation }) {
       </View>
     );
   };
+  console.log("Data :", Data);
+ 
+  const dateSearch = () => {
+  const searchDateFilter =  dateFilter.start && date.filter.end && setData(Data.filter((eachData) => new Date(eachData) >= dateFilter.start && Date(eachData) <= dateFilter.end))
+
+  console.log(searchDateFilter);
+  }
+
+  const setDateFilters = (e,type) => {
+     setDateFilter((prevState) => ({
+          ...prevState, [type] : new Date(e)
+     }))
+  }
 
   return (
     <>
+      
+
       <View
         style={{
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
           marginTop: "10%",
-         
         }}
-      >
+      > 
+ 
+<View style={{flexDirection:'row' , justifyContent:'center', alignItems:'center'}}>
+<DatePickerSet onChange={(e) => setDateFilters(e,'start')} />
+<DatePickerSet onChange={(e) => setDateFilters(e,'end')} />
+
+<TouchableOpacity onPress={dateSearch}>
+  <Text>click </Text>
+</TouchableOpacity>
+</View>
+
         <View style={{ flexDirection: "row" }}>
           <View style={{ width: 30, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff", fontSize:16 }}>ID</Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>ID</Text>
           </View>
 
           <View style={{ width: 80, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff",  fontSize:16 }}>Name</Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Name</Text>
           </View>
 
           <View style={{ width: 90, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff",  fontSize:16 }}>VehNo</Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>VehNo</Text>
           </View>
 
           <View style={{ width: 70, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff",  fontSize:16 }}>Service </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Service </Text>
+          </View>
+          <View style={{ width: 50, backgroundColor: "#000" }}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Date </Text>
           </View>
 
           <View style={{ width: 70, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff",  fontSize:16 }}> Status </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}> Status </Text>
           </View>
 
           <View style={{ width: 70, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff",  fontSize:16 }}> Action </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}> Action </Text>
           </View>
         </View>
         <FlatList
@@ -129,43 +166,41 @@ export default function MyService({ navigation }) {
             Alert.alert("Modal has been closed.");
             setShow(!show);
           }}
-          
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text onPress={() => setShow(!show)} style={{marginTop:15, textAlign:'center'}}>
+              <Text
+                onPress={() => setShow(!show)}
+                style={{ marginTop: 15, textAlign: "center" }}
+              >
                 {" "}
-                <Ionicons name="close-outline" color={'#7B0C0C'} size={35}  />
+                <Ionicons name="close-outline" color={"#7B0C0C"} size={35} />
               </Text>
               <View>
-              <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-              
-              }}
-            >
-              Abdul {"\n"}
-              <Text style={{ fontWeight: "normal", fontSize: 16 }}>
-                (RG nagar)
-              </Text>
-            </Text>
- 
-             {
-                Data.filter((e) => e.status == 'Confirmed')  ?  <Text >
-              Payed !
-            </Text> :  <Text style={{color:'red'}} >
-                Payed !
-              </Text>
-             }
-           
-          </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Abdul {"\n"}
+                    <Text style={{ fontWeight: "normal", fontSize: 16 }}>
+                      (RG nagar)
+                    </Text>
+                  </Text>
+
+                  {Data.filter((e) => e.status === "Confirmed") ? (
+                    <Text>Payed !</Text>
+                  ) : (
+                    <Text style={{ backgroundColor: "red" }}>Payed !</Text>
+                  )}
+                </View>
                 <Text
                   style={{
                     fontWeight: "bold",
@@ -248,7 +283,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-   
   },
   modalView: {
     margin: 20,
@@ -257,7 +291,7 @@ const styles = StyleSheet.create({
     padding: 25,
     height: 300,
     width: 300,
-    
+
     justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
