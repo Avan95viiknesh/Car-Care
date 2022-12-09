@@ -22,8 +22,10 @@ import DatePickerSet from "../datepicker/DatePickerSet";
 export default function MyService({ navigation }) {
   
   const [show, setShow] = useState(false);
-  const [dateFilter, setDateFilter] = useState({});
-  const [data, setData] = useState(Data);
+
+
+  // const [dateFilter, setDateFilter] = useState({});
+  // const [data, setData] = useState(Data);
 
   const getInvoice = (item) => {
     setShow(true);
@@ -45,7 +47,7 @@ export default function MyService({ navigation }) {
   const itemData = ({ item, index, value }) => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <View style={{ width: 30, height: 40, backgroundColor: "#F0CE1B" }}>
+        <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }}>
           <Text>{item.id} </Text>
         </View>
 
@@ -54,15 +56,13 @@ export default function MyService({ navigation }) {
         </View>
 
         <View style={{ width: 90, backgroundColor: "#F0CE1B" }}>
-          <Text>{item.vegNo} </Text>
+          <Text>{item.vehNo} </Text>
         </View>
 
-        <View style={{ width: 70, backgroundColor: "#F0CE1B" }}>
+        <View style={{ width: 60, backgroundColor: "#F0CE1B" }}>
           <Text>{item.service} </Text>
         </View>
-        <View style={{ width: 50, backgroundColor: "#F0CE1B" }}>
-          <Text>{item.date} </Text>
-        </View>
+        
 
         <View style={{ width: 70, backgroundColor: "#F0CE1B" }}>
           <Text>{item.status} </Text>
@@ -88,17 +88,17 @@ export default function MyService({ navigation }) {
   };
   console.log("Data :", Data);
  
-  const dateSearch = () => {
-  const searchDateFilter =  dateFilter.start && date.filter.end && setData(Data.filter((eachData) => new Date(eachData) >= dateFilter.start && Date(eachData) <= dateFilter.end))
+  // const dateSearch = () => {
+  // const searchDateFilter =  dateFilter.start && date.filter.end && setData(Data.filter((eachData) => new Date(eachData) >= dateFilter.start && Date(eachData) <= dateFilter.end))
 
-  console.log(searchDateFilter);
-  }
+  // console.log(searchDateFilter);
+  // }
 
-  const setDateFilters = (e,type) => {
-     setDateFilter((prevState) => ({
-          ...prevState, [type] : new Date(e)
-     }))
-  }
+  // const setDateFilters = (e,type) => {
+  //    setDateFilter((prevState) => ({
+  //         ...prevState, [type] : new Date(e)
+  //    }))
+  // }
 
   return (
     <>
@@ -112,7 +112,7 @@ export default function MyService({ navigation }) {
           marginTop: "10%",
         }}
       > 
- 
+{/*  
 <View style={{flexDirection:'row' , justifyContent:'center', alignItems:'center'}}>
 <DatePickerSet onChange={(e) => setDateFilters(e,'start')} />
 <DatePickerSet onChange={(e) => setDateFilters(e,'end')} />
@@ -120,10 +120,10 @@ export default function MyService({ navigation }) {
 <TouchableOpacity onPress={dateSearch}>
   <Text>click </Text>
 </TouchableOpacity>
-</View>
+</View> */}
 
         <View style={{ flexDirection: "row" }}>
-          <View style={{ width: 30, backgroundColor: "#000" }}>
+          <View style={{ width: 40, backgroundColor: "#000" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>ID</Text>
           </View>
 
@@ -135,12 +135,10 @@ export default function MyService({ navigation }) {
             <Text style={{ color: "#fff", fontSize: 16 }}>VehNo</Text>
           </View>
 
-          <View style={{ width: 70, backgroundColor: "#000" }}>
+          <View style={{ width: 60, backgroundColor: "#000" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Service </Text>
           </View>
-          <View style={{ width: 50, backgroundColor: "#000" }}>
-            <Text style={{ color: "#fff", fontSize: 16 }}>Date </Text>
-          </View>
+         
 
           <View style={{ width: 70, backgroundColor: "#000" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}> Status </Text>

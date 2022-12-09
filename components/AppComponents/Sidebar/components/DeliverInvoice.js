@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  StatusBar
 } from "react-native";
 import React from "react";
 import SidebarStyle from "./SibebarStyle";
@@ -35,18 +36,17 @@ export default function DeliverInvoice({ upcoming, id }) {
     console.log(setTotal(parseInt(bookingFees) + parseInt(washPrice)));
   };
 
-  const result = () => {
-    Data.find((eachData) => id === eachData.id);
-  };
+  // const result = () => {
+  //   Data.find((eachData) => id === eachData.id);
+  // };
 
   return (
     <SafeAreaView>
       <ScrollView>
         <View
           style={{
-            padding: 20,
-     
-            paddingTop: 60,
+            padding: 20,   
+            paddingTop: 100,
             backgroundColor: theme == "light" ? "white" : "black",
             justifyContent: "center",
           }}

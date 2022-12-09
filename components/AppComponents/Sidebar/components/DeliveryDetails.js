@@ -4,5 +4,9 @@ import ScheduleApp from "./ScheduleApp";
 import SidebarStyle from "./SibebarStyle";
 
 export default function DeliveryDetails({navigation}) {
-  return <ScheduleApp delivery='delivery'  deliveryInvoice={() => navigation.navigate("DeliverInvoice")} />;
+  return (
+    <ScrollView>
+      <ScheduleApp delivery='delivery'  deliveryInvoice={() => navigation.navigate("DeliverInvoice")} />;
+    </ScrollView>
+  )
 }

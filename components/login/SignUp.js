@@ -62,18 +62,20 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
 
           <View style={{ marginTop: 50, height: "100%" }}>
             <Text style={LoginStyle.title}> {name ? name : "SIGN UP"} </Text>
-            <View>
-              <Text style={LoginStyle.lebelText}>Name </Text>
-
-              <View>
-                <TextInput
-                  placeholder="Name"
-                  style={LoginStyle.TextInput}
-                  value={userName}
-                  onChangeText={(text) => setUserName(text)}
-                />
-              </View>
-            </View>
+             {
+              name ? '' : (<View>
+                <Text style={LoginStyle.lebelText}>Name </Text>
+  
+                <View>
+                  <TextInput
+                    placeholder="Name"
+                    style={LoginStyle.TextInput}
+                    value={userName}
+                    onChangeText={(text) => setUserName(text)}
+                  />
+                </View>
+              </View>)
+             }
             <View>
               <Text style={LoginStyle.lebelText}>Mobile no</Text>
               <TextInput

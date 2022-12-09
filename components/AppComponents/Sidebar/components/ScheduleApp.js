@@ -8,7 +8,7 @@ import {
   Pressable,
   LogBox,
   TextInput,
-  Alert
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import InputField from "../../../login/InputField";
@@ -18,36 +18,7 @@ import LoginStyle from "../../../login/LoginStyle";
 import { useSelector } from "react-redux";
 import DatePicker from "react-native-neat-date-picker";
 import UpcomingInvoice from "./UpcomingInvoice";
-
-const sheduleDetails = [
-  {
-    id: "1",
-    ownerName: "Akil (Anna nagar) ",
-    carName: "Hyundai",
-    carNo: "TN0123",
-    date: " 12/03/21",
-    time: "10.30",
-    status: "Confirmed",
-  },
-  {
-    id: "2",
-    ownerName: "Suren (Saidapet)",
-    carName: "Honda",
-    carNo: "TN0456",
-    date: "1/08/22",
-    time: " 11.00",
-    status: "Confirmed",
-  },
-  {
-    id: "3",
-    ownerName: "John (Tambaram)",
-    carName: "Maruti",
-    carNo: "TN0789",
-    date: "11/05/21",
-    time: " 4.00",
-    status: "Upcoming",
-  },
-];
+import { Data } from "../../../data/Datas";
 
 export default function ScheduleApp({
   delivery,
@@ -60,12 +31,12 @@ export default function ScheduleApp({
 
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [date, setDate] = useState("");
-  const [searchTerm, setSearchTerm] = useState([...sheduleDetails]);
-  const [mastersearchTerm, setmasterSearchTerm] = useState([...sheduleDetails]);
+  const [searchTerm, setSearchTerm] = useState([...Data]);
+  const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
 
   const searchFilterFunction = (text) => {
     if (text.length >= 1) {
-      const filteredData = sheduleDetails.filter((data) => {
+      const filteredData = Data.filter((data) => {
         if (data.ownerName.toUpperCase().includes(text.toUpperCase())) {
           return data;
         }
@@ -77,60 +48,31 @@ export default function ScheduleApp({
     }
   };
 
-
-  const openDatePickerSingle = (item,index) => {
-    setShowDatePickerSingle(true);
-    setShowDatePickerSingle(index)
-  }
-
   useEffect(() => {
-
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-
   }, []);
 
-
-
-  const onCancelSingle = () => {
- 
-    setShowDatePickerSingle(false);
-  };
- 
-  const onConfirmSingle = (output) => {
-    
-    setShowDatePickerSingle(false);
-
-      console.log(output);
-    setDate(output.dateString);
-  };
-
-
-const alertPopup = () => {
-  Alert.alert(
-
-    "Are you sure you want to cancel..?",
-    " ",
-    [
+  const alertPopup = () => {
+    Alert.alert("Are you sure you want to cancel..?", " ", [
       {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
+        style: "cancel",
       },
-      { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]
-  );
-
-
-}
-
-
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]);
+  };
 
   return (
     <>
       <ScrollView>
         <View style={{ backgroundColor: theme == "light" ? "white" : "black" }}>
           <View style={{ margin: 20 }}>
-            <TextInput placeholder="Search" style={LoginStyle.TextInput}   onChangeText={(e) => searchFilterFunction(e)} />
+            <TextInput
+              placeholder="Search"
+              style={LoginStyle.TextInput}
+              onChangeText={(e) => searchFilterFunction(e)}
+            />
             <Icon
               name="search-outline"
               size={24}
@@ -166,7 +108,7 @@ const alertPopup = () => {
             <FlatList
               data={searchTerm}
               Style={LoginStyle.container}
-              renderItem={({ item,index }) => (
+              renderItem={({ item, index }) => (
                 <View
                   style={
                     delivery || upcoming
@@ -176,15 +118,15 @@ const alertPopup = () => {
                 >
                   <Pressable
                     style={SidebarStyle.cardlist}
-                    onPress={ item.status === 'Confirmed' ? deliveryInvoice
-                      ? () => deliveryInvoice()
-                      : () => navigation.navigate("DeliveryDetails") :
-
-                      upcomingInvoice ? () => upcomingInvoice() :
-                      () => navigation.navigate("Upcoming")
-
-
-}
+                    onPress={
+                      delivery
+                        ? deliveryInvoice
+                          ? () => deliveryInvoice()
+                          : () => navigation.navigate("DeliveryDetails")
+                        : upcomingInvoice
+                        ? () => upcomingInvoice()
+                        : () => navigation.navigate("Upcoming")
+                    }
                   >
                     <View style={styles.textContainer}>
                       <Text style={styles.textStyle}>Owner Name</Text>
@@ -195,7 +137,7 @@ const alertPopup = () => {
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.ownerName}
+                        {item.name}
                       </Text>
                     </View>
 
@@ -209,7 +151,7 @@ const alertPopup = () => {
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.carName}{" "}
+                        {item.vehName}{" "}
                       </Text>
                     </View>
 
@@ -222,7 +164,7 @@ const alertPopup = () => {
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.carNo}
+                        {item.vehNo}
                       </Text>
                     </View>
                   </Pressable>
@@ -230,13 +172,7 @@ const alertPopup = () => {
                   <Text style={styles.horzontalLine}></Text>
                   <View style={styles.dateAtime}>
                     <Text>
-                      <Icon name="calendar-outline" size={18} onPress={openDatePickerSingle(index)} />{" "}
-                      <DatePicker
-                        isVisible={showDatePickerSingle}
-                        mode={"single"}
-                        onCancel={onCancelSingle}
-                        onConfirm={onConfirmSingle}
-                      />
+                      <Icon name="calendar-outline" size={18} />{" "}
                       <Text
                         style={{ color: theme == "light" ? "black" : "white" }}
                       >
@@ -261,7 +197,7 @@ const alertPopup = () => {
                       <Text
                         style={{ color: theme == "light" ? "black" : "white" }}
                       >
-                        { item.status  }{" "}
+                        {item.status}{" "}
                       </Text>
                     </Text>
                   </View>
@@ -275,10 +211,16 @@ const alertPopup = () => {
                         { marginHorizontal: 25, marginBottom: 10 },
                       ]}
                     >
-                      <TouchableOpacity style={SidebarStyle.cancelBtn} onPress={alertPopup} >
+                      <TouchableOpacity
+                        style={SidebarStyle.cancelBtn}
+                        onPress={alertPopup}
+                      >
                         <Text>Cancel</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={SidebarStyle.scheduleBtn} onPress={() => navigation.navigate("CarService")}>
+                      <TouchableOpacity
+                        style={SidebarStyle.scheduleBtn}
+                        onPress={() => navigation.navigate("CarService")}
+                      >
                         <Text style={SidebarStyle.btnText}>Reschedule</Text>
                       </TouchableOpacity>
                     </View>

@@ -25,12 +25,13 @@ export default function DatePickerSet({props}) {
 
 
   return (
-    <View style={styles.boxContainer}>
- <View style={styles.inputContainer}>
+   <>
+    <View >
+ <View >
         <TextInput
           style={[
             LoginStyle.TextInput,
-            { width: 150, marginTop: 50, marginLeft: 50 },
+            { width: 150,},
           ]}
           value={date}
         />
@@ -38,45 +39,29 @@ export default function DatePickerSet({props}) {
         <Icon
           name="calendar-outline"
           size={18}
-          style={{ position: "absolute", left: 150, bottom: 20 }}
+          style={{ position: "absolute", left: 120, bottom: 20 }}
           onPress={openDatePickerSingle}
         />
 
-        <DatePicker
+       
+      </View>
+     
+    </View>
+    <DatePicker
           placeholder="select date"
           dateStringFormat="dd-mm-yyyy"
-          modalStyles={{
-            height: 350,
-            width: 50,
-            position: "absolute",
-            top: 0,
-            right: 0,
-            zIndex: 1,
-          }}
+          
           isVisible={showDatePickerSingle}
           mode={"single"}
           onCancel={onCancelSingle}
           onConfirm={onConfirmSingle}
-          onChange = {(e) => {e.target.value;
-          props.onChange(value)}}
+          // onChange = {(e) => {e.target.value;
+          // props.onChange(value)}}
         />
-      </View>
+    </>
 
-    </View>
+    
   )
 }
 
-const styles = StyleSheet.create({
-  boxContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: 0,
-  },
-
-  inputContainer: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-})
+ 

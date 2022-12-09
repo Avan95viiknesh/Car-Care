@@ -3,7 +3,7 @@ import React from "react";
 import LoginStyle from "./LoginStyle";
 import InputField from "./InputField";
 
-export default function CreatePassword() {
+export default function CreatePassword({navigation}) {
   return (
     <View style={LoginStyle.container}>
       <View>
@@ -20,7 +20,7 @@ export default function CreatePassword() {
           <InputField placeholder="password" style={LoginStyle.InputField} />
         </View>
       <View>
-        <TouchableOpacity style={LoginStyle.loginBtn}>
+        <TouchableOpacity style={LoginStyle.loginBtn} onPress={() => navigation.navigate("Login")} >
           <Text>Continue  </Text>
         </TouchableOpacity>
       </View>

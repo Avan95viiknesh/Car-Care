@@ -1,15 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
 import ScheduleApp from "./ScheduleApp";
 
-export default function Upcoming({navigation}) {
+export default function Upcoming({ navigation }) {
   return (
-   
-       <>
-        <ScheduleApp upcoming='upcoming'  upcomingInvoice={() => navigation.navigate("UpcomingInvoice")} />
-        </>
- 
-  )
+    <>
+      <ScrollView>
+        <ScheduleApp
+          upcoming="upcoming"
+          upcomingInvoice={() => navigation.navigate("UpcomingInvoice")}
+        />
+      </ScrollView>
+    </>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

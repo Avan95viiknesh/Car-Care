@@ -11,12 +11,12 @@ import {
   View,
   StyleSheet,
   Text,
-  Image,
+  Pressable,
 } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-const Main = () => {
+const Main = ({ navigation }) => {
   const [userName, setUserName] = useState("");
 
   const drawer = useRef(null);
@@ -31,61 +31,70 @@ const Main = () => {
       >
         <View>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}
-          >
-         
-            <Ionicons name="home" size={20} color={"#2f2542"} />
-            <Text style={{  fontSize: 20,}}>   Upcoming                             </Text>
-          </View>
-
-          <View
-           style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginVertical:20}}
-          >
-     
-            <Ionicons name="cart" size={20} color={"#2f2542"} />
-            <Text style={{  fontSize: 20,}}>  Outgoing                               </Text>
-          </View>
-        
-          <View
-       style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}
-          >
-      
-            <Ionicons name="heart" size={20} color={"#2f2542"} />
-            <Text style={{  fontSize: 20,}}> Shedule                                 </Text>
-          </View>
-        </View>
-        <Text style={[styles.horzontalLine,{ marginBottom:30}]}></Text>
-        <View   style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center",  }}>
-
-
-
-
-        <View>
-
-
-        <View>
-  <Ionicons name='people-circle-outline' size={50} color={'#000'}  />
-</View>
-        <Text
             style={{
-              color: "black",
-              fontWeight: "bold",
-              fontSize: 20,
-              marginBottom: 5,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+            
+          >
+            <Ionicons name="home" size={20} color={"#2f2542"} style={{padding:5}}  />
+            <Text style={{ fontSize: 20 }}> Upcoming </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              marginVertical: 20,
             }}
           >
-        { `${userName}`}
-          </Text>
-           
+            <Ionicons name="cart" size={20} color={"#2f2542"}  style={{padding:5}}  />
+            <Text style={{ fontSize: 20 }}> Outgoing </Text>
+          </View>
 
+          <View  style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}>
+            
+            
+              <Ionicons name="heart" size={20} color={"#2f2542"}  style={{padding:5}}  />
+              <Text style={{ fontSize: 20 }}> Shedule</Text>
+          
+          </View>
         </View>
+        <Text style={[styles.horzontalLine, { marginBottom: 30 }]}></Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <View>
+              <Ionicons name="people-circle-outline" size={50} color={"#000"} />
+            </View>
+            <Text
+              style={{
+                color: "black",
+                fontWeight: "bold",
+                fontSize: 20,
+                marginBottom: 5,
+              }}
+            >
+              {`${userName}`}
+            </Text>
+          </View>
           <Ionicons
-          name="close-outline"
-          size={30}
-          onPress={() => drawer.current.closeDrawer()}
-          style={{marginVertical:40,}}
-        />
-
+            name="close-outline"
+            size={30}
+            onPress={() => drawer.current.closeDrawer()}
+            style={{ marginVertical: 40 }}
+          />
         </View>
       </View>
     </View>
@@ -113,7 +122,6 @@ const Main = () => {
         ref={drawer}
         drawerWidth={300}
         renderNavigationView={navigationView}
-        
       >
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -149,7 +157,7 @@ const Main = () => {
                   onPress={() => drawer.current.openDrawer()}
                   size={30}
                   color={"#F0CE1B"}
-                  style={{marginLeft:10}}
+                  style={{ marginLeft: 10 }}
                 />
               ),
               headerTitle: `Hi ${userName}`,
@@ -175,7 +183,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     backgroundColor: "#fce651",
   },
-  
+
   paragraph: {
     padding: 16,
     fontSize: 15,
@@ -186,7 +194,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     marginLeft: 10,
     marginTop: 10,
-    minWidth:'100%'
+    minWidth: "100%",
   },
-
 });

@@ -1,11 +1,13 @@
-import React from 'react'
-import DeliverInvoice from './DeliverInvoice'
+import React from "react";
+import { ScrollView } from "react-native";
+import DeliverInvoice from "./DeliverInvoice";
 
-export default function UpcomingInvoice({navigation}) {
+export default function UpcomingInvoice({ navigation }) {
   return (
     <>
-    <DeliverInvoice upcoming = 'upcoming' />
+      <ScrollView>
+        <DeliverInvoice upcoming="upcoming" />
+      </ScrollView>
     </>
-  )
+  );
 }
- 

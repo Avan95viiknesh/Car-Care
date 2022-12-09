@@ -12,8 +12,8 @@ import LoginStyle from "../../login/LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { TimePicker } from 'react-native-simple-time-picker';
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { TimePicker } from "react-native-simple-time-picker";
 import DatePickerSet from "../datepicker/DatePickerSet";
 
 export default function CarService() {
@@ -28,49 +28,46 @@ export default function CarService() {
     { label: "Paid Service", value: "Paid" },
     { label: "Free Checkup", value: "Checkup" },
   ]);
-const [ownerName, setOwnerName] = useState();
-const [vehNo, setVehNo] = useState();
-const [contact, setContact] = useState();
- 
+  const [ownerName, setOwnerName] = useState();
+  const [vehNo, setVehNo] = useState();
+  const [contact, setContact] = useState();
 
+  const [dateNow, setDateNow] = useState(new Date());
+  const [mode, setMode] = useState("dateNow");
+  const [show, setShow] = useState(false);
+  const [textShow, setTextShow] = useState("...");
 
-const [dateNow, setDateNow] = useState(new Date())
-const [mode, setMode] = useState('dateNow');
-const [show, setShow] = useState(false);
-const [textShow, setTextShow] = useState('...')
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
 
+  const onChangeTimeDate = (event, selectedDate) => {
+    const currentdate = selectedDate || dateNow;
+    setShow(Platform.OS === "ios");
+    setDateNow(currentdate);
 
-const showMode = (currentMode) => {
-  setShow(true);
-  setMode(currentMode)
-}
+    let tempDate = new Date(currentdate);
+    // let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+    let fTime = "Hrs :" + tempDate.getHours() + "| Min" + tempDate.getMinutes();
+    setTextShow(fTime);
 
-const onChangeTimeDate = (event, selectedDate) => {
-const currentdate = selectedDate || dateNow;
-setShow(Platform.OS === 'ios');
-setDateNow(currentdate);
+    console.log("(" + fTime + ")");
+  };
 
-let tempDate = new Date(currentdate);
-// let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-let fTime = 'Hrs :' + tempDate.getHours() + '| Min' + tempDate.getMinutes(); 
-setTextShow(fTime)
+  const onCancel = () => {
+    setShow(false);
+  };
 
-console.log( '('+ fTime + ')' )
-}
+  const onConfirm = (output) => {
+    setShow(false);
+    console.log(output);
+    setDateNow(output.timeString);
+  };
 
-const onCancel = () => {
-  setShow(false);
-};
-
-const onConfirm = (output) => {
-  setShow(false);
-  console.log(output);
-  setDateNow(output.timeString);
-};
-
-  const handleChangeTime = (  { hours , minutes }) => {
+  const handleChangeTime = ({ hours, minutes }) => {
     setHours(hours);
-    setMinutes( minutes);
+    setMinutes(minutes);
   };
   // const handleReset = () => {
   //   setHours(0);
@@ -78,28 +75,35 @@ const onConfirm = (output) => {
   // };
 
   const openDatePickerSingle = () => setShowDatePickerSingle(true);
- 
+  const openDatePickerSingle2 = () => setShowDatePickerSingle2(true);
 
   const onCancelSingle = () => {
     setShowDatePickerSingle(false);
   };
-  
+
+  const onCancelSingle2 = () => {
+    setShowDatePickerSingle2(false);
+  };
+
   const onConfirmSingle = (output) => {
     setShowDatePickerSingle(false);
     console.log(output);
     setDate(output.dateString);
   };
 
-   
-  const handleSubmit =() => {
- 
-    console.log(ownerName,vehNo,contact,value,date,data,textShow);
-   ('')
-  }
+  const onConfirmSingle2 = (output) => {
+    setShowDatePickerSingle2(false);
+    console.log(output);
+    setData(output.dateString);
+  };
+
+  const handleSubmit = () => {
+    console.log(ownerName, vehNo, contact, value, date, data, textShow);
+    ("");
+  };
 
   return (
     <ScrollView>
-    
       <View style={styles.container}>
         <View>
           <Text style={styles.headingText}>Car Service </Text>
@@ -111,7 +115,7 @@ const onConfirm = (output) => {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Name"
-              onChangeText={(text) =>setOwnerName(text)}
+              onChangeText={(text) => setOwnerName(text)}
               value={ownerName}
             />
           </View>
@@ -120,8 +124,7 @@ const onConfirm = (output) => {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder="Enter your Veh No"
-              onChangeText={(text) => setVehNo (text)}
-          
+              onChangeText={(text) => setVehNo(text)}
               value={vehNo}
             />
           </View>
@@ -133,7 +136,7 @@ const onConfirm = (output) => {
             <TextInput
               style={[LoginStyle.TextInput, { width: 150 }]}
               placeholder=" Enter your number"
-              onChangeText={(text) => setContact (text)}           
+              onChangeText={(text) => setContact(text)}
               value={contact}
             />
           </View>
@@ -151,7 +154,6 @@ const onConfirm = (output) => {
               setOpen={setOpen}
               setValue={setValue}
               setItems={setItems}
-              
             />
           </View>
         </View>
@@ -173,52 +175,64 @@ const onConfirm = (output) => {
           </View>
           <View>
             <Text style={styles.labelText}>Expected Delivery</Text>
-            
-        <DatePickerSet />
+            <TextInput
+              style={[LoginStyle.TextInput, { width: 150 }]}
+              value={data}
+            />
+
+            <Icon
+              name="calendar-outline"
+              size={18}
+              style={{ position: "absolute", right: 10, bottom: 20 }}
+              onPress={openDatePickerSingle2}
+            />
           </View>
-          
         </View>
 
         <View>
-       
-            <Text style={styles.labelText}>Expected Time</Text>
-            <TextInput
-              style={[LoginStyle.TextInput, { width: 150 }]}
-              value={textShow}
-            />
-             
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={styles.labelText}>Expected Time</Text>
+          <TextInput
+            style={[LoginStyle.TextInput, { width: 150 }]}
+            value={textShow}
+          />
+
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
             {/* <TimePicker
         value={{ hours, minutes }}
         onChange={handleChangeTime}    
         
       /> */}
 
- 
-       </View>
-
-            <Icon
-              name="time-outline"
-              size={18}
-              style={{ position: "absolute", left: 120, bottom: 20 }}
-             onPress={() => showMode('time')} 
-            />
-
-           
-           {
-            show && (  <DateTimePicker testID = 'dateTimePicker' show={show} value ={dateNow} mode='time' is24Hour ={true} display ='default' onChange ={onChangeTimeDate}    onCancel={onCancel}
-            onConfirm={onConfirm}  />)
-           }  
-
- 
+          
           </View>
 
+          <Icon
+            name="time-outline"
+            size={18}
+            style={{ position: "absolute", left: 120, bottom: 20 }}
+            onPress={() => showMode("time")}
+          />
 
- 
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              show={show}
+              value={dateNow}
+              mode="time"
+              is24Hour={true}
+              display="default"
+              onChange={onChangeTimeDate}
+              onCancel={onCancel}
+              onConfirm={onConfirm}
+            />
+          )}
+        </View>
 
         <View>
           <TouchableOpacity
-            style={[LoginStyle.loginBtn, { marginVertical: 10, }]}
+            style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
             onPress={handleSubmit}
           >
             <Text>Book Service</Text>
@@ -226,7 +240,38 @@ const onConfirm = (output) => {
         </View>
         <Text></Text>
       </View>
-      
+      <DatePicker
+              placeholder="select date"
+              dateStringFormat="dd-mm-yyyy"
+              modalStyles={{
+                height: 400,
+                width: 50,
+
+                position: "absolute",
+                top: 80,
+                left: 190,
+                zIndex: 1,
+              }}
+              isVisible={showDatePickerSingle}
+              mode={"single"}
+              onCancel={onCancelSingle}
+              onConfirm={onConfirmSingle}
+            />
+
+            <DatePicker
+              placeholder="select date"
+              dateStringFormat="dd-mm-yyyy"
+              modalStyles={{
+                position: "absolute",
+                top: 0,
+                left: 50,
+                zIndex: 1,
+              }}
+              isVisible={showDatePickerSingle2}
+              mode={"single"}
+              onCancel={onCancelSingle2}
+              onConfirm={onConfirmSingle2}
+            />
     </ScrollView>
   );
 }
@@ -239,6 +284,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#F0CE1B",
     borderRadius: 10,
+    
   },
 
   boxContainer: {

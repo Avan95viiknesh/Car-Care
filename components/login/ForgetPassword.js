@@ -21,8 +21,8 @@ export default function ForgetPassword({navigation}) {
       </View>
 
       <View>
-        <TouchableOpacity style={LoginStyle.loginBtn}>
-          <Text>Verify OTP</Text>
+        <TouchableOpacity style={LoginStyle.loginBtn} onPress={() => navigation.navigate("Otp")} >
+          <Text>OK</Text>
         </TouchableOpacity>
       </View>
     </View>

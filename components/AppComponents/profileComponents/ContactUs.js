@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ToastAndroid
 } from "react-native";
 import React from "react";
 import InputField from "../../login/InputField";
@@ -12,6 +13,10 @@ import LoginStyle from "../../login/LoginStyle";
 import { useSelector } from "react-redux";
 
 export default function ContactUs() {
+
+  const showToast = () => {
+    ToastAndroid.show("Thanks for contacting us we will get back to you soon!!", ToastAndroid.SHORT), ToastAndroid.CENTER;
+  };
 
   const {theme} = useSelector((state) => state.themeReducer)
 
@@ -45,7 +50,7 @@ export default function ContactUs() {
           </View>
 
           <View>
-            <TouchableOpacity style={LoginStyle.loginBtn}>
+            <TouchableOpacity style={LoginStyle.loginBtn} onPress={() => showToast()}>
               <Text style={{fontSize:18,}}>Send</Text>
             </TouchableOpacity>
           </View>
