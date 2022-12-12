@@ -1,10 +1,10 @@
-import { StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View, Text } from 'react-native'
 import React, { useState } from "react";
 import LoginStyle from '../../login/LoginStyle';
 import Icon from "react-native-vector-icons/Ionicons";
 import DatePicker from "react-native-neat-date-picker";
 
-export default function DatePickerSet({props}) {
+export default function DatePickerSet(props) {
 
     const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
  
@@ -28,13 +28,13 @@ export default function DatePickerSet({props}) {
    <>
     <View >
  <View >
-        <TextInput
+        <Text
           style={[
             LoginStyle.TextInput,
             { width: 150,},
           ]}
-          value={date}
-        />
+        
+        >{date} </Text>
 
         <Icon
           name="calendar-outline"
@@ -50,14 +50,21 @@ export default function DatePickerSet({props}) {
     <DatePicker
           placeholder="select date"
           dateStringFormat="dd-mm-yyyy"
-          
+        
           isVisible={showDatePickerSingle}
           mode={"single"}
           onCancel={onCancelSingle}
           onConfirm={onConfirmSingle}
           // onChange = {(e) => {e.target.value;
           // props.onChange(value)}}
+          modalStyles= {props.modalStyles}
+          value={props.value}
+         date={props.date}
+         setDate={props.setDate}
         />
+
+ 
+
     </>
 
     

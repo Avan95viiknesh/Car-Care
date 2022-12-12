@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createBottomTabNavigator,
+  Drawer,
+} from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Profile from "./Profile";
 import Offer from "./Offer";
@@ -11,7 +14,7 @@ import {
   View,
   StyleSheet,
   Text,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -30,41 +33,62 @@ const Main = ({ navigation }) => {
         }}
       >
         <View>
-          <View
+          <TouchableOpacity
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
             }}
-            
           >
-            <Ionicons name="home" size={20} color={"#2f2542"} style={{padding:5}}  />
+            <Ionicons
+              name="home"
+              size={20}
+              color={"#2f2542"}
+              style={{ padding: 5 }}
+            />
             <Text style={{ fontSize: 20 }}> Upcoming </Text>
-          </View>
+          </TouchableOpacity>
 
-          <View
+          <TouchableOpacity
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
               alignItems: "center",
               marginVertical: 20,
             }}
+            onPress={() => navigation.navigate("DeliveryDetails")}
           >
-            <Ionicons name="cart" size={20} color={"#2f2542"}  style={{padding:5}}  />
+            <Ionicons
+              name="cart"
+              size={20}
+              color={"#2f2542"}
+              style={{ padding: 5 }}
+            />
             <Text style={{ fontSize: 20 }}> Outgoing </Text>
-          </View>
+          </TouchableOpacity>
 
-          <View  style={{
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}>
-            
-            
-              <Ionicons name="heart" size={20} color={"#2f2542"}  style={{padding:5}}  />
-              <Text style={{ fontSize: 20 }}> Shedule</Text>
-          
-          </View>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+            onPress={() => navigation.navigate("ScheduleApp")}
+          >
+            <Ionicons
+              name="heart"
+              size={20}
+              color={"#2f2542"}
+              style={{ padding: 5 }}
+            />
+            <Text style={{ fontSize: 20 }}> Shedule</Text>
+          </TouchableOpacity>
+
+          {/* <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
+    </Drawer.Navigator> */}
         </View>
         <Text style={[styles.horzontalLine, { marginBottom: 30 }]}></Text>
         <View

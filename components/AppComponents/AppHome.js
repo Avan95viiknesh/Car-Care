@@ -14,6 +14,11 @@ import LoginStyle from "../login/LoginStyle";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action";
+import {
+  horizontalScale,
+  verticalScale,
+  moderateScale,
+} from "../../Dimensions/Metrics";
 
 const AppHome = ({ navigation }) => {
   useEffect(() => {
@@ -24,14 +29,7 @@ const AppHome = ({ navigation }) => {
     {
       id: 1,
       name: "Car Service",
-      icon: (
-        <Icon
-          name="car-sport-outline"
-          color="#F0CE1B"
-          size={24}
-          
-        />
-      ),
+      icon: <Icon name="car-sport-outline" color="#F0CE1B" size={24} />,
     },
     {
       id: 2,
@@ -96,45 +94,74 @@ const AppHome = ({ navigation }) => {
       <ScrollView>
         <View
           style={{
-            padding: 20,
-            backgroundColor: theme == "light" ? "white" : "black",
+            paddingVertical: verticalScale(20),
+            paddingHorizontal: horizontalScale(20),
+            backgroundColor: theme == "light" ? "#FFFFFF" : "black",
           }}
         >
-          <View style={{ margin: 20 }}>
+          <View>
             <InputField placeholder="Search" />
             <Icon
               name="search-outline"
               size={24}
-              style={{ position: "absolute", right: 20, bottom: 20 }}
+              style={{
+                position: "absolute",
+                right: horizontalScale(20),
+                bottom: verticalScale(20),
+              }}
             />
           </View>
-          <View>
+          <View style={{}}>
             <Image
               source={require("../.././assets/images/App/Home/home-banner.png")}
               style={AppStyle.homeImage}
             />
           </View>
-         <View style={{flexDirection:"row",  }}>
-
-         <View>
-            <Text
-              style={[
-                AppStyle.selectText,
-                { color: theme == "light" ? "black" : "white", marginRight:10 },
-              ]}
-            >
-              Select Service
-            </Text>
-          </View>
-          <View >
-            <TouchableOpacity style={{ backgroundColor:"#F0CE1B", borderRadius:10, marginTop:15, cursor:'pointer'}} onPress={() => navigation.navigate("CarService")} >
-              <Text style={{ color: theme == "light" ? "black" : "white", backgroundColor:'#F0CE1B', padding:10, fontSize:15, borderRadius:10 }} >
-                Book Service
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+            }}
+          >
+            <View>
+              <Text
+                style={[
+                  AppStyle.selectText,
+                  {
+                    color: theme == "light" ? "black" : "white",
+                    paddingHorizontal: horizontalScale(0),
+                  },
+                ]}
+              >
+                Select Service
               </Text>
-            </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#F0CE1B",
+                  borderRadius: moderateScale(10),
+                  marginVertical: verticalScale(15),
+                  marginLeft: horizontalScale(50),
+                  cursor: "pointer",
+                }}
+                onPress={() => navigation.navigate("CarService")}
+              >
+                <Text
+                  style={{
+                    color: theme == "light" ? "black" : "white",
+                    backgroundColor: "#F0CE1B",
+                    padding: moderateScale(10),
+                    fontSize: moderateScale(15),
+                    borderRadius: moderateScale(10),
+                  }}
+                >
+                  Book Service
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-
-         </View>
           <View>
             <FlatList
               data={DATA}
@@ -142,19 +169,21 @@ const AppHome = ({ navigation }) => {
               contentContainerStyle={{
                 justifyContent: "center",
                 alignItems: "center",
+                marginVertical: verticalScale(20),
+                marginBottom: verticalScale(80),
               }}
               renderItem={({ item }) => (
                 <TouchableOpacity style={AppStyle.cardSection}>
                   <View style={AppStyle.cardDetails}>
                     <Text
-                      style={{ color: theme == "light" ? "black" : "white" }}
+                      style={{ color: theme == "light" ? "black" : "white",marginBottom: verticalScale(5) }}
                     >
                       {item.icon}{" "}
                     </Text>
                     <Text
                       style={[
                         AppStyle.cardTextstyle,
-                        { color: theme == "light" ? "black" : "white" },
+                        { color: theme == "light" ? "black" : "white",  },
                       ]}
                     >
                       {item.name}

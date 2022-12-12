@@ -19,6 +19,7 @@ import Settings from "./components/AppComponents/profileComponents/Settings";
 import CarService from "./components/AppComponents/HomepageComponents/CarService";
 import TyreWheel from "./components/AppComponents/HomepageComponents/TyreWheel";
 import { SafeAreaView } from "react-native";
+import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,11 @@ export default function Home() {
           name="MyService"
           component={MyService}
           options={{ title: "My Service ", headerShown: true }}
+        />
+         <Stack.Screen
+          name="ScheduleApp"
+          component={ScheduleApp}
+          options={{ title: "ScheduleApp", headerShown: true }}
         />
         <Stack.Screen
           name="Upcoming"

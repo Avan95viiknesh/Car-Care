@@ -5,8 +5,10 @@ import SidebarStyle from "./SibebarStyle";
 
 export default function DeliveryDetails({navigation}) {
   return (
+    <>
     <ScrollView>
       <ScheduleApp delivery='delivery'  deliveryInvoice={() => navigation.navigate("DeliverInvoice")} />;
     </ScrollView>
+    </>
   )
 }

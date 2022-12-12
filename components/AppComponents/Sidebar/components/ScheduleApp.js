@@ -59,9 +59,15 @@ export default function ScheduleApp({
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: () => console.log("OK Pressed") },
+      { text: "OK", onPress: (id) => {console.log("OK Pressed: ", delShedule(id)); delShedule }},
     ]);
   };
+
+  const delShedule = (id) => {
+   const dltList = [...searchTerm]; 
+   dltList.splice(id,1)
+   setSearchTerm(dltList)
+  }
 
   return (
     <>
@@ -111,9 +117,9 @@ export default function ScheduleApp({
               renderItem={({ item, index }) => (
                 <View
                   style={
-                    delivery || upcoming
+                   [ delivery || upcoming
                       ? SidebarStyle.cardSectionDelivery
-                      : SidebarStyle.cardSection
+                      : SidebarStyle.cardSection]
                   }
                 >
                   <Pressable

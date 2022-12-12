@@ -36,6 +36,8 @@ export default function CarService() {
   const [mode, setMode] = useState("dateNow");
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
+  const [addItem, setAddItem] = useState([])
+
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -65,10 +67,10 @@ export default function CarService() {
     setDateNow(output.timeString);
   };
 
-  const handleChangeTime = ({ hours, minutes }) => {
-    setHours(hours);
-    setMinutes(minutes);
-  };
+  // const handleChangeTime = ({ hours, minutes }) => {
+  //   setHours(hours);
+  //   setMinutes(minutes);
+  // };
   // const handleReset = () => {
   //   setHours(0);
   //   setMinutes(0);
@@ -99,7 +101,14 @@ export default function CarService() {
 
   const handleSubmit = () => {
     console.log(ownerName, vehNo, contact, value, date, data, textShow);
-    ("");
+    setAddItem(prevArray => [...prevArray, addItem]);
+    setOwnerName("")
+    setVehNo("")
+    setContact("")
+    setData("")
+    setDate("")
+    setTextShow("")
+    
   };
 
   return (
@@ -161,10 +170,10 @@ export default function CarService() {
         <View style={styles.boxContainer}>
           <View style={styles.inputContainer}>
             <Text style={styles.labelText}>Booking Date</Text>
-            <TextInput
+            <Text
               style={[LoginStyle.TextInput, { width: 150 }]}
-              value={date}
-            />
+             
+            > {date}  </Text>
 
             <Icon
               name="calendar-outline"
@@ -175,10 +184,10 @@ export default function CarService() {
           </View>
           <View>
             <Text style={styles.labelText}>Expected Delivery</Text>
-            <TextInput
+            <Text
               style={[LoginStyle.TextInput, { width: 150 }]}
-              value={data}
-            />
+              
+            >{data} </Text>
 
             <Icon
               name="calendar-outline"
@@ -191,10 +200,10 @@ export default function CarService() {
 
         <View>
           <Text style={styles.labelText}>Expected Time</Text>
-          <TextInput
+          <Text
             style={[LoginStyle.TextInput, { width: 150 }]}
-            value={textShow}
-          />
+            
+          >{textShow} </Text>
 
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -238,7 +247,7 @@ export default function CarService() {
             <Text>Book Service</Text>
           </TouchableOpacity>
         </View>
-        <Text></Text>
+        <Text>{addItem} </Text>
       </View>
       <DatePicker
               placeholder="select date"

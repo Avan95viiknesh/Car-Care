@@ -1,8 +1,13 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
 import { useSelector } from "react-redux";
+import {
+  horizontalScale,
+  verticalScale,
+  moderateScale,
+} from "../../Dimensions/Metrics";
  
 
 export default function Offer() {
@@ -15,7 +20,7 @@ export default function Offer() {
         style={[
           LoginStyle.container,
           {
-            backgroundColor: theme == "light" ? "white" : "black",
+            backgroundColor: theme == "light" ? "#c4c070" : "black",
           },
         ]}
       >
@@ -25,7 +30,7 @@ export default function Offer() {
           <View>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: moderateScale(20),
                 color: theme == "light" ? "black" : "white",
               }}
             >
@@ -33,16 +38,18 @@ export default function Offer() {
               Special Offers Coming Soon !!!{" "}
             </Text>
           </View>
-          <View style={{ marginTop: 40, backgroundColor:'red' }}>
-            <Image
+          <View style={{ marginTop:verticalScale(40)  }}>
+           <TouchableOpacity >
+           <Image
               source={require("../.././assets/images/App/Home/festive-main.png")}
               style={{
-                height: 300,
-                width: 400,
-                resizeMode: "cover",
-                borderRadius: 20,
+                height:verticalScale(300),
+                width: horizontalScale(300),
+                resizeMode: "stretch",
+                borderRadius: moderateScale(20),
               }}
             />
+           </TouchableOpacity>
           </View>
         </View>
  
@@ -55,21 +62,4 @@ export default function Offer() {
 
 
 
-
-
-const styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
-});
+ 
