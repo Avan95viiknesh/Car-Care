@@ -16,7 +16,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { TimePicker } from "react-native-simple-time-picker";
 import DatePickerSet from "../datepicker/DatePickerSet";
 
-export default function CarService() {
+export default function CarService({navigation}) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [showDatePickerSingle2, setShowDatePickerSingle2] = useState(false);
   const [date, setDate] = useState("");
@@ -108,7 +108,7 @@ export default function CarService() {
     setData("")
     setDate("")
     setTextShow("")
-    
+    navigation.navigate("ScheduleApp")
   };
 
   return (

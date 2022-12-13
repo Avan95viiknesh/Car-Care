@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import React from "react";
 import SidebarStyle from "./SibebarStyle";
@@ -26,26 +26,27 @@ const deliverDetails = [
   },
 ];
 
-export default function DeliverInvoice({ upcoming, id }) {
+export default function DeliverInvoice({ navigation,payment,upcoming, id,route }) {
   const { theme } = useSelector((state) => state.themeReducer);
-  const [bookingFees, setBookingFees] = useState(50);
-  const [washPrice, setWashPrice] = useState(100);
+  const [bookingFees, setBookingFees] = useState();
+  const [washPrice, setWashPrice] = useState();
   const [total, setTotal] = useState(0);
 
-  const handleIncrement = () => {
-    console.log(setTotal(parseInt(bookingFees) + parseInt(washPrice)));
-  };
+  // const handleIncrement = () => {
+  //   console.log(setTotal(parseInt(bookingFees) + parseInt(washPrice)));
+  // };
 
   // const result = () => {
   //   Data.find((eachData) => id === eachData.id);
   // };
 
+  const addAmount =parseInt(bookingFees) + parseInt(washPrice)
   return (
     <SafeAreaView>
       <ScrollView>
         <View
           style={{
-            padding: 20,   
+            padding: 20,
             paddingTop: 100,
             backgroundColor: theme == "light" ? "white" : "black",
             justifyContent: "center",
@@ -231,16 +232,7 @@ export default function DeliverInvoice({ upcoming, id }) {
               )}
             </View>
           </View>
-          {upcoming ? (
-            <TouchableOpacity
-              style={[LoginStyle.loginBtn, { marginTop: 0 }]}
-              onPress={handleIncrement}
-            >
-              <Text> Conform</Text>
-            </TouchableOpacity>
-          ) : (
-            ""
-          )}
+         
           <View
             style={{
               flexDirection: "row",
@@ -261,7 +253,7 @@ export default function DeliverInvoice({ upcoming, id }) {
             {upcoming ? (
               <Text style={{ color: theme == "light" ? "black" : "white" }}>
                 {" "}
-                {total} RS !{" "}
+                {addAmount}
               </Text>
             ) : (
               <Text style={{ color: theme == "light" ? "black" : "white" }}>
@@ -270,6 +262,13 @@ export default function DeliverInvoice({ upcoming, id }) {
               </Text>
             )}
           </View>
+          <TouchableOpacity
+              style={[LoginStyle.loginBtn, { marginTop: 0 }]}
+              onPress={  payment }
+              
+            >
+              <Text> OK</Text>
+            </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
