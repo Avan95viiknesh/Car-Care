@@ -13,10 +13,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { TimePicker } from "react-native-simple-time-picker";
-import DatePickerSet from "../datepicker/DatePickerSet";
-
-export default function CarService({navigation}) {
+ 
+export default function CarService({ navigation }) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [showDatePickerSingle2, setShowDatePickerSingle2] = useState(false);
   const [date, setDate] = useState("");
@@ -36,8 +34,7 @@ export default function CarService({navigation}) {
   const [mode, setMode] = useState("dateNow");
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
-  const [addItem, setAddItem] = useState([])
-
+  const [addItem, setAddItem] = useState([]);
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -67,15 +64,6 @@ export default function CarService({navigation}) {
     setDateNow(output.timeString);
   };
 
-  // const handleChangeTime = ({ hours, minutes }) => {
-  //   setHours(hours);
-  //   setMinutes(minutes);
-  // };
-  // const handleReset = () => {
-  //   setHours(0);
-  //   setMinutes(0);
-  // };
-
   const openDatePickerSingle = () => setShowDatePickerSingle(true);
   const openDatePickerSingle2 = () => setShowDatePickerSingle2(true);
 
@@ -101,14 +89,14 @@ export default function CarService({navigation}) {
 
   const handleSubmit = () => {
     console.log(ownerName, vehNo, contact, value, date, data, textShow);
-    setAddItem(prevArray => [...prevArray, addItem]);
-    setOwnerName("")
-    setVehNo("")
-    setContact("")
-    setData("")
-    setDate("")
-    setTextShow("")
-    navigation.navigate("ScheduleApp")
+    setAddItem((prevArray) => [...prevArray, addItem]);
+    setOwnerName("");
+    setVehNo("");
+    setContact("");
+    setData("");
+    setDate("");
+    setTextShow("");
+    navigation.navigate("ScheduleApp");
   };
 
   return (
@@ -170,10 +158,7 @@ export default function CarService({navigation}) {
         <View style={styles.boxContainer}>
           <View style={styles.inputContainer}>
             <Text style={styles.labelText}>Booking Date</Text>
-            <Text
-              style={[LoginStyle.TextInput, { width: 150 }]}
-             
-            > {date}  </Text>
+            <Text style={[LoginStyle.TextInput, { width: 150 }]}> {date} </Text>
 
             <Icon
               name="calendar-outline"
@@ -184,10 +169,7 @@ export default function CarService({navigation}) {
           </View>
           <View>
             <Text style={styles.labelText}>Expected Delivery</Text>
-            <Text
-              style={[LoginStyle.TextInput, { width: 150 }]}
-              
-            >{data} </Text>
+            <Text style={[LoginStyle.TextInput, { width: 150 }]}>{data} </Text>
 
             <Icon
               name="calendar-outline"
@@ -200,10 +182,9 @@ export default function CarService({navigation}) {
 
         <View>
           <Text style={styles.labelText}>Expected Time</Text>
-          <Text
-            style={[LoginStyle.TextInput, { width: 150 }]}
-            
-          >{textShow} </Text>
+          <Text style={[LoginStyle.TextInput, { width: 150 }]}>
+            {textShow}{" "}
+          </Text>
 
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -213,8 +194,6 @@ export default function CarService({navigation}) {
         onChange={handleChangeTime}    
         
       /> */}
-
-          
           </View>
 
           <Icon
@@ -250,37 +229,37 @@ export default function CarService({navigation}) {
         <Text>{addItem} </Text>
       </View>
       <DatePicker
-              placeholder="select date"
-              dateStringFormat="dd-mm-yyyy"
-              modalStyles={{
-                height: 400,
-                width: 50,
+        placeholder="select date"
+        dateStringFormat="dd-mm-yyyy"
+        modalStyles={{
+          height: 400,
+          width: 50,
 
-                position: "absolute",
-                top: 80,
-                left: 190,
-                zIndex: 1,
-              }}
-              isVisible={showDatePickerSingle}
-              mode={"single"}
-              onCancel={onCancelSingle}
-              onConfirm={onConfirmSingle}
-            />
+          position: "absolute",
+          top: 80,
+          left: 190,
+          zIndex: 1,
+        }}
+        isVisible={showDatePickerSingle}
+        mode={"single"}
+        onCancel={onCancelSingle}
+        onConfirm={onConfirmSingle}
+      />
 
-            <DatePicker
-              placeholder="select date"
-              dateStringFormat="dd-mm-yyyy"
-              modalStyles={{
-                position: "absolute",
-                top: 0,
-                left: 50,
-                zIndex: 1,
-              }}
-              isVisible={showDatePickerSingle2}
-              mode={"single"}
-              onCancel={onCancelSingle2}
-              onConfirm={onConfirmSingle2}
-            />
+      <DatePicker
+        placeholder="select date"
+        dateStringFormat="dd-mm-yyyy"
+        modalStyles={{
+          position: "absolute",
+          top: 0,
+          left: 50,
+          zIndex: 1,
+        }}
+        isVisible={showDatePickerSingle2}
+        mode={"single"}
+        onCancel={onCancelSingle2}
+        onConfirm={onConfirmSingle2}
+      />
     </ScrollView>
   );
 }
@@ -293,7 +272,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#F0CE1B",
     borderRadius: 10,
-    
   },
 
   boxContainer: {

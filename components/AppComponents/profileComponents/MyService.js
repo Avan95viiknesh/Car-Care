@@ -25,14 +25,30 @@ export default function MyService({ navigation }) {
 
 
   // const [dateFilter, setDateFilter] = useState({});
-  // const [data, setData] = useState(Data);
+   const [data, setData] = useState([...Data]);
 
   const getInvoice = (item) => {
     setShow(true);
   };
 
   // const filterObj = Data.filter((e) => e.status == 'Confirmed');
+  const delrow = (id) => {
+    const dltList = [...data]; 
+    dltList.splice(id,1)
+    setData(dltList)
+    
+   }
 
+  //  const deleteRow = (id) =>{
+  //   const newOne = data.filter((el) => el.id !== id );
+  //   setData({data, newOne });
+  //  }
+
+  // const handleDelete = id => {
+  //   const items = data.filter(item => item.id !== id);
+  //   setData(items,1);
+  // };
+   
   const alertPopup = () => {
     Alert.alert("Are you sure you want to delete..?", " ", [
       {
@@ -40,15 +56,31 @@ export default function MyService({ navigation }) {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: () => console.log("OK Pressed") },
+      { text: "OK", onPress: (id) => delrow(id) },
     ]);
   };
 
-  const itemData = ({ item, index, value }) => {
+  const itemData = ({ item, index, value,key }) => {
+
+    const editField = (value, index) => {
+
+      // Clone students data before mutation
+      const students =  data.map(item => ({ ...item }))
+
+      // Update field by index of current student
+      students[key][index] = value
+
+      // Trigger re-render
+      setData({ students })
+    }
+
     return (
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }}>
-          <Text>{item.id} </Text>
+
+
+      <View style={{ flexDirection: "row" }}     >
+        <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }} key={key}
+         className={ item.editing ? 'editing' : '' }>
+         { item.editing ? <TextInput value={item[1]} onChange={ e => editField(e.target.value, 1) } /> :<Text>{item.id} </Text> }  
         </View>
 
         <View style={{ width: 80, backgroundColor: "#F0CE1B" }}>
@@ -79,7 +111,21 @@ export default function MyService({ navigation }) {
             name="eye-outline"
             color="#000"
             size={20}
-            onPress={getInvoice}
+            
+            onPress={()=> {
+
+              // Clone students data before mutation
+              const studentss = data.map(i => ({ ...i, editing : item.editing && i===item }))
+        
+              // Toggle editing flag of this current student (ie table row)
+              studentss[key].editing = true; 
+        
+              setData({
+                clientIsEditing:true, // This might not be needed ?
+                studentss
+              })
+        }
+            }
           />
           <Ionicons name="trash" color="#000" size={20} onPress={alertPopup} />
         </View>
@@ -149,7 +195,7 @@ export default function MyService({ navigation }) {
           </View>
         </View>
         <FlatList
-          data={Data}
+          data={data}
           renderItem={itemData}
           keyExtractor={(item, index) => index.toString()}
         />

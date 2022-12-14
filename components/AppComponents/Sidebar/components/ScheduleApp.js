@@ -59,7 +59,7 @@ export default function ScheduleApp({
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: (id) => {console.log("OK Pressed: ", delShedule(id)); delShedule }},
+      { text: "OK", onPress: (id) => {console.log("OK Pressed: ", delShedule(id)); delShedule(id) }},
     ]);
   };
 
@@ -68,6 +68,19 @@ export default function ScheduleApp({
    dltList.splice(id,1)
    setSearchTerm(dltList)
   }
+
+
+
+  // const handleRemove = (index) => {
+  //   console.log(index);
+  //   searchTerm.splice(index, 1);
+  //   setSearchTerm([...searchTerm]);
+  // };
+
+
+
+
+
 
   return (
     <>
@@ -219,7 +232,7 @@ export default function ScheduleApp({
                     >
                       <TouchableOpacity
                         style={SidebarStyle.cancelBtn}
-                        onPress={alertPopup}
+                        onPress={ alertPopup}
                       >
                         <Text>Cancel</Text>
                       </TouchableOpacity>

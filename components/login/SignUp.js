@@ -15,7 +15,14 @@ import Icon from "react-native-vector-icons/Ionicons";
 import InputField from "./InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
+export default function SignUp({
+  navigation,
+  name,
+  LogOtp,
+  LogHome,
+  forgot,
+  signup,
+}) {
   const [userName, setUserName] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +39,6 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
       Alert.alert("warning", "Please enter valid Password");
     } else {
       try {
-
         await AsyncStorage.setItem("userName", userName);
 
         if (name == LogOtp) {
@@ -49,8 +55,25 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
     setPassword("");
   };
 
-  
-  console.log(userName);
+  const setLogin = async () => {
+    console.log(mobile, password);
+
+    let item = { mobile, password };
+
+    let result = await fetch("https://fioritest.avaniko.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(item)
+    });
+
+    result = await result.json();
+    AsyncStorage.setItem("user-info",JSON.stringify(result));
+    LogHome();
+  };
+
   return (
     <>
       <SafeAreaView style={LoginStyle.container}>
@@ -62,10 +85,12 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
 
           <View style={{ marginTop: 50, height: "100%" }}>
             <Text style={LoginStyle.title}> {name ? name : "SIGN UP"} </Text>
-             {
-              name ? '' : (<View>
+            {name ? (
+              ""
+            ) : (
+              <View>
                 <Text style={LoginStyle.lebelText}>Name </Text>
-  
+
                 <View>
                   <TextInput
                     placeholder="Name"
@@ -74,8 +99,8 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
                     onChangeText={(text) => setUserName(text)}
                   />
                 </View>
-              </View>)
-             }
+              </View>
+            )}
             <View>
               <Text style={LoginStyle.lebelText}>Mobile no</Text>
               <TextInput
@@ -127,13 +152,28 @@ export default function SignUp({ navigation, name, LogOtp, LogHome, forgot }) {
             )}
 
             <View>
-              <TouchableOpacity style={LoginStyle.loginBtn} onPress={setData}>
+              <TouchableOpacity style={LoginStyle.loginBtn} onPress={setLogin}>
                 <Text> {name ? "Login" : "Get otp"}</Text>
               </TouchableOpacity>
             </View>
 
             {name ? (
-              <Text style={{ marginTop: 10 }}> </Text>
+              <View style={LoginStyle.accountHave}>
+                <Text style={{ fontSize: 15 }}>
+                  Don't have an account?
+                  <Text
+                    style={{ color: "#F0CE1B", fontSize: 14 }}
+                    onPress={
+                      signup
+                        ? () => signup()
+                        : () => navigation.navigate("SignUp")
+                    }
+                  >
+                    {" "}
+                    Signup
+                  </Text>
+                </Text>
+              </View>
             ) : (
               <View style={LoginStyle.accountHave}>
                 <Text style={{ fontSize: 15 }}>

@@ -91,8 +91,9 @@ export default function Home() {
         />
         <Stack.Screen
           name="Payment"
-          component={Payment}
+          component={Payment }
           options={{ title: "Payment", headerShown: true }}
+          
         />
       </Stack.Navigator>
  

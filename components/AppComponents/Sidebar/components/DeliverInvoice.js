@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import LoginStyle from "../../../login/LoginStyle";
 import { Data } from "../../../data/Datas";
+import Payment from "./Payment";
 
 const deliverDetails = [
   {
@@ -30,7 +31,8 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
   const { theme } = useSelector((state) => state.themeReducer);
   const [bookingFees, setBookingFees] = useState();
   const [washPrice, setWashPrice] = useState();
-  const [total, setTotal] = useState(0);
+
+ // const [total, setTotal] = useState(0);
 
   // const handleIncrement = () => {
   //   console.log(setTotal(parseInt(bookingFees) + parseInt(washPrice)));
@@ -41,6 +43,9 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
   // };
 
   const addAmount =parseInt(bookingFees) + parseInt(washPrice)
+
+  
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -269,7 +274,11 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
             >
               <Text> OK</Text>
             </TouchableOpacity>
+            <View style={{display:'none'}}>
+       <Payment addAmount={addAmount}   />
+       </View>
         </View>
+    
       </ScrollView>
     </SafeAreaView>
   );
