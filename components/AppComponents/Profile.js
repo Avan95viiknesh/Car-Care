@@ -24,6 +24,15 @@ export default function Profile({ navigation, settings }) {
     } catch (error) {
       console.log(error);
     }
+    try {
+      AsyncStorage.getItem("mobile").then((value) => {
+        if (value != null) {
+          setUserNum(value);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 
@@ -231,7 +240,7 @@ export default function Profile({ navigation, settings }) {
         { `Hi ${userName}`}
           </Text>
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
-            +91 0123456789
+          { ` ${userNum}`}
           </Text>
         </View>
       )}

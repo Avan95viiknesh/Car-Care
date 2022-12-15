@@ -14,6 +14,8 @@ import LoginStyle from "./LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import InputField from "./InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
+
 
 export default function SignUp({
   navigation,
@@ -58,19 +60,26 @@ export default function SignUp({
   const setLogin = async () => {
     console.log(mobile, password);
 
-    let item = { mobile, password };
+    let bodyData =
+      "userName=" +
+      mobile +
+      "&password=" +
+      password +
+      "&grant_type=password&Type=service";
 
-    let result = await fetch("https://fioritest.avaniko.com/login", {
+    let result = await axios( {
       method: "POST",
+      url: "https://fioritest.avaniko.com/login",
+      data: bodyData,
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify(item)
     });
 
-    result = await result.json();
-    AsyncStorage.setItem("user-info",JSON.stringify(result));
+    console.log(result)
+    // result = await result.json();
+    AsyncStorage.setItem("userName",result.data.UserName);
+    AsyncStorage.setItem("mobile",result.data.PhoneNumber);
     LogHome();
   };
 
@@ -152,9 +161,18 @@ export default function SignUp({
             )}
 
             <View>
-              <TouchableOpacity style={LoginStyle.loginBtn} onPress={setLogin}>
-                <Text> {name ? "Login" : "Get otp"}</Text>
-              </TouchableOpacity>
+              {name ? (
+                <TouchableOpacity
+                  style={LoginStyle.loginBtn}
+                  onPress={setLogin}
+                >
+                  <Text> {name ? "Login" : "Get otp"}</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity style={LoginStyle.loginBtn} onPress={setData}>
+                  <Text> {name ? "Login" : "Get otp"}</Text>
+                </TouchableOpacity>
+              )}
             </View>
 
             {name ? (
