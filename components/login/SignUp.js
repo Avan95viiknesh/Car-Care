@@ -15,6 +15,10 @@ import Icon from "react-native-vector-icons/Ionicons";
 import InputField from "./InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
+import { Dimensions } from 'react-native';
+
+
+const windowWidth = Dimensions.get('window').width;
 
 
 export default function SignUp({
@@ -89,10 +93,10 @@ export default function SignUp({
         <ScrollView>
           <Image
             source={require("../../../Car-Care/assets/car-care.jpg")}
-            style={LoginStyle.headerImage}
+            style={[LoginStyle.headerImage,{maxWidth: windowWidth,}]}
           />
 
-          <View style={{ marginTop: 50, height: "100%" }}>
+          <View >
             <Text style={LoginStyle.title}> {name ? name : "SIGN UP"} </Text>
             {name ? (
               ""
@@ -114,17 +118,17 @@ export default function SignUp({
               <Text style={LoginStyle.lebelText}>Mobile no</Text>
               <TextInput
                 placeholder="Mobile no"
-                secureTextEntry={isPasswordSecure}
+               // secureTextEntry={isPasswordSecure}
                 style={LoginStyle.TextInput}
                 value={mobile}
                 onChangeText={(val) => setMobile(val)}
               />
-              <Icon
+              {/* <Icon
                 name={isPasswordSecure ? "eye-off-outline" : "eye-outline"}
                 size={24}
                 style={LoginStyle.iconstyle}
                 onPress={changeIcon}
-              />
+              /> */}
             </View>
             <View>
               <Text style={LoginStyle.lebelText}>Password </Text>
@@ -175,37 +179,21 @@ export default function SignUp({
               )}
             </View>
 
-            {name ? (
               <View style={LoginStyle.accountHave}>
-                <Text style={{ fontSize: 15 }}>
-                  Don't have an account?
+                <Text style={{ fontSize: 15,marginLeft:20 }}>
+                 {name ? "Don't have an account?" : "Already have an account?"}
                   <Text
                     style={{ color: "#F0CE1B", fontSize: 14 }}
-                    onPress={
-                      signup
-                        ? () => signup()
-                        : () => navigation.navigate("SignUp")
-                    }
+                    onPress={ name?  signup
+                      ? () => signup()
+                      : () => navigation.navigate("SignUp"):() => navigation.navigate("Login")}
                   >
                     {" "}
-                    Signup
+                   { name ? "  Signup" : " Login"}
                   </Text>
                 </Text>
               </View>
-            ) : (
-              <View style={LoginStyle.accountHave}>
-                <Text style={{ fontSize: 15 }}>
-                  Already have an account?
-                  <Text
-                    style={{ color: "#F0CE1B", fontSize: 14 }}
-                    onPress={() => navigation.navigate("Login")}
-                  >
-                    {" "}
-                    Login
-                  </Text>
-                </Text>
-              </View>
-            )}
+            
             <View style={LoginStyle.horizontalSection}>
               <View style={LoginStyle.horizontalLine} />
               <View>

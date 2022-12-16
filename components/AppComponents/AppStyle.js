@@ -33,9 +33,14 @@ export default StyleSheet.create({
   },
 
   cardSection: {
-     borderRadius:moderateScale(10), margin:moderateScale(5), borderColor: '#F0CE1B', borderWidth: 1, height: verticalScale(90), width: horizontalScale(75),   cursor:'pointer'
+     borderRadius:moderateScale(10), margin:moderateScale(5), borderColor: '#F0CE1B', borderWidth: 1, height: verticalScale(90), width: horizontalScale(75),   cursor:'pointer',
   },
 
+   cardHOver :{
+    transition: "all 100ms ease",
+    transform: "scale(1.05)",
+    boxShadow: "0 0 8px rgba(0, 0, 0, 0.5)"
+   },
 cardDetails : {
    
   flexDirection:'column',

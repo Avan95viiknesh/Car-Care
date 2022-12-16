@@ -8,6 +8,7 @@ import {
   Modal,
   Button,
   Pressable,
+  ScrollView,
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import LoginStyle from "./LoginStyle";
@@ -70,7 +71,8 @@ export default function Otp({ navigation }) {
 
   return (
     <>
-      <View style={LoginStyle.container}>
+ 
+     <View style={{padding:20, flex:1, justifyContent:'center',}}>
         <View style={LoginStyle.otpVerify}>
           <Text style={LoginStyle.title}>OTP verification</Text>
           <Text style={LoginStyle.verificationText}>
@@ -135,6 +137,7 @@ export default function Otp({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+    
 
       <Modal animationType="fade" transparent visible={modalVisible}>
         <View style={LoginStyle.popCard}>

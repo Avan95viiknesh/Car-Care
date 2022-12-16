@@ -173,7 +173,7 @@ const AppHome = ({ navigation }) => {
                 marginBottom: verticalScale(80),
               }}
               renderItem={({ item }) => (
-                <TouchableOpacity style={AppStyle.cardSection}>
+                <TouchableOpacity style={AppStyle.cardSection} hoverStyle={AppStyle.cardHOver}>
                   <View style={AppStyle.cardDetails}>
                     <Text
                       style={{ color: theme == "light" ? "black" : "white",marginBottom: verticalScale(5) }}

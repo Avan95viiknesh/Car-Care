@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import DatePicker from "react-native-neat-date-picker";
 import UpcomingInvoice from "./UpcomingInvoice";
 import { Data } from "../../../data/Datas";
+import SibebarStyle from "./SibebarStyle";
 
 export default function ScheduleApp({
   delivery,
@@ -29,7 +30,7 @@ export default function ScheduleApp({
 }) {
   const { theme } = useSelector((state) => state.themeReducer);
 
-  const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
+//  const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [date, setDate] = useState("");
   const [searchTerm, setSearchTerm] = useState([...Data]);
   const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
@@ -37,7 +38,7 @@ export default function ScheduleApp({
   const searchFilterFunction = (text) => {
     if (text.length >= 1) {
       const filteredData = Data.filter((data) => {
-        if (data.ownerName.toUpperCase().includes(text.toUpperCase())) {
+        if (data.name.toUpperCase().includes(text.toUpperCase())) {
           return data;
         }
       });
@@ -85,8 +86,8 @@ export default function ScheduleApp({
   return (
     <>
       <ScrollView>
-        <View style={{ backgroundColor: theme == "light" ? "white" : "black" }}>
-          <View style={{ margin: 20 }}>
+        <View style={[SibebarStyle.container,{ backgroundColor: theme == "light" ? "white" : "black" }]}>
+          <View style={{ marginBottom: 10 }}>
             <TextInput
               placeholder="Search"
               style={LoginStyle.TextInput}

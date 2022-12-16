@@ -5,9 +5,9 @@ import DeliverInvoice from "./DeliverInvoice";
 export default function UpcomingInvoice({navigation}) {
   return (
     <>
-      <ScrollView>
+       
         <DeliverInvoice upcoming="upcoming" payment ={() => navigation.navigate("Payment" )} />
-      </ScrollView>
+     
     </>
   );
 }

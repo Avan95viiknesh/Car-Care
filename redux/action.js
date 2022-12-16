@@ -7,3 +7,12 @@ export const setTheme = (theme) => (dispatch) => {
         payload: theme
     });
 }
+
+export const ADD_TOAST = 'ADD_TOAST'
+ 
+export const addToast = (message) => (dispatch) => {
+    dispatch({
+        type: ADD_TOAST,
+        payload:message
+    });
+}

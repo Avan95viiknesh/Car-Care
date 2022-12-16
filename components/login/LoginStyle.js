@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
 
 headerImage :{
-  width:100, height:120, position:'absolute', right: 140, top : 10
+  width:'100%', height:120,   resizeMode: 'contain', bottom:-55    
 },
 
   title: {
@@ -19,7 +19,7 @@ headerImage :{
   },
 
   accountHave: {
-    marginLeft: 90,
+    marginLeft: 40,
     paddingVertical: 30,
     
   },
@@ -79,9 +79,9 @@ headerImage :{
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    padding: 20,
-     
+    alignItems: "center",
+    backgroundColor: "#FFFF",
+   
   },
 
   otpBox: {

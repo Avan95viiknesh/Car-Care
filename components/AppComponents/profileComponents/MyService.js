@@ -77,7 +77,7 @@ export default function MyService({ navigation }) {
     return (
 
 
-      <View style={{ flexDirection: "row" }}     >
+      <View style={{ flexDirection: "row",justifyContent:'space-around',marginHorizontal:5 }}     >
         <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }} key={key}
          className={ item.editing ? 'editing' : '' }>
          { item.editing ? <TextInput value={item[1]} onChange={ e => editField(e.target.value, 1) } /> :<Text>{item.id} </Text> }  
@@ -168,7 +168,7 @@ export default function MyService({ navigation }) {
 </TouchableOpacity>
 </View> */}
 
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row",justifyContent:'space-around',marginHorizontal:5  }}>
           <View style={{ width: 40, backgroundColor: "#000" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>ID</Text>
           </View>
