@@ -52,7 +52,7 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
         <View
           style={{
             padding: 20,
-            paddingTop: 100,
+            paddingVertical: 110,
             backgroundColor: theme == "light" ? "white" : "black",
             justifyContent: "center",
           }}

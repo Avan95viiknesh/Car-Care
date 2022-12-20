@@ -99,7 +99,7 @@ export default function CarService({ navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <ScrollView>
+      
           <View style={{ width: "100%", height: "100%" }}>
             <View>
               <Text style={styles.headingText}>Car Service </Text>
@@ -142,7 +142,7 @@ export default function CarService({ navigation }) {
                 <DropDownPicker
                   style={[
                     LoginStyle.TextInput,
-                    { width: "90%", height: 45, zIndex: -1 },
+                    { width: "90%", height: 45,},
                   ]}
                   open={open}
                   value={value}
@@ -150,6 +150,7 @@ export default function CarService({ navigation }) {
                   setOpen={setOpen}
                   setValue={setValue}
                   setItems={setItems}
+                   
                 />
               </View>
             </View>
@@ -165,7 +166,7 @@ export default function CarService({ navigation }) {
                 <Icon
                   name="calendar-outline"
                   size={18}
-                  style={{ position: "absolute", right: 40, bottom: 20 }}
+                  style={{ position: "absolute", right: 30, bottom: 20 }}
                   onPress={openDatePickerSingle}
                 />
               </View>
@@ -207,7 +208,7 @@ export default function CarService({ navigation }) {
                   <Icon
                     name="time-outline"
                     size={18}
-                    style={{ position: "absolute", left: 115, bottom: 20 }}
+                    style={{ position: "absolute", left: 105, bottom: 20 }}
                     onPress={() => showMode("time")}
                   />
                 </View>
@@ -226,7 +227,7 @@ export default function CarService({ navigation }) {
             </View>
             <Text>{addItem} </Text>
           </View>
-        </ScrollView>
+ 
       </View>
       {show && (
         <DateTimePicker

@@ -27,6 +27,8 @@ export default function ScheduleApp({
   deliveryInvoice,
   upcoming,
   upcomingInvoice,
+  okStatus,
+  statusNOtok
 }) {
   const { theme } = useSelector((state) => state.themeReducer);
 
@@ -139,7 +141,7 @@ export default function ScheduleApp({
                   <Pressable
                     style={SidebarStyle.cardlist}
                     onPress={
-                      delivery
+                      item.status === "Confirmed"
                         ? deliveryInvoice
                           ? () => deliveryInvoice()
                           : () => navigation.navigate("DeliveryDetails")
@@ -213,11 +215,11 @@ export default function ScheduleApp({
                       </Text>
                     </Text>
                     <Text>
-                      <Icon name="ellipse" size={10} color="green" />{" "}
+                      <Icon name="ellipse" size={10} color="green" /> 
                       <Text
                         style={{ color: theme == "light" ? "black" : "white" }}
                       >
-                        {item.status}{" "}
+                        {okStatus ? item.status = 'Delivered' : statusNOtok ? item. status= 'Upcoming' : item.status} 
                       </Text>
                     </Text>
                   </View>

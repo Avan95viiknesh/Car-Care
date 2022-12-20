@@ -11,6 +11,7 @@ export default function DeliveryDetails({ navigation }) {
           <ScheduleApp
             delivery="delivery"
             deliveryInvoice={() => navigation.navigate("DeliverInvoice")}
+            okStatus='OK'
           />
         </ScrollView>
       </View>

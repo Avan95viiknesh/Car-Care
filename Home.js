@@ -46,7 +46,7 @@ export default function Home() {
         <Stack.Screen
           name="DeliverInvoice"
           component={DeliverInvoice}
-          options={{ title: "Delivered ", headerShown: true }}
+          options={{ title: "Deliver Invoice", headerShown: true }}
         />
 
         <Stack.Screen
@@ -67,7 +67,7 @@ export default function Home() {
         <Stack.Screen
           name="UpcomingInvoice"
           component={UpcomingInvoice}
-          options={{ title: "Upcoming ", headerShown: true }}
+          options={{ title: "Upcoming Invoice", headerShown: true }}
         />
         <Stack.Screen
           name="ContactUs"

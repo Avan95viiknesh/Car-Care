@@ -68,14 +68,23 @@ export default function SignUp({
         )
           .then((res) => console.log(res.data))
           .catch((error) => console.log(error.response.data.error));
-        AsyncStorage.setItem("userName", userName);
-        AsyncStorage.setItem("mobile", mobile);
+
+          // if(resData.success===true){
+          //   var userName=resData.message;
+          //   AsyncStorage.setItem("userName", userName);
+          //   AsyncStorage.setItem("mobile", mobile);
+          //   LogHome();
+          //   alert("Login success");
+          // } else{
+          //   alert("Invalid Credentials");
+          // }
+     
         console.log(resData);
-        if (name == LogOtp) {
-          navigation.navigate("Otp");
-        } else {
-          LogHome();
-        }
+        // if (name == LogOtp) {
+        //   navigation.navigate("Otp");
+        // } else {
+        //   LogHome();
+        // }
       } catch (error) {
         console.log(error);
       }

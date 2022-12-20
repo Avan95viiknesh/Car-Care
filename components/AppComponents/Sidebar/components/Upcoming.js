@@ -5,12 +5,13 @@ import ScheduleApp from "./ScheduleApp";
 export default function Upcoming({ navigation }) {
   return (
     <>
-      <ScrollView>
+    
         <ScheduleApp
           upcoming="upcoming"
           upcomingInvoice={() => navigation.navigate("UpcomingInvoice")}
+          statusNOtok ='notOk'
         />
-      </ScrollView>
+ 
     </>
   );
 }
