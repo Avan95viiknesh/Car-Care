@@ -13,7 +13,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
- 
+import { ServiceList } from "../../data/ServiceList";
+
 export default function CarService({ navigation }) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [showDatePickerSingle2, setShowDatePickerSingle2] = useState(false);
@@ -21,11 +22,7 @@ export default function CarService({ navigation }) {
   const [data, setData] = useState("");
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Free Service", value: "Free" },
-    { label: "Paid Service", value: "Paid" },
-    { label: "Free Checkup", value: "Checkup" },
-  ]);
+  const [items, setItems] = useState([...ServiceList]);
   const [ownerName, setOwnerName] = useState();
   const [vehNo, setVehNo] = useState();
   const [contact, setContact] = useState();
@@ -48,7 +45,7 @@ export default function CarService({ navigation }) {
 
     let tempDate = new Date(currentdate);
     // let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-    let fTime = "Hrs :" + tempDate.getHours() + "| Min" + tempDate.getMinutes();
+    let fTime = "Hrs:" + tempDate.getHours() + " | Min" + tempDate.getMinutes();
     setTextShow(fTime);
 
     console.log("(" + fTime + ")");
@@ -100,144 +97,159 @@ export default function CarService({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <>
       <View style={styles.container}>
-        <View>
-          <Text style={styles.headingText}>Car Service </Text>
-        </View>
+        <ScrollView>
+          <View style={{ width: "100%", height: "100%" }}>
+            <View>
+              <Text style={styles.headingText}>Car Service </Text>
+            </View>
 
-        <View style={styles.boxContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.labelText}>Name</Text>
-            <TextInput
-              style={[LoginStyle.TextInput, { width: 150 }]}
-              placeholder="Enter your Name"
-              onChangeText={(text) => setOwnerName(text)}
-              value={ownerName}
-            />
-          </View>
-          <View>
-            <Text style={styles.labelText}>Vehicle No</Text>
-            <TextInput
-              style={[LoginStyle.TextInput, { width: 150 }]}
-              placeholder="Enter your Veh No"
-              onChangeText={(text) => setVehNo(text)}
-              value={vehNo}
-            />
-          </View>
-        </View>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Name</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "100%" }]}
+                  placeholder="Enter your Name"
+                  onChangeText={(text) => setOwnerName(text)}
+                  value={ownerName}
+                />
+              </View>
+              <View style={{ width: "50%" }}>
+                <Text style={styles.labelText}>Vehicle No</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "90%" }]}
+                  placeholder="Enter your Veh No"
+                  onChangeText={(text) => setVehNo(text)}
+                  value={vehNo}
+                />
+              </View>
+            </View>
 
-        <View style={styles.boxContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.labelText}>Contact</Text>
-            <TextInput
-              style={[LoginStyle.TextInput, { width: 150 }]}
-              placeholder=" Enter your number"
-              onChangeText={(text) => setContact(text)}
-              value={contact}
-            />
-          </View>
-          <View>
-            <Text style={styles.labelText}>Service Type</Text>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Contact</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "100%" }]}
+                  placeholder=" Enter your number"
+                  onChangeText={(text) => setContact(text)}
+                  value={contact}
+                />
+              </View>
+              <View style={{ width: "50%" }}>
+                <Text style={styles.labelText}>Service Type</Text>
 
-            <DropDownPicker
-              style={[
-                LoginStyle.TextInput,
-                { width: 150, height: 45, zIndex: -1 },
-              ]}
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
-            />
-          </View>
-        </View>
+                <DropDownPicker
+                  style={[
+                    LoginStyle.TextInput,
+                    { width: "90%", height: 45, zIndex: -1 },
+                  ]}
+                  open={open}
+                  value={value}
+                  items={items}
+                  setOpen={setOpen}
+                  setValue={setValue}
+                  setItems={setItems}
+                />
+              </View>
+            </View>
 
-        <View style={styles.boxContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.labelText}>Booking Date</Text>
-            <Text style={[LoginStyle.TextInput, { width: 150 }]}> {date} </Text>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Booking Date</Text>
+                <Text style={[LoginStyle.TextInput, { width: "100%" }]}>
+                  {" "}
+                  {date}{" "}
+                </Text>
 
-            <Icon
-              name="calendar-outline"
-              size={18}
-              style={{ position: "absolute", right: 10, bottom: 20 }}
-              onPress={openDatePickerSingle}
-            />
-          </View>
-          <View>
-            <Text style={styles.labelText}>Expected Delivery</Text>
-            <Text style={[LoginStyle.TextInput, { width: 150 }]}>{data} </Text>
+                <Icon
+                  name="calendar-outline"
+                  size={18}
+                  style={{ position: "absolute", right: 40, bottom: 20 }}
+                  onPress={openDatePickerSingle}
+                />
+              </View>
+              <View style={{ width: "50%" }}>
+                <Text style={styles.labelText}>Expected Delivery</Text>
+                <Text style={[LoginStyle.TextInput, { width: "90%" }]}>
+                  {data}{" "}
+                </Text>
 
-            <Icon
-              name="calendar-outline"
-              size={18}
-              style={{ position: "absolute", right: 10, bottom: 20 }}
-              onPress={openDatePickerSingle2}
-            />
-          </View>
-        </View>
+                <Icon
+                  name="calendar-outline"
+                  size={18}
+                  style={{ position: "absolute", right: 30, bottom: 20 }}
+                  onPress={openDatePickerSingle2}
+                />
+              </View>
+            </View>
 
-        <View>
-          <Text style={styles.labelText}>Expected Time</Text>
-          <Text style={[LoginStyle.TextInput, { width: 150 }]}>
-            {textShow}{" "}
-          </Text>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Expected Time</Text>
+                <Text style={[LoginStyle.TextInput, { width: "100%",textAlign:'left',paddingTop:15 }]}>
+                  {textShow}{" "}
+                </Text>
 
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            {/* <TimePicker
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <TimePicker
         value={{ hours, minutes }}
         onChange={handleChangeTime}    
         
       /> */}
+
+                  <Icon
+                    name="time-outline"
+                    size={18}
+                    style={{ position: "absolute", left: 115, bottom: 20 }}
+                    onPress={() => showMode("time")}
+                  />
+                </View>
+
+               
+              </View>
+            </View>
+
+            <View>
+              <TouchableOpacity
+                style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
+                onPress={handleSubmit}
+              >
+                <Text>Book Service</Text>
+              </TouchableOpacity>
+            </View>
+            <Text>{addItem} </Text>
           </View>
-
-          <Icon
-            name="time-outline"
-            size={18}
-            style={{ position: "absolute", left: 120, bottom: 20 }}
-            onPress={() => showMode("time")}
-          />
-
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              show={show}
-              value={dateNow}
-              mode="time"
-              is24Hour={true}
-              display="default"
-              onChange={onChangeTimeDate}
-              onCancel={onCancel}
-              onConfirm={onConfirm}
-            />
-          )}
-        </View>
-
-        <View>
-          <TouchableOpacity
-            style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
-            onPress={handleSubmit}
-          >
-            <Text>Book Service</Text>
-          </TouchableOpacity>
-        </View>
-        <Text>{addItem} </Text>
+        </ScrollView>
       </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          show={show}
+          value={dateNow}
+          mode="time"
+          is24Hour={true}
+          display="default"
+          onChange={onChangeTimeDate}
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+        />
+      )}
       <DatePicker
         placeholder="select date"
         dateStringFormat="dd-mm-yyyy"
         modalStyles={{
           height: 400,
           width: 50,
-
           position: "absolute",
           top: 80,
-          left: 190,
+          left: 170,
           zIndex: 1,
         }}
         isVisible={showDatePickerSingle}
@@ -252,7 +264,7 @@ export default function CarService({ navigation }) {
         modalStyles={{
           position: "absolute",
           top: 0,
-          left: 50,
+          left: 30,
           zIndex: 1,
         }}
         isVisible={showDatePickerSingle2}
@@ -260,12 +272,15 @@ export default function CarService({ navigation }) {
         onCancel={onCancelSingle2}
         onConfirm={onConfirmSingle2}
       />
-    </ScrollView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     margin: 20,
     marginVertical: 50,
     padding: 20,
@@ -279,12 +294,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     margin: 0,
+    minWidth: "100%",
   },
 
   inputContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    paddingRight: 10,
+    width: "50%",
   },
 
   labelText: {

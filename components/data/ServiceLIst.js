@@ -1,4 +1,4 @@
-export const ServiceList = [
+export  const ServiceList = [
     { label: "Free Service", value: "Free" },
     { label: "Paid Service", value: "Paid" },
     { label: "Free Checkup", value: "Checkup" },

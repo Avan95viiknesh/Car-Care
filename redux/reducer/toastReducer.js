@@ -1,4 +1,4 @@
-import { ADD_TOAST } from '../action'  
+import { ADD_TOAST } from '../action/action' 
 
 function toastMessage (state = null, action) {
   switch (action.type) {

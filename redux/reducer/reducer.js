@@ -1,6 +1,6 @@
-import { SET_DARK_THEME } from "../action";  
+import {SET_DARK_THEME }  from '../action/action'
 
-
+           
 const initialState = {
     theme : 'light',
 }

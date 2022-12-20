@@ -14,12 +14,11 @@ import LoginStyle from "./LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import InputField from "./InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from 'axios';
-import { Dimensions } from 'react-native';
+import axios from "axios";
+import { Dimensions } from "react-native";
+import { confirmButtonStyles } from "react-native-modal-datetime-picker";
 
-
-const windowWidth = Dimensions.get('window').width;
-
+const windowWidth = Dimensions.get("window").width;
 
 export default function SignUp({
   navigation,
@@ -45,8 +44,33 @@ export default function SignUp({
       Alert.alert("warning", "Please enter valid Password");
     } else {
       try {
-        await AsyncStorage.setItem("userName", userName);
+        console.log(userName, mobile, password);
+        let obj =
+          "phNum=" +
+          mobile +
+          "&name=" +
+          userName +
+          "&password=" +
+          password +
+          "&type=service";
 
+        const resData = await axios(
+          "https://fioritest.avaniko.com/User/AddUser ",
+          {
+            method: "POST",
+            data: obj,
+            // headers: {
+
+            //   "Content-Type": "application/x-www-form-urlencoded",
+
+            // },
+          }
+        )
+          .then((res) => console.log(res.data))
+          .catch((error) => console.log(error.response.data.error));
+        AsyncStorage.setItem("userName", userName);
+        AsyncStorage.setItem("mobile", mobile);
+        console.log(resData);
         if (name == LogOtp) {
           navigation.navigate("Otp");
         } else {
@@ -71,7 +95,7 @@ export default function SignUp({
       password +
       "&grant_type=password&Type=service";
 
-    let result = await axios( {
+    let result = await axios({
       method: "POST",
       url: "https://fioritest.avaniko.com/login",
       data: bodyData,
@@ -80,10 +104,10 @@ export default function SignUp({
       },
     });
 
-    console.log(result)
+    console.log(result);
     // result = await result.json();
-    AsyncStorage.setItem("userName",result.data.UserName);
-    AsyncStorage.setItem("mobile",result.data.PhoneNumber);
+    AsyncStorage.setItem("userName", result.data.UserName);
+    AsyncStorage.setItem("mobile", result.data.PhoneNumber);
     LogHome();
   };
 
@@ -93,10 +117,10 @@ export default function SignUp({
         <ScrollView>
           <Image
             source={require("../../../Car-Care/assets/car-care.jpg")}
-            style={[LoginStyle.headerImage,{maxWidth: windowWidth,}]}
+            style={[LoginStyle.headerImage, { maxWidth: windowWidth }]}
           />
 
-          <View >
+          <View>
             <Text style={LoginStyle.title}> {name ? name : "SIGN UP"} </Text>
             {name ? (
               ""
@@ -118,7 +142,7 @@ export default function SignUp({
               <Text style={LoginStyle.lebelText}>Mobile no</Text>
               <TextInput
                 placeholder="Mobile no"
-               // secureTextEntry={isPasswordSecure}
+                // secureTextEntry={isPasswordSecure}
                 style={LoginStyle.TextInput}
                 value={mobile}
                 onChangeText={(val) => setMobile(val)}
@@ -179,21 +203,25 @@ export default function SignUp({
               )}
             </View>
 
-              <View style={LoginStyle.accountHave}>
-                <Text style={{ fontSize: 15,marginLeft:20 }}>
-                 {name ? "Don't have an account?" : "Already have an account?"}
-                  <Text
-                    style={{ color: "#F0CE1B", fontSize: 14 }}
-                    onPress={ name?  signup
-                      ? () => signup()
-                      : () => navigation.navigate("SignUp"):() => navigation.navigate("Login")}
-                  >
-                    {" "}
-                   { name ? "  Signup" : " Login"}
-                  </Text>
+            <View style={LoginStyle.accountHave}>
+              <Text style={{ fontSize: 15, marginLeft: 20 }}>
+                {name ? "Don't have an account?" : "Already have an account?"}
+                <Text
+                  style={{ color: "#F0CE1B", fontSize: 14 }}
+                  onPress={
+                    name
+                      ? signup
+                        ? () => signup()
+                        : () => navigation.navigate("SignUp")
+                      : () => navigation.navigate("Login")
+                  }
+                >
+                  {" "}
+                  {name ? "  Signup" : " Login"}
                 </Text>
-              </View>
-            
+              </Text>
+            </View>
+
             <View style={LoginStyle.horizontalSection}>
               <View style={LoginStyle.horizontalLine} />
               <View>

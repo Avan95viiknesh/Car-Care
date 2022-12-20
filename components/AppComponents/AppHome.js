@@ -13,7 +13,7 @@ import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "../../redux/action";
+import { setTheme } from "../../redux/action/action";
 import {
   horizontalScale,
   verticalScale,

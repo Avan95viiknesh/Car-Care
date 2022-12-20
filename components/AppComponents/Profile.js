@@ -3,7 +3,7 @@ import React,{useState,useEffect} from "react";
 import LoginStyle from "../login/LoginStyle";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "../../redux/action";
+import { setTheme } from "../../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation, settings }) {
