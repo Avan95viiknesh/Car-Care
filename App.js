@@ -4,11 +4,11 @@ import Upcoming from "./components/AppComponents/Sidebar/components/Upcoming";
 import Home from "./Home";
 import { store } from "./redux/store/store";  
 import { Provider } from 'react-redux'
-import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
-import CarService from "./components/AppComponents/HomepageComponents/CarService";
-import SignUp from "./components/login/SignUp";
-import MyService from "./components/AppComponents/profileComponents/MyService";
-import Main from "./components/AppComponents/Main";
+// import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
+// import CarService from "./components/AppComponents/HomepageComponents/CarService";
+// import SignUp from "./components/login/SignUp";
+// import MyService from "./components/AppComponents/profileComponents/MyService";
+// import Main from "./components/AppComponents/Main";
 import Toast from 'react-native-toast-message';
 
 export default function App() {
