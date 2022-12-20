@@ -43,7 +43,8 @@ const paymentDetails = [
 
 const Payment = ({addAmount }) => {
   const [checkbox, setCheckbox] = useState([...paymentDetails]);
-  const [selectedID, setID] = React.useState('');
+  const [selectedID, setID] = React.useState(0);
+ 
 
  
 

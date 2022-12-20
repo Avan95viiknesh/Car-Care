@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Profile({ navigation, settings }) {
+export default function Profile({ navigation, settings,addText }) {
   const [userName, setUserName] = useState("");
   const [userNum, setUserNum] = useState("");
 
@@ -268,6 +268,9 @@ export default function Profile({ navigation, settings }) {
             </TouchableOpacity>
           )}
         />
+     
+
+    
       </View>
 {
   settings ? '' : (

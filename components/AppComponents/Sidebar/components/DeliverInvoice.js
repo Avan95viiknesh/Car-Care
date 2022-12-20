@@ -47,8 +47,7 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
   
 
   return (
-    <SafeAreaView>
-      <ScrollView>
+  
         <View
           style={{
             padding: 20,
@@ -278,8 +277,6 @@ export default function DeliverInvoice({ navigation,payment,upcoming, id,route }
        <Payment addAmount={addAmount}   />
        </View>
         </View>
-    
-      </ScrollView>
-    </SafeAreaView>
+     
   );
 }

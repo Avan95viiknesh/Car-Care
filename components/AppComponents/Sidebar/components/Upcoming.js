@@ -3,6 +3,9 @@ import React from "react";
 import ScheduleApp from "./ScheduleApp";
 
 export default function Upcoming({ navigation }) {
+
+ 
+
   return (
     <>
     
@@ -10,6 +13,7 @@ export default function Upcoming({ navigation }) {
           upcoming="upcoming"
           upcomingInvoice={() => navigation.navigate("UpcomingInvoice")}
           statusNOtok ='notOk'
+          
         />
  
     </>

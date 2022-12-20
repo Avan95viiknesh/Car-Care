@@ -20,6 +20,7 @@ import DatePicker from "react-native-neat-date-picker";
 import UpcomingInvoice from "./UpcomingInvoice";
 import { Data } from "../../../data/Datas";
 import SibebarStyle from "./SibebarStyle";
+import Toast from 'react-native-toast-message';
 
 export default function ScheduleApp({
   delivery,
@@ -28,7 +29,8 @@ export default function ScheduleApp({
   upcoming,
   upcomingInvoice,
   okStatus,
-  statusNOtok
+  statusNOtok,
+  addText
 }) {
   const { theme } = useSelector((state) => state.themeReducer);
 
@@ -62,16 +64,34 @@ export default function ScheduleApp({
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: (id) => {console.log("OK Pressed: ", delShedule(id)); delShedule(id) }},
+      { text: "OK", onPress: () => {console.log("OK Pressed: ",handleDelete() ); handleDelete() }},
     ]);
   };
 
   const delShedule = (id) => {
-   const dltList = [...searchTerm]; 
-   dltList.splice(id,1)
-   setSearchTerm(dltList)
+  const dlist=  Data.findIndex((el) => el.id === id) 
+
+  if (dlist != -1) return;
+  Data.splice(dlist, 1);
+
+   Toast.show({
+    type: 'success',
+    text1: 'user deleted successfully',
+    
+  });
+
+  console.log(id)
   }
 
+  
+  const remove = (id) => {
+
+    const filterArr = [...searchTerm];
+
+    filterArr.splice(id,1);
+    setSearchTerm(filterArr)
+
+}
 
 
   // const handleRemove = (index) => {
@@ -80,9 +100,9 @@ export default function ScheduleApp({
   //   setSearchTerm([...searchTerm]);
   // };
 
+   
 
-
-
+ 
 
 
   return (
@@ -130,7 +150,7 @@ export default function ScheduleApp({
             <FlatList
               data={searchTerm}
               Style={LoginStyle.container}
-              renderItem={({ item, index }) => (
+              renderItem={({ item,id}) => (
                 <View
                   style={
                    [ delivery || upcoming
@@ -142,7 +162,7 @@ export default function ScheduleApp({
                     style={SidebarStyle.cardlist}
                     onPress={
                       item.status === "Confirmed"
-                        ? deliveryInvoice
+                        ? deliveryInvoice 
                           ? () => deliveryInvoice()
                           : () => navigation.navigate("DeliveryDetails")
                         : upcomingInvoice
@@ -173,7 +193,8 @@ export default function ScheduleApp({
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.vehName}{" "}
+                        {item.vehName}{" "} 
+
                       </Text>
                     </View>
 
@@ -221,6 +242,7 @@ export default function ScheduleApp({
                       >
                         {okStatus ? item.status = 'Delivered' : statusNOtok ? item. status= 'Upcoming' : item.status} 
                       </Text>
+                      
                     </Text>
                   </View>
 
@@ -235,7 +257,8 @@ export default function ScheduleApp({
                     >
                       <TouchableOpacity
                         style={SidebarStyle.cancelBtn}
-                        onPress={ alertPopup}
+                       // onPress={() =>delShedule(item.id)}
+                       onPress={() =>remove(item,id)}
                       >
                         <Text>Cancel</Text>
                       </TouchableOpacity>

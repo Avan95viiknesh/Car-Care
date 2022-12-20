@@ -1,17 +1,20 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, Button, TouchableOpacity } from "react-native";
 import React from "react";
 import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   horizontalScale,
   verticalScale,
   moderateScale,
 } from "../../Dimensions/Metrics";
- 
+//import counterAction from "../../redux/action/counterAction"; 
 
 export default function Offer() {
   const { theme } = useSelector((state) => state.themeReducer);
+
+  // const  counter  = useSelector((state) => state.counter);
+  // const dispatch = useDispatch();
 
   return (
     <>
@@ -52,7 +55,15 @@ export default function Offer() {
            </TouchableOpacity>
           </View>
         </View>
- 
+
+      {/* <View>
+
+        <Text> count : {counter}  </Text>
+
+      <Button title="increment" onPress={() => dispatch(counterAction.increment())} />  
+      <Button title="decrement" onPress={() => dispatch(counterAction.decrement())} />  
+      </View>
+  */}
       </View>
     
     </>

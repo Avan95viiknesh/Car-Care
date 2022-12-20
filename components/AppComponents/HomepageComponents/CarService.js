@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import LoginStyle from "../../login/LoginStyle";
@@ -98,137 +99,173 @@ export default function CarService({ navigation }) {
 
   return (
     <>
-      <View style={styles.container}>
-      
-          <View style={{ width: "100%", height: "100%" }}>
-            <View>
-              <Text style={styles.headingText}>Car Service </Text>
-            </View>
-
-            <View style={styles.boxContainer}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Name</Text>
-                <TextInput
-                  style={[LoginStyle.TextInput, { width: "100%" }]}
-                  placeholder="Enter your Name"
-                  onChangeText={(text) => setOwnerName(text)}
-                  value={ownerName}
-                />
-              </View>
-              <View style={{ width: "50%" }}>
-                <Text style={styles.labelText}>Vehicle No</Text>
-                <TextInput
-                  style={[LoginStyle.TextInput, { width: "90%" }]}
-                  placeholder="Enter your Veh No"
-                  onChangeText={(text) => setVehNo(text)}
-                  value={vehNo}
-                />
-              </View>
-            </View>
-
-            <View style={styles.boxContainer}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Contact</Text>
-                <TextInput
-                  style={[LoginStyle.TextInput, { width: "100%" }]}
-                  placeholder=" Enter your number"
-                  onChangeText={(text) => setContact(text)}
-                  value={contact}
-                />
-              </View>
-              <View style={{ width: "50%" }}>
-                <Text style={styles.labelText}>Service Type</Text>
-
-                <DropDownPicker
-                  style={[
-                    LoginStyle.TextInput,
-                    { width: "90%", height: 45,},
-                  ]}
-                  open={open}
-                  value={value}
-                  items={items}
-                  setOpen={setOpen}
-                  setValue={setValue}
-                  setItems={setItems}
-                   
-                />
-              </View>
-            </View>
-
-            <View style={styles.boxContainer}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Booking Date</Text>
-                <Text style={[LoginStyle.TextInput, { width: "100%" }]}>
-                  {" "}
-                  {date}{" "}
-                </Text>
-
-                <Icon
-                  name="calendar-outline"
-                  size={18}
-                  style={{ position: "absolute", right: 30, bottom: 20 }}
-                  onPress={openDatePickerSingle}
-                />
-              </View>
-              <View style={{ width: "50%" }}>
-                <Text style={styles.labelText}>Expected Delivery</Text>
-                <Text style={[LoginStyle.TextInput, { width: "90%" }]}>
-                  {data}{" "}
-                </Text>
-
-                <Icon
-                  name="calendar-outline"
-                  size={18}
-                  style={{ position: "absolute", right: 30, bottom: 20 }}
-                  onPress={openDatePickerSingle2}
-                />
-              </View>
-            </View>
-
-            <View style={styles.boxContainer}>
-              <View style={styles.inputContainer}>
-                <Text style={styles.labelText}>Expected Time</Text>
-                <Text style={[LoginStyle.TextInput, { width: "100%",textAlign:'left',paddingTop:15 }]}>
-                  {textShow}{" "}
-                </Text>
-
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {/* <TimePicker
-        value={{ hours, minutes }}
-        onChange={handleChangeTime}    
-        
-      /> */}
-
-                  <Icon
-                    name="time-outline"
-                    size={18}
-                    style={{ position: "absolute", left: 105, bottom: 20 }}
-                    onPress={() => showMode("time")}
-                  />
-                </View>
-
-               
-              </View>
-            </View>
-
-            <View>
-              <TouchableOpacity
-                style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
-                onPress={handleSubmit}
-              >
-                <Text>Book Service</Text>
-              </TouchableOpacity>
-            </View>
-            <Text>{addItem} </Text>
-          </View>
  
+ <ScrollView>
+  
+ <View style={styles.container}>
+    
+      
+    <View style={{ width: "100%", height: "100%" }}>
+      <View>
+        <Text style={styles.headingText}>Car Service </Text>
       </View>
+
+      <View style={styles.boxContainer}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelText}>Name</Text>
+          <TextInput
+            style={[LoginStyle.TextInput, { width: "100%" }]}
+            placeholder="Enter your Name"
+            onChangeText={(text) => setOwnerName(text)}
+            value={ownerName}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <Text style={styles.labelText}>Vehicle No</Text>
+          <TextInput
+            style={[LoginStyle.TextInput, { width: "90%" }]}
+            placeholder="Enter your Veh No"
+            onChangeText={(text) => setVehNo(text)}
+            value={vehNo}
+          />
+        </View>
+      </View>
+
+      <View style={styles.boxContainer}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelText}>Contact</Text>
+          <TextInput
+            style={[LoginStyle.TextInput, { width: "100%" }]}
+            placeholder=" Enter your number"
+            onChangeText={(text) => setContact(text)}
+            value={contact}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <Text style={styles.labelText}>Address</Text>
+
+          <TextInput
+      multiline={true}
+      textAlignVertical="top"
+      style={[LoginStyle.TextInput, { padding: 10, height: 40 }]}
+    />
+        </View>
+      </View>
+
+      <View style={styles.boxContainer}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelText}>Booking Date</Text>
+          <Text style={[LoginStyle.TextInput, { width: "100%" }]}>
+            {" "}
+            {date}{" "}
+          </Text>
+
+          <Icon
+            name="calendar-outline"
+            size={18}
+            style={{ position: "absolute", right: 30, bottom: 20 }}
+            onPress={openDatePickerSingle}
+          />
+        </View>
+        <View style={{ width: "50%" }}>
+          <Text style={styles.labelText}>Expected Delivery</Text>
+          <Text style={[LoginStyle.TextInput, { width: "90%" }]}>
+            {data}{" "}
+          </Text>
+
+          <Icon
+            name="calendar-outline"
+            size={18}
+            style={{ position: "absolute", right: 30, bottom: 20 }}
+            onPress={openDatePickerSingle2}
+          />
+        </View>
+      </View>
+
+      <View style={styles.boxContainer}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.labelText}>Expected Time</Text>
+          <Text style={[LoginStyle.TextInput, { width: "100%",textAlign:'left',paddingTop:15 }]}>
+            {textShow}{" "}
+          </Text>
+
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* <TimePicker
+  value={{ hours, minutes }}
+  onChange={handleChangeTime}    
+  
+/> */}
+
+            <Icon
+              name="time-outline"
+              size={18}
+              style={{ position: "absolute", left: 105, bottom: 20 }}
+              onPress={() => showMode("time")}
+            />
+          </View>
+
+         
+        </View>
+        <View style={{ width: "50%" }}>
+          <Text style={styles.labelText}>Service Type</Text>
+
+          <DropDownPicker
+          // mode="BADGE"
+            style={[
+              LoginStyle.TextInput,
+              { width: "90%", height: 45, },
+            ]}
+          //  searchable={true}     
+            showArrowIcon={true}
+         //   listMode="FLATLIST"
+            autoScroll={true}
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+          //  autoScroll={true}
+          multiple={true}
+          closeAfterSelecting={true}
+          min={0}
+          max={3}
+          textStyle={{
+            fontSize: 15,
+            
+          }}
+        //  theme="DARK"
+          />
+        </View>
+
+
+        
+      </View>
+
+      <View>
+        <TouchableOpacity
+          style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
+          onPress={handleSubmit}
+        >
+          <Text>Book Service</Text>
+        </TouchableOpacity>
+      </View>
+      <Text>{addItem} </Text>
+    </View>
+   
+</View>
+   
+ </ScrollView>
+ 
+
+
+
       {show && (
         <DateTimePicker
           testID="dateTimePicker"

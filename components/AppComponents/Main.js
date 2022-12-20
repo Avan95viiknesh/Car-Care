@@ -15,14 +15,26 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  LogBox
 } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 const Main = ({ navigation }) => {
+
+
   const [userName, setUserName] = useState("");
 
   const drawer = useRef(null);
+
+
+
+
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
 
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>

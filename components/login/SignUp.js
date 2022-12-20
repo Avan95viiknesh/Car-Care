@@ -97,27 +97,34 @@ export default function SignUp({
   const setLogin = async () => {
     console.log(mobile, password);
 
+   try {
     let bodyData =
-      "userName=" +
-      mobile +
-      "&password=" +
-      password +
-      "&grant_type=password&Type=service";
+    "userName=" +
+    mobile +
+    "&password=" +
+    password +
+    "&grant_type=password&Type=service";
 
-    let result = await axios({
-      method: "POST",
-      url: "https://fioritest.avaniko.com/login",
-      data: bodyData,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
+  let result = await axios({
+    method: "POST",
+    url: "https://fioritest.avaniko.com/login",
+    data: bodyData,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+  console.log(result);
+  // result = await result.json();
+  AsyncStorage.setItem("userName", result.data.UserName);
+  AsyncStorage.setItem("mobile", result.data.PhoneNumber);
+ 
+  LogHome();
+  return result
 
-    console.log(result);
-    // result = await result.json();
-    AsyncStorage.setItem("userName", result.data.UserName);
-    AsyncStorage.setItem("mobile", result.data.PhoneNumber);
-    LogHome();
+   } catch (error) {
+    return error.response.data
+   }
+
   };
 
   return (
