@@ -38,6 +38,7 @@ export default function ScheduleApp({
   const [date, setDate] = useState("");
   const [searchTerm, setSearchTerm] = useState([...Data]);
   const [mastersearchTerm, setmasterSearchTerm] = useState([...Data]);
+  const [datas, setDatas] = useState([...Data]);
 
   const searchFilterFunction = (text) => {
     if (text.length >= 1) {
@@ -57,53 +58,34 @@ export default function ScheduleApp({
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
 
-  const alertPopup = () => {
+  const alertPopup = (id) => {
     Alert.alert("Are you sure you want to cancel..?", " ", [
       {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: () => {console.log("OK Pressed: ",handleDelete() ); handleDelete() }},
+      { text: "OK", onPress: () =>handleRemove(id)},
     ]);
   };
 
-  const delShedule = (id) => {
-  const dlist=  Data.findIndex((el) => el.id === id) 
-
-  if (dlist != -1) return;
-  Data.splice(dlist, 1);
-
-   Toast.show({
-    type: 'success',
-    text1: 'user deleted successfully',
-    
-  });
-
-  console.log(id)
-  }
-
-  
-  const remove = (id) => {
-
-    const filterArr = [...searchTerm];
-
-    filterArr.splice(id,1);
-    setSearchTerm(filterArr)
-
-}
-
-
-  // const handleRemove = (index) => {
-  //   console.log(index);
-  //   searchTerm.splice(index, 1);
-  //   setSearchTerm([...searchTerm]);
-  // };
-
-   
 
  
+ 
+ 
 
+const handleRemove = (id) => {
+  const newList = searchTerm.filter((item) => item.id!== id);
+  setSearchTerm(newList)
+  console.log(id)
+  Toast.show({
+    type: 'success',
+    position: 'top',
+    text1: 'user deleted successfully'    
+  });
+}
+
+ 
 
   return (
     <>
@@ -257,8 +239,8 @@ export default function ScheduleApp({
                     >
                       <TouchableOpacity
                         style={SidebarStyle.cancelBtn}
-                       // onPress={() =>delShedule(item.id)}
-                       onPress={() =>remove(item,id)}
+                      //  onPress={() =>handleDelete(item.id)}
+                       onPress={() =>alertPopup(item.id)}
                       >
                         <Text>Cancel</Text>
                       </TouchableOpacity>

@@ -72,6 +72,7 @@ headerImage :{
     paddingLeft: "63%",
     color: "#F0CE1B",
     fontSize: 14,
+    paddingTop:10
   },
 
  iconstyle:{ position: "absolute", right: 20, bottom: 20 },

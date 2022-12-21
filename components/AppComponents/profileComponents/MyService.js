@@ -32,12 +32,14 @@ export default function MyService({ navigation }) {
   };
 
   // const filterObj = Data.filter((e) => e.status == 'Confirmed');
-  const delrow = (id) => {
-    const dltList = [...data]; 
-    dltList.splice(id,1)
-    setData(dltList)
+
+  // const delrow = (id) => {
+  //   const dltList = [data]; 
+  //   dltList.splice(id,1)
+  //   setData(dltList)
     
-   }
+  //  }
+
 
   //  const deleteRow = (id) =>{
   //   const newOne = data.filter((el) => el.id !== id );
@@ -48,39 +50,34 @@ export default function MyService({ navigation }) {
   //   const items = data.filter(item => item.id !== id);
   //   setData(items,1);
   // };
+
+
+  const handleDelete = (id) => {
+    const items = data.filter(itm => itm.id !== id);
+    setData(items)
+  };
+
    
-  const alertPopup = () => {
+  const alertPopup = (id) => {
     Alert.alert("Are you sure you want to delete..?", " ", [
       {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: (id) => delrow(id) },
+      { text: "OK", onPress: () => handleDelete(id) },
     ]);
   };
 
-  const itemData = ({ item, index, value,key }) => {
-
-    const editField = (value, index) => {
-
-      // Clone students data before mutation
-      const students =  data.map(item => ({ ...item }))
-
-      // Update field by index of current student
-      students[key][index] = value
-
-      // Trigger re-render
-      setData({ students })
-    }
+  const itemData = ({ item,key,id }) => {
+ 
 
     return (
 
 
       <View style={{ flexDirection: "row",justifyContent:'space-around',marginHorizontal:5 }}     >
-        <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }} key={key}
-         className={ item.editing ? 'editing' : '' }>
-         { item.editing ? <TextInput value={item[1]} onChange={ e => editField(e.target.value, 1) } /> :<Text>{item.id} </Text> }  
+        <View style={{ width: 40, height: 40, backgroundColor: "#F0CE1B" }} key={key}>
+         <Text>{item.id} </Text>   
         </View>
 
         <View style={{ width: 80, backgroundColor: "#F0CE1B" }}>
@@ -112,22 +109,9 @@ export default function MyService({ navigation }) {
             color="#000"
             size={20}
             
-            onPress={()=> {
-
-              // Clone students data before mutation
-              const studentss = data.map(i => ({ ...i, editing : item.editing && i===item }))
-        
-              // Toggle editing flag of this current student (ie table row)
-              studentss[key].editing = true; 
-        
-              setData({
-                clientIsEditing:true, // This might not be needed ?
-                studentss
-              })
-        }
-            }
+             
           />
-          <Ionicons name="trash" color="#000" size={20} onPress={alertPopup} />
+          <Ionicons name="trash" color="#000" size={20} onPress={()=> alertPopup(item.id)} />
         </View>
       </View>
     );
@@ -197,7 +181,7 @@ export default function MyService({ navigation }) {
         <FlatList
           data={data}
           renderItem={itemData}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index,) => index.toString()}
         />
       </View>
 

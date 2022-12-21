@@ -26,7 +26,7 @@ const Slide = ({navigation}) => {
 
   const appLogin = () => {
    
-    navigation.navigate("Main")
+    navigation.navigate("Login")
   }
 
   const RenderItem = ({item}) => {

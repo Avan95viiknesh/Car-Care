@@ -16,7 +16,10 @@ import InputField from "./InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Dimensions } from "react-native";
-import { confirmButtonStyles } from "react-native-modal-datetime-picker";
+import { useSelector, useDispatch } from "react-redux";
+import signupAction from "../../redux/action/signupAction";
+import { loginUser, signUpUser } from "../../redux/authsliceReducer";
+import Toast from "react-native-toast-message";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -32,6 +35,10 @@ export default function SignUp({
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
+  const logError = useSelector((state) => state.user.loginErr);
+  const signError = useSelector((state) => state.user.signupErr);
+  const dispatch = useDispatch();
 
   const changeIcon = () => {
     setIsPasswordSecure(!isPasswordSecure);
@@ -69,16 +76,16 @@ export default function SignUp({
           .then((res) => console.log(res.data))
           .catch((error) => console.log(error.response.data.error));
 
-          // if(resData.success===true){
-          //   var userName=resData.message;
-          //   AsyncStorage.setItem("userName", userName);
-          //   AsyncStorage.setItem("mobile", mobile);
-          //   LogHome();
-          //   alert("Login success");
-          // } else{
-          //   alert("Invalid Credentials");
-          // }
-     
+        // if(resData.success===true){
+        //   var userName=resData.message;
+        //   AsyncStorage.setItem("userName", userName);
+        //   AsyncStorage.setItem("mobile", mobile);
+        //   LogHome();
+        //   alert("Login success");
+        // } else{
+        //   alert("Invalid Credentials");
+        // }
+
         console.log(resData);
         // if (name == LogOtp) {
         //   navigation.navigate("Otp");
@@ -97,34 +104,66 @@ export default function SignUp({
   const setLogin = async () => {
     console.log(mobile, password);
 
-   try {
+    try {
+      let bodyData =
+        "userName=" +
+        mobile +
+        "&password=" +
+        password +
+        "&grant_type=password&Type=service";
+
+      let result = await axios({
+        method: "POST",
+        url: "https://fioritest.avaniko.com/login",
+        data: bodyData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      console.log(result);
+      // result = await result.json();
+      AsyncStorage.setItem("userName", result.data.UserName);
+      AsyncStorage.setItem("mobile", result.data.PhoneNumber);
+
+      LogHome();
+      return result;
+    } catch (error) {
+      return error.response.data;
+    }
+  };
+
+  const loginOperation = async () => {
     let bodyData =
-    "userName=" +
-    mobile +
-    "&password=" +
-    password +
-    "&grant_type=password&Type=service";
+      "userName=" +
+      mobile +
+      "&password=" +
+      password +
+      "&grant_type=password&Type=service";
+    dispatch(loginUser(bodyData)).unwrap().then(() => LogHome() ) 
+    
+  };
 
-  let result = await axios({
-    method: "POST",
-    url: "https://fioritest.avaniko.com/login",
-    data: bodyData,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
-  console.log(result);
-  // result = await result.json();
-  AsyncStorage.setItem("userName", result.data.UserName);
-  AsyncStorage.setItem("mobile", result.data.PhoneNumber);
- 
-  LogHome();
-  return result
+  console.log(logError, "errorerrorerrorerror");
 
-   } catch (error) {
-    return error.response.data
-   }
+  const signOperation = async () => {
+    let obj =
+      "phNum=" +
+      mobile +
+      "&name=" +
+      userName +
+      "&password=" +
+      password +
+      "&type=service";
+    dispatch(signUpUser(obj));
+    navigation.navigate("Login")
+  };
 
+  const alertCheck = () => {
+    Toast.show({
+      type: "error",
+      position: "top",
+      text1: `${logError}`,
+    });
   };
 
   return (
@@ -189,6 +228,12 @@ export default function SignUp({
                 />
               </View>
             </View>
+
+         
+    { name ? logError && <Text> {logError} </Text> : '' }
+
+         
+
             {name ? (
               <Text
                 style={LoginStyle.inputFieldBaseText}
@@ -208,12 +253,15 @@ export default function SignUp({
               {name ? (
                 <TouchableOpacity
                   style={LoginStyle.loginBtn}
-                  onPress={setLogin}
+                  onPress={loginOperation}
                 >
                   <Text> {name ? "Login" : "Get otp"}</Text>
                 </TouchableOpacity>
               ) : (
-                <TouchableOpacity style={LoginStyle.loginBtn} onPress={setData}>
+                <TouchableOpacity
+                  style={LoginStyle.loginBtn}
+                  onPress={signOperation}
+                >
                   <Text> {name ? "Login" : "Get otp"}</Text>
                 </TouchableOpacity>
               )}

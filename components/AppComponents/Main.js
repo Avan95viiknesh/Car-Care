@@ -17,17 +17,17 @@ import {
   TouchableOpacity,
   LogBox
 } from "react-native";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const Main = ({ navigation }) => {
 
-
-  const [userName, setUserName] = useState("");
+ 
 
   const drawer = useRef(null);
 
-
+  const user = useSelector((state) => state.user.userInfo )
 
 
 
@@ -122,7 +122,7 @@ const Main = ({ navigation }) => {
                 marginBottom: 5,
               }}
             >
-              {`${userName}`}
+            
             </Text>
           </View>
           <Ionicons
@@ -136,22 +136,7 @@ const Main = ({ navigation }) => {
     </View>
   );
 
-  useEffect(() => {
-    getUserName();
-  }, []);
-
-  const getUserName = () => {
-    try {
-      AsyncStorage.getItem("userName").then((value) => {
-        if (value != null) {
-          setUserName(value);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+ 
   return (
     <>
       <DrawerLayoutAndroid
@@ -196,7 +181,7 @@ const Main = ({ navigation }) => {
                   style={{ marginLeft: 10 }}
                 />
               ),
-              headerTitle: `Hi ${userName}`,
+              headerTitle: `Hi ${user.UserName}`,
             }}
           />
           <Tab.Screen name="Offers" component={Offer} />

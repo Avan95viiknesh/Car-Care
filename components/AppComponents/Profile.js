@@ -7,33 +7,45 @@ import { setTheme } from "../../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation, settings,addText }) {
-  const [userName, setUserName] = useState("");
-  const [userNum, setUserNum] = useState("");
 
-  useEffect(() => {
-    getUserName();
-  }, []);
 
-  const getUserName = () => {
-    try {
-      AsyncStorage.getItem("userName").then((value) => {
-        if (value != null) {
-          setUserName(value);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      AsyncStorage.getItem("mobile").then((value) => {
-        if (value != null) {
-          setUserNum(value);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  // const [userName, setUserName] = useState("");
+  // const [userNum, setUserNum] = useState("");
+
+  const user = useSelector((state) => state.user.userInfo )
+
+  // useEffect(() => {
+  //   getUserName();
+  // }, []);
+
+  // const getUserName = () => {
+  //   try {
+  //     AsyncStorage.getItem("currentUser").then((value) => {
+  //       if (value != null) {
+  //         setUserName(value);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   try {
+  //     AsyncStorage.getItem("currentUser").then((value) => {
+  //       if (value != null) {
+  //         setUserNum(value);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
+
+
+
+const onLogout = () => {AsyncStorage.removeItem("currentUser"), console.log("fhhfhfhgfghg") }
+
 
 
   const { theme } = useSelector((state) => state.themeReducer);
@@ -237,10 +249,10 @@ export default function Profile({ navigation, settings,addText }) {
               marginBottom: 5,
             }}
           >
-        { `Hi ${userName}`}
+        { `Hi ${user.UserName}`}
           </Text>
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
-          { ` ${userNum}`}
+          { ` ${user.PhoneNumber}`}
           </Text>
         </View>
       )}
@@ -287,7 +299,7 @@ export default function Profile({ navigation, settings,addText }) {
         height:40
       },
     ]}
-    onPress={() => navigation.navigate("Login")}
+   onPress={onLogout} 
   >
     <Text style={[LoginStyle.btnText, { fontSize: 14 }]}>Log out</Text>
     <Ionicons name="power-outline" color="black" size={20} />

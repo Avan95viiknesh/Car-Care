@@ -88,7 +88,7 @@ const AppHome = ({ navigation }) => {
     },
   ];
 
-  const { theme } = useSelector((state) => state.themeReducer);
+   const { theme } = useSelector((state) => state.themeReducer);
   return (
     <>
       <ScrollView>

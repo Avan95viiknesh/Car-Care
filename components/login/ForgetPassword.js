@@ -5,7 +5,7 @@ import InputField from "./InputField";
 
 export default function ForgetPassword({navigation}) {
   return (
-    <View style={LoginStyle.container}>
+    <View style={{flex:1, justifyContent:'center', padding:20}}>
       <View>
         <Text style={LoginStyle.title}> Forget your password </Text>
         <Text style={LoginStyle.verificationText}>
@@ -21,7 +21,7 @@ export default function ForgetPassword({navigation}) {
       </View>
 
       <View>
-        <TouchableOpacity style={LoginStyle.loginBtn} onPress={() => navigation.navigate("Otp")} >
+        <TouchableOpacity style={[LoginStyle.loginBtn,{marginLeft:'35%',width:'30%'}]} onPress={() => navigation.navigate("Otp")} >
           <Text>OK</Text>
         </TouchableOpacity>
       </View>

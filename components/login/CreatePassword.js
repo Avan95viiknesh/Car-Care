@@ -5,7 +5,7 @@ import InputField from "./InputField";
 
 export default function CreatePassword({navigation}) {
   return (
-    <View style={LoginStyle.container}>
+    <View style={{flex:1, justifyContent:'center', padding:20}}>
       <View>
         <Text style={[LoginStyle.title,{marginBottom:10}]}> Create new password</Text>
          
