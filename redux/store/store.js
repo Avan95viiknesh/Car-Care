@@ -8,6 +8,7 @@ import counter from '../reducer/counterReducer';
 // import authSlice from '../reducer/signupReducer';
 import { configureStore } from "@reduxjs/toolkit";
 import authsliceReducer from '../authsliceReducer';
+import userDataSlice from '../userDataSlice';
 
 
 // const rootReducer = combineReducers({themeReducer,authSlice,counter });
@@ -18,6 +19,7 @@ export const store = configureStore({
     reducer: {
     
       user: authsliceReducer, 
-      themeReducer
+      themeReducer,
+     userDataSlice
     },
   });

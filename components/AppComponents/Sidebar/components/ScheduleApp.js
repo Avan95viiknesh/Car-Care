@@ -33,7 +33,8 @@ export default function ScheduleApp({
   addText
 }) {
   const { theme } = useSelector((state) => state.themeReducer);
-
+  const  val = useSelector((state) => state.userDataSlice);
+  console.log("chkkkkkkkkkkk",val.cartItems)
 //  const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [date, setDate] = useState("");
   const [searchTerm, setSearchTerm] = useState([...Data]);
@@ -130,7 +131,7 @@ const handleRemove = (id) => {
             ]}
           >
             <FlatList
-              data={searchTerm}
+              data={val.cartItems}
               Style={LoginStyle.container}
               renderItem={({ item,id}) => (
                 <View
@@ -142,15 +143,15 @@ const handleRemove = (id) => {
                 >
                   <Pressable
                     style={SidebarStyle.cardlist}
-                    onPress={
-                      item.status === "Confirmed"
-                        ? deliveryInvoice 
-                          ? () => deliveryInvoice()
-                          : () => navigation.navigate("DeliveryDetails")
-                        : upcomingInvoice
-                        ? () => upcomingInvoice()
-                        : () => navigation.navigate("Upcoming")
-                    }
+                    // onPress={
+                    //   item.status === "Confirmed"
+                    //     ? deliveryInvoice 
+                    //       ? () => deliveryInvoice()
+                    //       : () => navigation.navigate("DeliveryDetails")
+                    //     : upcomingInvoice
+                    //     ? () => upcomingInvoice()
+                    //     : () => navigation.navigate("Upcoming")
+                    // }
                   >
                     <View style={styles.textContainer}>
                       <Text style={styles.textStyle}>Owner Name</Text>
@@ -161,7 +162,7 @@ const handleRemove = (id) => {
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.name}
+                        {item.ownName}
                       </Text>
                     </View>
 
@@ -189,7 +190,7 @@ const handleRemove = (id) => {
                           color: theme == "light" ? "black" : "white",
                         }}
                       >
-                        {item.vehNo}
+                        {item.vehno}
                       </Text>
                     </View>
                   </Pressable>

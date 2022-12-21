@@ -249,10 +249,11 @@ const onLogout = () => {AsyncStorage.removeItem("currentUser"), console.log("fhh
               marginBottom: 5,
             }}
           >
-        { `Hi ${user.UserName}`}
+        {user.UserName ?  `Hi ${user.UserName}` : <Text> Hi User </Text>}
           </Text>
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
-          { ` ${user.PhoneNumber}`}
+         
+          {user.PhoneNumber ?  `Hi ${user.PhoneNumber}` : <Text>9000000000 </Text>}
           </Text>
         </View>
       )}

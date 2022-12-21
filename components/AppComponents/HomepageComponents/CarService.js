@@ -15,6 +15,10 @@ import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-neat-date-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { ServiceList } from "../../data/ServiceList";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/userDataSlice";
+
+ 
 
 export default function CarService({ navigation }) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
@@ -27,7 +31,7 @@ export default function CarService({ navigation }) {
   const [ownerName, setOwnerName] = useState();
   const [vehNo, setVehNo] = useState();
   const [contact, setContact] = useState();
-
+  const [adress, setAdress] = useState();
   const [dateNow, setDateNow] = useState(new Date());
   const [mode, setMode] = useState("dateNow");
   const [show, setShow] = useState(false);
@@ -39,6 +43,31 @@ export default function CarService({ navigation }) {
     setMode(currentMode);
   };
 
+const dispatch = useDispatch();
+
+
+  const newObj = [{
+    ownName: ownerName,
+    vehno : vehNo,
+    contact: contact,
+    address: adress,
+    bookingDate:date,
+    expectedDate: data,
+    expectedTime:dateNow,
+    service: value
+  }];
+
+  const handleSubmit = () => {
+   
+    dispatch(addToCart(newObj))
+    
+   navigation.navigate("ScheduleApp");
+  };
+
+
+// console.log(newObj);
+
+
   const onChangeTimeDate = (event, selectedDate) => {
     const currentdate = selectedDate || dateNow;
     setShow(Platform.OS === "ios");
@@ -49,7 +78,7 @@ export default function CarService({ navigation }) {
     let fTime = "Hrs:" + tempDate.getHours() + " | Min" + tempDate.getMinutes();
     setTextShow(fTime);
 
-    console.log("(" + fTime + ")");
+   // console.log("(" + fTime + ")");
   };
 
   const onCancel = () => {
@@ -58,7 +87,7 @@ export default function CarService({ navigation }) {
 
   const onConfirm = (output) => {
     setShow(false);
-    console.log(output);
+   // console.log(output);
     setDateNow(output.timeString);
   };
 
@@ -75,28 +104,17 @@ export default function CarService({ navigation }) {
 
   const onConfirmSingle = (output) => {
     setShowDatePickerSingle(false);
-    console.log(output);
+   // console.log(output);
     setDate(output.dateString);
   };
 
   const onConfirmSingle2 = (output) => {
     setShowDatePickerSingle2(false);
-    console.log(output);
+   // console.log(output);
     setData(output.dateString);
   };
 
-  const handleSubmit = () => {
-    console.log(ownerName, vehNo, contact, value, date, data, textShow);
-    setAddItem((prevArray) => [...prevArray, addItem]);
-    setOwnerName("");
-    setVehNo("");
-    setContact("");
-    setData("");
-    setDate("");
-    setTextShow("");
-    navigation.navigate("ScheduleApp");
-  };
-
+ 
   return (
     <>
  
@@ -148,6 +166,8 @@ export default function CarService({ navigation }) {
       multiline={true}
       textAlignVertical="top"
       style={[LoginStyle.TextInput, { padding: 10, height: 40 }]}
+      onChangeText={(text) => setAdress(text)}
+      value={adress}
     />
         </View>
       </View>
