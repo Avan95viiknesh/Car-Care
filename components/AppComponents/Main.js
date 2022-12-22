@@ -18,7 +18,9 @@ import {
   LogBox
 } from "react-native";
 import { useSelector } from "react-redux";
+ 
 
+ 
 const Tab = createBottomTabNavigator();
 
 const Main = ({ navigation }) => {
@@ -27,10 +29,12 @@ const Main = ({ navigation }) => {
 
   const drawer = useRef(null);
 
-  const user = useSelector((state) => state.user.userInfo )
+  const userName = useSelector((state) => state.authsliceReducer.userInfo )
+
+  console.log(userName.UserName,"user check");
 
 
-
+ 
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
@@ -181,7 +185,7 @@ const Main = ({ navigation }) => {
                   style={{ marginLeft: 10 }}
                 />
               ),
-              headerTitle: `Hi ${user.UserName}`,
+              headerTitle: `Hi ${userName.UserName ? userName.UserName : ''}`
             }}
           />
           <Tab.Screen name="Offers" component={Offer} />

@@ -20,7 +20,7 @@ import { addToCart } from "../../../redux/userDataSlice";
 
  
 
-export default function CarService({ navigation }) {
+export default function CarService({ navigation, customer }) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
   const [showDatePickerSingle2, setShowDatePickerSingle2] = useState(false);
   const [date, setDate] = useState("");

@@ -36,8 +36,8 @@ export default function SignUp({
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
-  const logError = useSelector((state) => state.user.loginErr);
-  const signError = useSelector((state) => state.user.signupErr);
+  const logError = useSelector((state) => state.authsliceReducer );
+  const signError = useSelector((state) =>  state.authsliceReducer );
   const dispatch = useDispatch();
 
   const changeIcon = () => {
@@ -230,7 +230,7 @@ export default function SignUp({
             </View>
 
          
-    { name ? logError && <Text> {logError} </Text> : '' }
+    { name ? logError.loginErr && <Text> {logError.loginErr} </Text> : '' }
 
          
 

@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
 
 
-  selectText: { padding: moderateScale(20), fontSize: moderateScale(20), fontWeight: "bold" },
+  selectText: { padding: moderateScale(0), fontSize: moderateScale(12), fontWeight: "bold", },
 
   homeImage: {
     marginVertical: verticalScale(10),

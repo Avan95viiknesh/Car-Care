@@ -120,42 +120,54 @@ const AppHome = ({ navigation }) => {
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "flex-start",
+              justifyContent: "space-between",
               alignItems: "flex-start",
             }}
           >
-            <View>
+            <TouchableOpacity   style={{
+                  backgroundColor: "#F0CE1B",
+                  borderRadius: moderateScale(15),
+                  paddingHorizontal: horizontalScale(10),
+                  paddingVertical: verticalScale(15),
+                  marginVertical:verticalScale(15),
+                  cursor: "pointer",
+                  height:verticalScale(50),
+                }} 
+                onPress={() => navigation.navigate("NewCustomer")}
+                >
               <Text
                 style={[
                   AppStyle.selectText,
                   {
                     color: theme == "light" ? "black" : "white",
-                    paddingHorizontal: horizontalScale(0),
+                   
                   },
                 ]}
               >
-                Select Service
+                New Customer
               </Text>
-            </View>
+            </TouchableOpacity>
             <View>
               <TouchableOpacity
                 style={{
                   backgroundColor: "#F0CE1B",
-                  borderRadius: moderateScale(10),
-                  marginVertical: verticalScale(15),
-                  marginLeft: horizontalScale(50),
+                  borderRadius: moderateScale(15),
+                  paddingHorizontal: horizontalScale(10),
+                  paddingVertical: verticalScale(15),
+                  marginVertical:verticalScale(15),
                   cursor: "pointer",
+                  height:verticalScale(50),
                 }}
                 onPress={() => navigation.navigate("CarService")}
               >
                 <Text
-                  style={{
-                    color: theme == "light" ? "black" : "white",
-                    backgroundColor: "#F0CE1B",
-                    padding: moderateScale(10),
-                    fontSize: moderateScale(15),
-                    borderRadius: moderateScale(10),
-                  }}
+                  style={[
+                    AppStyle.selectText,
+                    {
+                      color: theme == "light" ? "black" : "white",
+                     
+                    },
+                  ]}
                 >
                   Book Service
                 </Text>

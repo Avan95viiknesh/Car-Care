@@ -11,15 +11,15 @@ import authsliceReducer from '../authsliceReducer';
 import userDataSlice from '../userDataSlice';
 
 
-// const rootReducer = combineReducers({themeReducer,authSlice,counter });
+const rootReducer = combineReducers({themeReducer,userDataSlice,counter,authsliceReducer });
 
-//export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 
-export const store = configureStore({
-    reducer: {
+// export const store = configureStore({
+//     reducer: {
     
-      user: authsliceReducer, 
-      themeReducer,
-     userDataSlice
-    },
-  });
+//       user: authsliceReducer, 
+//       themeReducer,
+//      userDataSlice
+//     },
+//   });

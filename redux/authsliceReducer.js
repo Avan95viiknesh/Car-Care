@@ -40,7 +40,7 @@ export const authSlice = createSlice({
   name: "user",
 
   initialState: {
-    userInfo: {},
+    userInfo: "",
 
     loginErr: "",
     signupErr: "",

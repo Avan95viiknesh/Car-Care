@@ -5,7 +5,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import authsliceReducer from "../../redux/authsliceReducer";
+ 
 export default function Profile({ navigation, settings,addText }) {
 
 
@@ -13,7 +14,7 @@ export default function Profile({ navigation, settings,addText }) {
   // const [userName, setUserName] = useState("");
   // const [userNum, setUserNum] = useState("");
 
-  const user = useSelector((state) => state.user.userInfo )
+  const user = useSelector((state) => state.authsliceReducer.userInfo)
 
   // useEffect(() => {
   //   getUserName();
@@ -249,11 +250,11 @@ const onLogout = () => {AsyncStorage.removeItem("currentUser"), console.log("fhh
               marginBottom: 5,
             }}
           >
-        {user.UserName ?  `Hi ${user.UserName}` : <Text> Hi User </Text>}
+        {   <Text>{ `Hi ${user.UserName ? user.UserName : '' }`}</Text>}
           </Text>
           <Text style={{ color: theme == "light" ? "black" : "white" }}>
          
-          {user.PhoneNumber ?  `Hi ${user.PhoneNumber}` : <Text>9000000000 </Text>}
+            <Text> {user.PhoneNumber ? user.PhoneNumber : '9000000000' } </Text>
           </Text>
         </View>
       )}

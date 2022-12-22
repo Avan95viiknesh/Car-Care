@@ -20,6 +20,7 @@ import TyreWheel from "./components/AppComponents/HomepageComponents/TyreWheel";
 import { SafeAreaView } from "react-native";
 import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleApp";
 import Payment from "./components/AppComponents/Sidebar/components/Payment";
+import NewCustomer from "./components/AppComponents/HomepageComponents/NewCustomer";
 
 const Stack = createNativeStackNavigator();
 
@@ -93,6 +94,12 @@ export default function Home() {
     name="Payment"
     component={Payment }
     options={{ title: "Payment", headerShown: true }}
+    
+  />
+   <Stack.Screen
+    name="NewCustomer"
+    component={NewCustomer }
+    options={{ title: "Create Customer", headerShown: true }}
     
   />
 </Stack.Navigator>
