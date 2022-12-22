@@ -2,8 +2,12 @@ import { View, Text, ScrollView,StyleSheet,TextInput,TouchableOpacity } from "re
 import React,{useState} from "react";
 import CarService from "./CarService";
 import LoginStyle from "../../login/LoginStyle";
+import { useSelector, useDispatch } from "react-redux";
+import { customerData } from "../../../redux/customerDataSlice";
 
-export default function NewCustomer() {
+
+
+export default function NewCustomer({navigation}) {
 
 const [formVal, setFormVal]  = useState({})
 
@@ -15,11 +19,24 @@ const handleChange = (value, fieldName) => {
   };
 
 
-  const handleSubmit = ( ) => {
-     
-    console.log(formVal)
-  }
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.customerDataSlice.addErr)
+  
+//   const handleSubmit = () => {
+//     console.log(formVal)
+//     dispatch(addToCustomer(formVal))
+    
+  
+//   };
 
+
+  
+  const addCusData = async () => {
+
+    console.log(formVal)
+    let obj = formVal
+    dispatch(customerData(obj)).unwrap().then(() => navigation.navigate("ScheduleApp") ) 
+  };
 
   return (
     <>
@@ -36,7 +53,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your Name"
                 onChangeText={(value) => {
-                    handleChange(value, "customerName");
+                    handleChange(value, "CustomerName");
                   }}
                
               />
@@ -47,7 +64,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "90%" }]}
                 placeholder="Enter your mobile No"
                 onChangeText={(value) => {
-                    handleChange(value, "customerNo");
+                    handleChange(value, "MobileNumber");
                   }}
             
               />
@@ -61,7 +78,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your  Address"
                 onChangeText={(value) => {
-                    handleChange(value, "customerAdress");
+                    handleChange(value, "Address");
                   }}
               />
             </View>
@@ -71,7 +88,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "90%" }]}
                 placeholder="Enter your City"
                 onChangeText={(value) => {
-                    handleChange(value, "customerCity");
+                    handleChange(value, "City");
                   }}
               />
             </View>
@@ -85,7 +102,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your CarBrand"
                 onChangeText={(value) => {
-                    handleChange(value, "customerCar");
+                    handleChange(value, "CarBrand");
                   }}
               />
             </View>
@@ -95,7 +112,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "90%" }]}
                 placeholder="Enter your Modal"
                 onChangeText={(value) => {
-                    handleChange(value, "customerModal");
+                    handleChange(value, "CarModel");
                   }}
               />
             </View>
@@ -108,7 +125,7 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="About "
                 onChangeText={(value) => {
-                    handleChange(value, "aboutCustomer");
+                    handleChange(value, "Dscription");
                   }}
               />
             </View>
@@ -118,22 +135,22 @@ const handleChange = (value, fieldName) => {
                 style={[LoginStyle.TextInput, { width: "90%" }]}
                 placeholder="Enter your Veh No"
                 onChangeText={(value) => {
-                    handleChange(value, "customerVehNo");
+                    handleChange(value, "RegNumber");
                   }}
               />
             </View>
           </View>
-
+ 
 
           <View>
         <TouchableOpacity
           style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
-         onPress={handleSubmit} 
+         onPress={addCusData} 
         >
           <Text>Create</Text>
         </TouchableOpacity>
       </View>
-
+  <Text>{error.addErr} </Text>
         </View>
       </ScrollView>
     </>
@@ -178,7 +195,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: "bold",
       textAlign: "center",
-      marginBottom: 30,
+      marginVertical: 30,
     },
   });
   

@@ -143,7 +143,7 @@ export default function SignUp({
     
   };
 
-  console.log(logError, "errorerrorerrorerror");
+  // console.log(logError, "errorerrorerrorerror");
 
   const signOperation = async () => {
     let obj =

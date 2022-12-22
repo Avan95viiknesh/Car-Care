@@ -16,7 +16,7 @@ import DatePicker from "react-native-neat-date-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { ServiceList } from "../../data/ServiceList";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/userDataSlice";
+import { addToShedule } from "../../../redux/userDataSlice";
 
  
 
@@ -53,13 +53,15 @@ const dispatch = useDispatch();
     address: adress,
     bookingDate:date,
     expectedDate: data,
-    expectedTime:dateNow,
+    expectedTime:textShow,
     service: value
   }];
 
+
+  console.log(textShow, 'dateNow check')
   const handleSubmit = () => {
    
-    dispatch(addToCart(newObj))
+    dispatch(addToShedule(newObj))
     
    navigation.navigate("ScheduleApp");
   };
@@ -160,7 +162,7 @@ const dispatch = useDispatch();
           />
         </View>
         <View style={{ width: "50%" }}>
-          <Text style={styles.labelText}>Address</Text>
+          <Text style={styles.labelText}>Model</Text>
 
           <TextInput
       multiline={true}
@@ -168,6 +170,7 @@ const dispatch = useDispatch();
       style={[LoginStyle.TextInput, { padding: 10, height: 40 }]}
       onChangeText={(text) => setAdress(text)}
       value={adress}
+      placeholder=" Enter your model name"
     />
         </View>
       </View>

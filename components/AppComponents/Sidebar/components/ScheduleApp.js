@@ -35,8 +35,8 @@ export default function ScheduleApp({
   addText
 }) {
   const { theme } = useSelector((state) => state.themeReducer);
-  const  val = useSelector((state) => state.userDataSlice);
-  console.log("chkkkkkkkkkkk",val.serviceDetails)
+  const  serviceDetails = useSelector((state) => state.userDataSlice.serviceDetails);
+  console.log("chkkkkkkkkkkk",serviceDetails)
 
   const dispatch = useDispatch();
 //  const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
@@ -60,8 +60,12 @@ export default function ScheduleApp({
   };
 
   useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
+    // LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    if(serviceDetails){
+      console.log(serviceDetails,"serviceDetailsshed")
+    }
+
+  }, [serviceDetails]);
 
  const remove =(item) => {
   dispatch(removeSheduleCard(item))
@@ -75,7 +79,7 @@ export default function ScheduleApp({
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: () => console.log('jj') },
+      { text: "OK", onPress: () => remove(item) },
     ]);
   };
 
@@ -84,16 +88,16 @@ export default function ScheduleApp({
  
  
 
-const handleRemove = (id) => {
-  const newList = searchTerm.filter((item) => item.id!== id);
-  setSearchTerm(newList)
-  console.log(id)
-  Toast.show({
-    type: 'success',
-    position: 'top',
-    text1: 'user deleted successfully'    
-  });
-}
+// const handleRemove = (id) => {
+//   const newList = searchTerm.filter((item) => item.id!== id);
+//   setSearchTerm(newList)
+//   console.log(id)
+//   Toast.show({
+//     type: 'success',
+//     position: 'top',
+//     text1: 'user deleted successfully'    
+//   });
+// }
 
  
 
@@ -142,12 +146,13 @@ const handleRemove = (id) => {
             { backgroundColor: theme == "light" ? "white" : "black" },
           ]}
         >
-          {  val.serviceDetails && 
+          { serviceDetails && 
           <FlatList
-            data={val.serviceDetails}          
+            data={serviceDetails}          
             Style={LoginStyle.container}
             keyExtractor={(item) => item.id}
-            renderItem={({ item,id}) => (
+            renderItem={({ item,index} ) => (
+          
               <View
                 style={
                  [ delivery || upcoming
@@ -176,7 +181,7 @@ const handleRemove = (id) => {
                         color: theme == "light" ? "black" : "white",
                       }}
                     >
-                      {item.ownName} 
+                      {item[0].ownName} 
              
                     </Text>
                   </View>
@@ -191,7 +196,7 @@ const handleRemove = (id) => {
                         color: theme == "light" ? "black" : "white",
                       }}
                     >
-                      {item.address}{" "} 
+                      {item[0].address}{" "} 
 
                     </Text>
                   </View>
@@ -205,7 +210,7 @@ const handleRemove = (id) => {
                         color: theme == "light" ? "black" : "white",
                       }}
                     >
-                      {item.vehno}
+                      {item[0].vehno}
                     </Text>
                   </View>
                 </Pressable>
@@ -218,7 +223,7 @@ const handleRemove = (id) => {
                       style={{ color: theme == "light" ? "black" : "white" }}
                     >
                       {" "}
-                      {item.date}{" "}
+                      {item[0].bookingDate}{" "}
                     </Text>
                   </Text>
                   <Text>
@@ -230,7 +235,7 @@ const handleRemove = (id) => {
                     <Text
                       style={{ color: theme == "light" ? "black" : "white" }}
                     >
-                      {item.time}
+                      {item[0].expectedTime}
                     </Text>
                   </Text>
                   <Text>
@@ -256,7 +261,7 @@ const handleRemove = (id) => {
                     <TouchableOpacity
                       style={SidebarStyle.cancelBtn}
                     //  onPress={() =>handleDelete(item.id)}
-                     onPress={(item) =>remove(item)}
+                     onPress={() =>alertPopup(item)}
                     >
                       <Text>Cancel</Text>
                     </TouchableOpacity>

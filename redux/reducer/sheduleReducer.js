@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  serviceDetails: [],
-};
-
 const cartSlice = createSlice({
   name: "service",
 
@@ -19,7 +15,7 @@ const cartSlice = createSlice({
       //   console.log(tempItem,"hiiiii tempppp")
 
       state.serviceDetails.push(tempItem);
-      console.log(state.serviceDetails,"state.serviceDetails")
+      console.log(state.serviceDetails, "state.serviceDetails");
     },
     removeSheduleCard(state, action) {
       //
@@ -32,10 +28,5 @@ const cartSlice = createSlice({
 
       // console.log(action.payload);
     },
-    
   },
 });
-
-export const { addToShedule, removeSheduleCard } = cartSlice.actions;
-
-export default cartSlice.reducer;
