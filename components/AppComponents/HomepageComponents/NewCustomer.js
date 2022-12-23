@@ -35,13 +35,13 @@ const handleChange = (value, fieldName) => {
 
     console.log(formVal)
     let obj = formVal
-    dispatch(customerData(obj)).unwrap().then(() => navigation.navigate("ScheduleApp") ) 
+    dispatch(customerData(obj)).unwrap().then(() => navigation.navigate("CarService") ) 
   };
 
   return (
     <>
       <ScrollView>
-        <View>
+        <View style={{borderWidth : 1, borderColor:'red', margin:15, borderRadius:15, }}>
           <View>
             <Text style={styles.headingText}> Customer Details </Text>
           </View>

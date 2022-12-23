@@ -45,7 +45,7 @@ export default function Profile({ navigation, settings,addText }) {
 
 
 
-const onLogout = () => {AsyncStorage.removeItem("currentUser"), console.log("fhhfhfhgfghg") }
+const onLogout = () => {AsyncStorage.removeItem("currentUser"); navigation.navigate("Login")  }
 
 
 

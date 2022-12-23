@@ -21,7 +21,7 @@ import UpcomingInvoice from "./UpcomingInvoice";
 import { Data } from "../../../data/Datas";
 import SibebarStyle from "./SibebarStyle";
 import Toast from 'react-native-toast-message';
-import { removeSheduleCard } from "../../../../redux/userDataSlice";
+import { removeSheduleCard,deleteSchedule } from "../../../../redux/userDataSlice";
  
 
 export default function ScheduleApp({

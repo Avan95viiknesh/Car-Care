@@ -19,7 +19,7 @@ headerImage :{
   },
 
   accountHave: {
-    marginLeft: 40,
+ //   marginLeft: 40,
     paddingVertical: 30,
     
   },
@@ -82,7 +82,7 @@ headerImage :{
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFFF",
-   
+    
   },
 
   otpBox: {

@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 import signupAction from "../../redux/action/signupAction";
 import { loginUser, signUpUser } from "../../redux/authsliceReducer";
 import Toast from "react-native-toast-message";
+import { Card } from '@rneui/themed';
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -36,7 +37,7 @@ export default function SignUp({
   const [password, setPassword] = useState("");
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
-  const logError = useSelector((state) => state.authsliceReducer );
+  const logError = useSelector((state) => state.authsliceReducer.loginErr );
   const signError = useSelector((state) =>  state.authsliceReducer );
   const dispatch = useDispatch();
 
@@ -168,9 +169,11 @@ export default function SignUp({
 
   return (
     <>
-      <SafeAreaView style={LoginStyle.container}>
+      <SafeAreaView>
         <ScrollView>
-          <Image
+        <View  style={{flex:1}}>
+        <Card>
+        <Image
             source={require("../../../Car-Care/assets/car-care.jpg")}
             style={[LoginStyle.headerImage, { maxWidth: windowWidth }]}
           />
@@ -230,7 +233,7 @@ export default function SignUp({
             </View>
 
          
-    { name ? logError.loginErr && <Text> {logError.loginErr} </Text> : '' }
+    { name ? logError && <Text style={{color:'red'}}> { logError } </Text> : '' }
 
          
 
@@ -268,7 +271,7 @@ export default function SignUp({
             </View>
 
             <View style={LoginStyle.accountHave}>
-              <Text style={{ fontSize: 15, marginLeft: 20 }}>
+              <Text style={{ fontSize: 15,  textAlign:'center' }}>
                 {name ? "Don't have an account?" : "Already have an account?"}
                 <Text
                   style={{ color: "#F0CE1B", fontSize: 14 }}
@@ -310,6 +313,8 @@ export default function SignUp({
               />
             </View>
           </View>
+          </Card>
+        </View>
         </ScrollView>
       </SafeAreaView>
     </>
