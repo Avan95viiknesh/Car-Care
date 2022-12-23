@@ -8,6 +8,7 @@ import {
   Pressable,
   SafeAreaView,
   Alert,
+  StatusBar
 } from "react-native";
 import React, { useState } from "react";
 import LoginStyle from "./LoginStyle";
@@ -23,6 +24,7 @@ import Toast from "react-native-toast-message";
 import { Card } from '@rneui/themed';
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default function SignUp({
   navigation,
@@ -171,12 +173,15 @@ export default function SignUp({
     <>
       <SafeAreaView>
         <ScrollView>
-        <View  style={{flex:1}}>
-        <Card>
-        <Image
+        <View  style={{flex:1, backgroundColor:'#F0CE1B',paddingVertical:30, }}>
+        <Card containerStyle={{borderRadius:20,padding:20,marginBottom:StatusBar.currentHeight, marginTop:StatusBar.currentHeight, backgroundColor:'#f0ffff'}}>
+       <View style={{justifyContent: 'center',
+    alignItems: 'center',}}>
+       <Image
             source={require("../../../Car-Care/assets/car-care.jpg")}
             style={[LoginStyle.headerImage, { maxWidth: windowWidth }]}
           />
+       </View>
 
           <View>
             <Text style={LoginStyle.title}> {name ? name : "SIGN UP"} </Text>

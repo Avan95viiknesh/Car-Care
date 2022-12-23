@@ -3,14 +3,15 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
 
 headerImage :{
-  width:'100%', height:120,   resizeMode: 'contain', bottom:-55    
+  width: 100,
+  height: 100,  resizeMode:'contain', borderRadius:10 
 },
 
   title: {
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop :60
+ 
     
   },
   lebelText: {
@@ -58,15 +59,19 @@ headerImage :{
   TextInput: {
     width: "100%",
     height: 45,
-    borderRadius: 5,
-    borderWidth: 2,
+    borderRadius: 10,
     borderColor: "#F0CE1B",
     marginBottom: 10,
     padding: 10,
-    backgroundColor:'#FFF'
+    backgroundColor:'#f0e68c'
     
   },
-  
+
+placeholder :{
+  backgroundColor:'red',
+    fontSize: 15,
+     
+  },
 
   inputFieldBaseText: {
     paddingLeft: "63%",

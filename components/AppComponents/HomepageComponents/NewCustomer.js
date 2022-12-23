@@ -1,10 +1,10 @@
-import { View, Text, ScrollView,StyleSheet,TextInput,TouchableOpacity } from "react-native";
+import { View, Text, ScrollView,StyleSheet,TextInput,TouchableOpacity,StatusBar, SafeAreaView } from "react-native";
 import React,{useState} from "react";
 import CarService from "./CarService";
 import LoginStyle from "../../login/LoginStyle";
 import { useSelector, useDispatch } from "react-redux";
 import { customerData } from "../../../redux/customerDataSlice";
-
+import { Card } from '@rneui/themed';
 
 
 export default function NewCustomer({navigation}) {
@@ -40,9 +40,12 @@ const handleChange = (value, fieldName) => {
 
   return (
     <>
-      <ScrollView>
-        <View style={{borderWidth : 1, borderColor:'red', margin:15, borderRadius:15, }}>
-          <View>
+   <SafeAreaView>
+       <ScrollView enableOnAndroid={false}>
+        <View style={styles.container} >
+        <Card containerStyle={{borderRadius:20,padding:20,marginBottom: 50, marginTop:StatusBar.currentHeight, backgroundColor:'#faf0e6'}}>
+       <View>
+       <View>
             <Text style={styles.headingText}> Customer Details </Text>
           </View>
 
@@ -61,7 +64,7 @@ const handleChange = (value, fieldName) => {
             <View style={styles.inputContainer}>
               <Text style={styles.labelText}>Mobile No</Text>
               <TextInput
-                style={[LoginStyle.TextInput, { width: "90%" }]}
+                style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your mobile No"
                 onChangeText={(value) => {
                     handleChange(value, "MobileNumber");
@@ -85,7 +88,7 @@ const handleChange = (value, fieldName) => {
             <View style={styles.inputContainer}>
               <Text style={styles.labelText}>city</Text>
               <TextInput
-                style={[LoginStyle.TextInput, { width: "90%" }]}
+                style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your City"
                 onChangeText={(value) => {
                     handleChange(value, "City");
@@ -109,7 +112,7 @@ const handleChange = (value, fieldName) => {
             <View style={styles.inputContainer}>
               <Text style={styles.labelText}>Car Modal</Text>
               <TextInput
-                style={[LoginStyle.TextInput, { width: "90%" }]}
+                style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your Modal"
                 onChangeText={(value) => {
                     handleChange(value, "CarModel");
@@ -132,7 +135,7 @@ const handleChange = (value, fieldName) => {
             <View style={styles.inputContainer}>
               <Text style={styles.labelText}>Vehicle No</Text>
               <TextInput
-                style={[LoginStyle.TextInput, { width: "90%" }]}
+                style={[LoginStyle.TextInput, { width: "100%" }]}
                 placeholder="Enter your Veh No"
                 onChangeText={(value) => {
                     handleChange(value, "RegNumber");
@@ -151,32 +154,33 @@ const handleChange = (value, fieldName) => {
         </TouchableOpacity>
       </View>
   <Text>{error.addErr} </Text>
+       </View>
+  </Card>
         </View>
       </ScrollView>
+   </SafeAreaView>
     </>
   );
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      margin: 20,
-      marginVertical: 50,
-      padding: 20,
-      borderWidth: 1,
-      borderColor: "#F0CE1B",
-      borderRadius: 10,
-    },
+  
+      container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#F0CE1B",
+        
+      },
+    
   
     boxContainer: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      margin: 10,
-      minWidth: "100%",
+    
+       
     },
   
     inputContainer: {
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: "bold",
       textAlign: "center",
-      marginVertical: 30,
+      marginVertical: 50,
     },
   });
   

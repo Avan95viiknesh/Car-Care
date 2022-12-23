@@ -7,6 +7,7 @@ import {
   ScrollView,
   Platform,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import React, { useState } from "react";
 import LoginStyle from "../../login/LoginStyle";
@@ -17,8 +18,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { ServiceList } from "../../data/ServiceList";
 import { useSelector, useDispatch } from "react-redux";
 import { addToShedule } from "../../../redux/userDataSlice";
-
- 
+import { serviceData } from "../../../redux/customerDataSlice";
+import { Card } from '@rneui/themed';
 
 export default function CarService({ navigation, customer }) {
   const [showDatePickerSingle, setShowDatePickerSingle] = useState(false);
@@ -28,47 +29,50 @@ export default function CarService({ navigation, customer }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([...ServiceList]);
-  const [ownerName, setOwnerName] = useState();
-  const [vehNo, setVehNo] = useState();
-  const [contact, setContact] = useState();
-  const [adress, setAdress] = useState();
+  // const [ownerName, setOwnerName] = useState();
+  // const [vehNo, setVehNo] = useState();
+  // const [contact, setContact] = useState();
+  //const [adress, setAdress] = useState();
   const [dateNow, setDateNow] = useState(new Date());
   const [mode, setMode] = useState("dateNow");
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
-  const [addItem, setAddItem] = useState([]);
+
+  const [addItem, setAddItem] = useState({});
 
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  const handleChange = (value, fieldName) => {
+    setAddItem((prevState) => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
+  };
+
+  
+ // console.log(textShow, "dateNow check");
 
 
-  const newObj = [{
-    ownName: ownerName,
-    vehno : vehNo,
-    contact: contact,
-    address: adress,
-    bookingDate:date,
-    expectedDate: data,
-    expectedTime:textShow,
-    service: value
-  }];
+  // const handleSubmit = () => {
+  //   // dispatch(addToShedule(newObj))
+  //   navigation.navigate("ScheduleApp");
+  // };
 
 
-  console.log(textShow, 'dateNow check')
   const handleSubmit = () => {
+    // dispatch(addToShedule(newObj))
+    dispatch(serviceData(addItem)) 
    
-    dispatch(addToShedule(newObj))
-    
-   navigation.navigate("ScheduleApp");
+   //console.log(addItem);
   };
 
 
-// console.log(newObj);
-
+  // console.log(newObj);
 
   const onChangeTimeDate = (event, selectedDate) => {
     const currentdate = selectedDate || dateNow;
@@ -80,7 +84,7 @@ const dispatch = useDispatch();
     let fTime = "Hrs:" + tempDate.getHours() + " | Min" + tempDate.getMinutes();
     setTextShow(fTime);
 
-   // console.log("(" + fTime + ")");
+    // console.log("(" + fTime + ")");
   };
 
   const onCancel = () => {
@@ -89,7 +93,7 @@ const dispatch = useDispatch();
 
   const onConfirm = (output) => {
     setShow(false);
-   // console.log(output);
+    // console.log(output);
     setDateNow(output.timeString);
   };
 
@@ -106,188 +110,209 @@ const dispatch = useDispatch();
 
   const onConfirmSingle = (output) => {
     setShowDatePickerSingle(false);
-   // console.log(output);
+    // console.log(output);
     setDate(output.dateString);
   };
 
   const onConfirmSingle2 = (output) => {
     setShowDatePickerSingle2(false);
-   // console.log(output);
+    // console.log(output);
     setData(output.dateString);
   };
 
- 
+  
   return (
     <>
- 
- <ScrollView>
-  
- <View style={styles.container}>
-    
-      
-    <View style={{ width: "100%", height: "100%" }}>
-      <View>
-        <Text style={styles.headingText}>Car Service </Text>
-      </View>
+ <SafeAreaView>
+  <ScrollView enableOnAndroid={false}>
 
-      <View style={styles.boxContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Name</Text>
-          <TextInput
-            style={[LoginStyle.TextInput, { width: "100%" }]}
-            placeholder="Enter your Name"
-            onChangeText={(text) => setOwnerName(text)}
-            value={ownerName}
-          />
-        </View>
-        <View style={{ width: "50%" }}>
-          <Text style={styles.labelText}>Vehicle No</Text>
-          <TextInput
-            style={[LoginStyle.TextInput, { width: "90%" }]}
-            placeholder="Enter your Veh No"
-            onChangeText={(text) => setVehNo(text)}
-            value={vehNo}
-          />
-        </View>
-      </View>
+  <View style={styles.container}>
+        <Card containerStyle={{borderRadius:20,padding:20,marginBottom:50, marginTop:StatusBar.currentHeight, backgroundColor:'#faf0e6'}}>
+          <View  >
+            <View>
+              <Text style={styles.headingText}>Car Service </Text>
+            </View>
 
-      <View style={styles.boxContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Contact</Text>
-          <TextInput
-            style={[LoginStyle.TextInput, { width: "100%" }]}
-            placeholder=" Enter your number"
-            onChangeText={(text) => setContact(text)}
-            value={contact}
-          />
-        </View>
-        <View style={{ width: "50%" }}>
-          <Text style={styles.labelText}>Model</Text>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Name</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "100%",borderWidth:0 }]}
+                  placeholder="Enter your Name"
+                  // onChangeText={(value) => {
+                  //   handleChange(value, "CustomerName");
+                  // }}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Vehicle No</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "90%",borderWidth:0  }]}
+                  placeholder="Enter your Veh No"
+                  onChangeText={(value) => {
+                    handleChange(value, "RegNum");
+                  }}
+                />
+              </View>
+            </View>
 
-          <TextInput
-      multiline={true}
-      textAlignVertical="top"
-      style={[LoginStyle.TextInput, { padding: 10, height: 40 }]}
-      onChangeText={(text) => setAdress(text)}
-      value={adress}
-      placeholder=" Enter your model name"
-    />
-        </View>
-      </View>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Contact</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "100%",borderWidth:0  }]}
+                  placeholderStyle={LoginStyle.placeholder}
+                  placeholder=" Enter your number"
+                  onChangeText={(value) => {
+                    handleChange(value, "MobileNum");
+                  }}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Model</Text>
 
-      <View style={styles.boxContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Booking Date</Text>
-          <Text style={[LoginStyle.TextInput, { width: "100%" }]}>
-            {" "}
-            {date}{" "}
-          </Text>
+                <TextInput
+                  multiline={true}
+                  textAlignVertical="top"
+                  style={[LoginStyle.TextInput, { width: "90%", padding: 10, height: 40,borderWidth:0  }]}
+                  // onChangeText={(value) => {
+                  //   handleChange(value, "Model");
+                  // }}
+                  placeholder=" Enter your model name"
+                />
+              </View>
+            </View>
 
-          <Icon
-            name="calendar-outline"
-            size={18}
-            style={{ position: "absolute", right: 30, bottom: 20 }}
-            onPress={openDatePickerSingle}
-          />
-        </View>
-        <View style={{ width: "50%" }}>
-          <Text style={styles.labelText}>Expected Delivery</Text>
-          <Text style={[LoginStyle.TextInput, { width: "90%" }]}>
-            {data}{" "}
-          </Text>
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Booking Date</Text>
+                <Text style={[LoginStyle.TextInput, { width: "100%",borderWidth:0  }]}>
+                  {" "}
+                  {date}{" "}
+                </Text>
 
-          <Icon
-            name="calendar-outline"
-            size={18}
-            style={{ position: "absolute", right: 30, bottom: 20 }}
-            onPress={openDatePickerSingle2}
-          />
-        </View>
-      </View>
+                <Icon
+                  name="calendar-outline"
+                  size={18}
+                  style={{ position: "absolute", right: 30, bottom: 20 }}
+                  onPress={openDatePickerSingle}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Expected Delivery</Text>
+                <Text style={[LoginStyle.TextInput, { width: "90%",borderWidth:0  }]}>
+                  {data}{" "}
+                </Text>
 
-      <View style={styles.boxContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.labelText}>Expected Time</Text>
-          <Text style={[LoginStyle.TextInput, { width: "100%",textAlign:'left',paddingTop:15 }]}>
-            {textShow}{" "}
-          </Text>
+                <Icon
+                  name="calendar-outline"
+                  size={18}
+                  style={{ position: "absolute", right: 30, bottom: 20 }}
+                  onPress={openDatePickerSingle2}
+                />
+              </View>
+            </View>
 
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {/* <TimePicker
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Description</Text>
+                <TextInput
+                  style={[LoginStyle.TextInput, { width: "100%",borderWidth:0  }]}
+                  onChangeText={(value) => {
+                    handleChange(value, "Dscription");
+                  }}
+                />
+              </View>
+
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Pick your need</Text>
+                <TextInput style={[LoginStyle.TextInput, { width: "90%",borderWidth:0  }]} />
+              </View>
+            </View>
+
+            <View style={styles.boxContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Expected Time</Text>
+                <Text
+                  style={[
+                    LoginStyle.TextInput,
+                    { width: "100%", textAlign: "left", paddingTop: 15,borderWidth:0  },
+                  ]}
+                >
+                  {textShow}{" "}
+                </Text>
+
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <TimePicker
   value={{ hours, minutes }}
   onChange={handleChangeTime}    
   
 /> */}
 
-            <Icon
-              name="time-outline"
-              size={18}
-              style={{ position: "absolute", left: 105, bottom: 20 }}
-              onPress={() => showMode("time")}
-            />
-          </View>
-
-         
-        </View>
-        <View style={{ width: "50%" }}>
-          <Text style={styles.labelText}>Service Type</Text>
-
-          <DropDownPicker
-          // mode="BADGE"
-            style={[
-              LoginStyle.TextInput,
-              { width: "90%", height: 45, },
-            ]}
-          //  searchable={true}     
-            showArrowIcon={true}
-         //   listMode="FLATLIST"
-            autoScroll={true}
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-          //  autoScroll={true}
-          multiple={true}
-          closeAfterSelecting={true}
-          min={0}
-          max={3}
-          textStyle={{
-            fontSize: 15,
-            
-          }}
-        //  theme="DARK"
-          />
-        </View>
-
-
-        
-      </View>
-
-      <View>
-        <TouchableOpacity
-          style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
-          onPress={handleSubmit}
-        >
-          <Text>Book Service</Text>
-        </TouchableOpacity>
-      </View>
-      <Text>{addItem} </Text>
-    </View>
-   
-</View>
-   
- </ScrollView>
+                  <Icon
+                    name="time-outline"
+                    size={18}
+                    style={{ position: "absolute", left: 105, bottom: 20 }}
+                    onPress={() => showMode("time")}
+                  />
+                </View>
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.labelText}>Service Type</Text>
+                <TextInput style={[LoginStyle.TextInput, { width: "90%",borderWidth:0  }]}  onChangeText={(value) => {
+                    handleChange(parseInt(value) , "ServiceCode");
+                  }} />
  
+    {/* <DropDownPicker
+    // mode="BADGE"
+    style={[LoginStyle.TextInput, { width: "90%", height: 45,borderWidth:0  }]}
+    //  searchable={true}
+    showArrowIcon={true}
+    //   listMode="FLATLIST"
+    autoScroll={true}
+    open={open}
+    value={value}
+    onChangeText={(value) => {
+      handleChange(value, "ServiceCode");
+    }}
+    items={items}
+    setOpen={setOpen}
+    setValue={setValue}
+    setItems={setItems}
+    //  autoScroll={true}
+    multiple={true}
+    closeAfterSelecting={true}
+    min={0}
+    max={3}
+    textStyle={{
+      fontSize: 15,
+    }}
+    //  theme="DARK"
+  /> */}
+   
+               
+              </View>
+            </View>
 
-
+            <View>
+              <TouchableOpacity
+                style={[LoginStyle.loginBtn, { marginVertical: 10 }]}
+                onPress={handleSubmit}
+              >
+                <Text>Book Service</Text>
+              </TouchableOpacity>
+            </View>
+            {/* <Text>{addItem} </Text> */}
+          </View>
+          </Card>
+        </View>
+  
 
       {show && (
         <DateTimePicker
@@ -333,6 +358,9 @@ const dispatch = useDispatch();
         onCancel={onCancelSingle2}
         onConfirm={onConfirmSingle2}
       />
+
+  </ScrollView>
+ </SafeAreaView>
     </>
   );
 }
@@ -342,20 +370,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
-    marginVertical: 50,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: "#F0CE1B",
-    borderRadius: 10,
+    backgroundColor: "#F0CE1B",
+   
   },
 
   boxContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: 0,
-    minWidth: "100%",
+    
   },
 
   inputContainer: {
@@ -376,4 +399,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
   },
+
+  
 });
