@@ -7,74 +7,103 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // };
 
 
-export const customerData = createAsyncThunk(
-  "Customerdata",
+export const customerData = createAsyncThunk("customerData",
   async (customer) => {
     let userToken = await AsyncStorage.getItem("currentUser");
 
     let new_token = JSON.parse(userToken);
-    
+    console.log(new_token, "VIKY CHECK TOKEN")
+ 
     try {
       const response = await axios({
         method: "POST",
         url: "https://fioritest.avaniko.com/Customer/AddCustomer",
         data: customer,
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${new_token.access_token}`,
         },
 
       });
 
       return response.data;
+   
     } catch (error) {
       const customerError = error?.response?.data?.error ?? "Unknown error";
-      console.log(error, "check error");
+     // console.log(error, "check error");
       throw new Error(customerError);
     }
+
   }
+  
 );
 
 
+export const serviceData = createAsyncThunk("serviceData",
+  async (customer) => {
+     let userToken = await AsyncStorage.getItem("currentUser");
 
-
-export const serviceData = createAsyncThunk(
-  "Servicedata",
-  async (service) => {
-    // let userToken = await AsyncStorage.getItem("currentUser");
-
-    // let new_token = JSON.parse(userToken);
-    // console.log(new_token, "SERVICE TOKEN")
+    let new_token = JSON.parse(userToken);
+  //  console.log(new_token, "SERVICE TOKEN")
     try {
       const response = await axios({
         method: "POST",
         url: "https://fioritest.avaniko.com/Customer/AddService",
-        data: service,
+        data: customer,
         headers: {
           "Content-Type": "application/json",
-          Authorization:"Bearer 0BHU-PIr3TqZHmOq28sD3ZTGaVkd97AyUe4a3QwyAKRMpevDBMykTFgnPrym02XTKYHMlwkYPS8DRDPjbO8KOVoU8hAY7P45-zybW2pgb6vfox8U581Lr08UVwQmB5Gjob4xkfAj-0mqnim_mp7AlYDfLILm2nPlGZ4Kef31K8DIIBd0WHkp9VooyNAm-JYfWjl0g8EPWUZgwS60TdfL2A_fx_A2TLAgXGo-kdxYLD3U81wn7LE-Au4VOIJhR3-7nRq59FzSoG84D4bwPTbt6zQ6PbZWbRRV63BgghMyUK9hGPdzksdGg5OEqfDNTBmn",
-        },
+          Authorization: `Bearer ${new_token.access_token}`,
+         },
        
       });
 
       return response.data;
     } catch (error) {
-      const customerError = error?.response?.data?.error ?? "Unknown error";
-      console.log(error, "check error");
-      throw new Error(customerError);
+      const serviceError = error?.response?.data?.error ?? "Unknown error";
+    //  console.log(error, "check error");
+      throw new Error(serviceError);
     }
   }
 );
 
 
+export const getServiceData = createAsyncThunk("getServiceData",
+  async (customer) => {
+     let userToken = await AsyncStorage.getItem("currentUser");
+
+    let new_token = JSON.parse(userToken);
+    console.log(new_token.access_token, "SERVICEGETttttttt TOKEN")
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "https://fioritest.avaniko.com/GetCustomerServList ",
+        data: customer,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${new_token.access_token}`,
+         },
+       
+      });
+      console.log(response,"check resrrrr")
+      return response.data;
+
+    } catch (error) {
+      const getSerError = error?.response?.data?.error ?? "Unknown error";
+      console.log(error, "check error");
+      throw new Error(getSerError);
+    }
+  }
+);
 
 
 export const authSlice = createSlice({
   name: "customer",
 
   initialState: {
-    customerInfo: "",
-
-    addErr: "",
+    customerInfo: [],
+    cusErr: "",
+    serErr:"",
+    getSerErr:""
   },
 
   reducers: {
@@ -92,13 +121,46 @@ export const authSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(customerData.fulfilled, (state, action) => {});
+    builder.addCase(customerData.fulfilled, (state, action) => {
+       state.customerInfo = action.payload;
+      
+    });
 
     builder.addCase(customerData.pending, (state, action) => {});
 
     builder.addCase(customerData.rejected, (state, action) => {
-      state.signupErr = action.error.message;
+      state.cusErr = action.error.message;
     });
+
+
+    builder.addCase(serviceData.fulfilled, (state, action) => {
+     // AsyncStorage.getItem("currentUser", JSON.stringify(action.payload));
+
+     state.customerInfo = action.payload;
+  });
+
+    builder.addCase(serviceData.pending, (state, action) => {});
+
+    builder.addCase(serviceData.rejected, (state, action) => {
+      state.serErr = action.error.message;
+    });
+
+
+
+    builder.addCase(getServiceData.fulfilled, (state, action) => {
+ 
+     state.customerInfo = action.payload;
+     console.log(action.payload,"checking function");
+   });
+ 
+     builder.addCase(getServiceData.pending, (state, action) => {});
+ 
+     builder.addCase(getServiceData.rejected, (state, action) => {
+       state.getSerErr = action.error.message;
+     });
+ 
+
+
   },
 });
 

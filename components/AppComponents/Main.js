@@ -18,6 +18,9 @@ import {
   LogBox
 } from "react-native";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getServiceData } from "../../redux/customerDataSlice";
+ 
  
 
  
@@ -26,6 +29,14 @@ const Tab = createBottomTabNavigator();
 const Main = ({ navigation }) => {
 
  
+  const dispatch = useDispatch()
+ 
+  useEffect(() => {
+  
+    dispatch(getServiceData());
+console.log("effect call")
+
+  },[])
 
   const drawer = useRef(null);
 

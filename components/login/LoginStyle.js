@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
 
 headerImage :{
-  width: 100,
-  height: 100,  resizeMode:'contain', borderRadius:10 
+    resizeMode:'contain', borderRadius:10 , marginVertical:10
 },
 
   title: {
@@ -74,7 +73,7 @@ placeholder :{
   },
 
   inputFieldBaseText: {
-    paddingLeft: "63%",
+    paddingLeft: "56%",
     color: "#F0CE1B",
     fontSize: 14,
     paddingTop:10

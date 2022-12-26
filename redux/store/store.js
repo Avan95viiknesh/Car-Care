@@ -5,7 +5,7 @@ import themeReducer from '../reducer/reducer';
 import toastMessage from '../reducer/toastReducer';
 //import signReducer from '../reducer/signupReducer';
 import counter from '../reducer/counterReducer';
-// import authSlice from '../reducer/signupReducer';
+ //import authSlice from '../reducer/signupReducer';
 //import { configureStore } from "@reduxjs/toolkit";
 import authsliceReducer from '../authsliceReducer';
 import userDataSlice from '../userDataSlice';
@@ -23,6 +23,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunk));
     
 //       user: authsliceReducer, 
 //       themeReducer,
-//      userDataSlice
+//      userDataSlice,
+//      customer : customerDataSlice
 //     },
 //   });

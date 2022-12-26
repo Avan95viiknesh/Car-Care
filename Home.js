@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./components/login/SignUp";
 import Login from "./components/login/Login";
@@ -22,9 +22,15 @@ import ScheduleApp from "./components/AppComponents/Sidebar/components/ScheduleA
 import Payment from "./components/AppComponents/Sidebar/components/Payment";
 import NewCustomer from "./components/AppComponents/HomepageComponents/NewCustomer";
 
+ 
+
 const Stack = createNativeStackNavigator();
 
+
 export default function Home() {
+
+
+//console.log("check get req",res )
 
   return (
    <>

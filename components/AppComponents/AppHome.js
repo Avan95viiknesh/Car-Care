@@ -19,6 +19,13 @@ import {
   verticalScale,
   moderateScale,
 } from "../../Dimensions/Metrics";
+import { Dimensions } from "react-native";
+
+
+
+
+const deviceHeight = Dimensions.get("window").height;
+const deviceWidth = Dimensions.get("window").width;
 
 const AppHome = ({ navigation }) => {
   useEffect(() => {
@@ -91,12 +98,14 @@ const AppHome = ({ navigation }) => {
    const { theme } = useSelector((state) => state.themeReducer);
   return (
     <>
-      <ScrollView>
+     <View style={{flex:1}}>
+     <ScrollView>
         <View
           style={{
-            paddingVertical: verticalScale(20),
-            paddingHorizontal: horizontalScale(20),
+            padding:20,
             backgroundColor: theme == "light" ? "#FFFFFF" : "black",
+            height:deviceHeight,
+            width:deviceWidth,
           }}
         >
           <View>
@@ -207,6 +216,7 @@ const AppHome = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
+     </View>
     </>
   );
 };
