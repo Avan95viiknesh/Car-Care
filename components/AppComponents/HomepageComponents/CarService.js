@@ -43,7 +43,7 @@ export default function CarService({ navigation, customer }) {
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
 
-  const [addItem, setAddItem] = useState([customerInfo]);
+  const [addItem, setAddItem] = useState([ ]);
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -52,7 +52,7 @@ export default function CarService({ navigation, customer }) {
 
   const customerInfo = useSelector((state) => state.customerDataSlice.customerInfo);
   const dispatch = useDispatch();
- 
+  dispatch(getServiceData());
 //   useEffect(() => {
   
 //     dispatch(getServiceData());
@@ -105,7 +105,7 @@ export default function CarService({ navigation, customer }) {
     dispatch(serviceData(data))
       .unwrap()
       .then(() => {
-        dispatch(getServiceData());
+      
         navigation.navigate("ScheduleApp");
         
       })
@@ -193,7 +193,7 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "100%", borderWidth: 0 },
                         ]}
-                        value={addItem.length -1 ? addItem.CustomerName : ''}
+                      //  value={  addItem.CustomerName }
                         placeholder="Enter your Name"
                         onChangeText={(value) => {
                           handleChange(value, "CustomerName");
@@ -230,7 +230,7 @@ export default function CarService({ navigation, customer }) {
                         placeholderStyle={LoginStyle.placeholder}
                         placeholder=" Enter your number"
                     
-                        value={addItem.length -1 ? addItem.MobileNumber : ''}
+                     //   value={addItem.length -1 ? addItem.MobileNumber : ''}
                         onChangeText={(value) => {
                           handleChange(value, "MobileNum");
                         }}

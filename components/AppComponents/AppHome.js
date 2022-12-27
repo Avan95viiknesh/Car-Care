@@ -6,12 +6,13 @@ import {
   FlatList,
   ScrollView,
   LogBox,
+  Pressable,
 } from "react-native";
 import InputField from "../../components/login/InputField";
 import Icon from "react-native-vector-icons/Ionicons";
 import AppStyle from "./AppStyle";
 import LoginStyle from "../login/LoginStyle";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from "../../redux/action/action";
 import {
@@ -20,14 +21,14 @@ import {
   moderateScale,
 } from "../../Dimensions/Metrics";
 import { Dimensions } from "react-native";
-
-
-
+import { Card } from "@rneui/themed";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
 
 const AppHome = ({ navigation }) => {
+  const [toggle, setToggle] = useState(false);
+
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, []);
@@ -95,56 +96,87 @@ const AppHome = ({ navigation }) => {
     },
   ];
 
-   const { theme } = useSelector((state) => state.themeReducer);
+  const { theme } = useSelector((state) => state.themeReducer);
   return (
     <>
-     <View style={{flex:1}}>
-     <ScrollView>
-        <View
-          style={{
-            padding:20,
-            backgroundColor: theme == "light" ? "#FFFFFF" : "black",
-            height:deviceHeight,
-            width:deviceWidth,
-          }}
-        >
-          <View>
-            <InputField placeholder="Search" />
-            <Icon
-              name="search-outline"
-              size={24}
-              style={{
-                position: "absolute",
-                right: horizontalScale(20),
-                bottom: verticalScale(20),
-              }}
-            />
-          </View>
-          <View style={{}}>
-            <Image
-              source={require("../.././assets/images/App/Home/home-banner.png")}
-              style={AppStyle.homeImage}
-            />
-          </View>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
+              padding: 20,
+              backgroundColor: theme == "light" ? "#FFFFFF" : "black",
+              height: deviceHeight,
+              width: deviceWidth,
             }}
           >
-            <TouchableOpacity   style={{
-                  backgroundColor: "#F0CE1B",
-                  borderRadius: moderateScale(15),
-                  paddingHorizontal: horizontalScale(10),
-                  paddingVertical: verticalScale(15),
-                  marginVertical:verticalScale(15),
-                  cursor: "pointer",
-                  height:verticalScale(50),
-                }} 
+            <View>
+              <InputField placeholder="Search" />
+              <Icon
+                name="search-outline"
+                size={24}
+                style={{
+                  position: "absolute",
+                  right: horizontalScale(20),
+                  bottom: verticalScale(20),
+                }}
+              />
+            </View>
+            <View style={{}}>
+              <Image
+                source={require("../.././assets/images/App/Home/home-banner.png")}
+                style={AppStyle.homeImage}
+              />
+            </View>
+            
+            <View style={{flexDirection:'column',justifyContent:'flex-start', alignItems:'flex-start'}}>
+              <FlatList
+                data={DATA}
+                horizontal={toggle ? false : true}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  marginVertical: verticalScale(20),
+                  
+                }}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={AppStyle.cardSection}>
+                    <View style={AppStyle.cardDetails}>
+                      <Text
+                        style={{
+                          color: theme == "light" ? "black" : "white",
+                          marginBottom: verticalScale(5),
+                        }}
+                      >
+                        {item.icon}{" "}
+                      </Text>
+                      <Text
+                        style={[
+                          AppStyle.cardTextstyle,
+                          { color: theme == "light" ? "black" : "white" },
+                        ]}
+                      >
+                        {item.name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              />
+
+              {/* <Text onPress={() => setToggle(!toggle)}>More...</Text> */}
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                alignItems: "flex-start",
+              }}
+            >
+              <Pressable
                 onPress={() => navigation.navigate("NewCustomer")}
-                >
-              <Text
+              >
+                {/* <Text
                 style={[
                   AppStyle.selectText,
                   {
@@ -154,69 +186,70 @@ const AppHome = ({ navigation }) => {
                 ]}
               >
                 New Customer
-              </Text>
-            </TouchableOpacity>
-            <View>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#F0CE1B",
-                  borderRadius: moderateScale(15),
-                  paddingHorizontal: horizontalScale(10),
-                  paddingVertical: verticalScale(15),
-                  marginVertical:verticalScale(15),
-                  cursor: "pointer",
-                  height:verticalScale(50),
-                }}
+              </Text> */}
+
+                <Card  containerStyle={{
+                  borderRadius: 20,
+                  padding: 10,                 
+                  borderColor: '#F0CE1B', borderWidth: 1,
+                  width: 150, height: 200,
+                }}>
+                  <Card.Title>NEW TO SERVICE</Card.Title>
+                  <Card.Divider />
+                  <View style={{ position: "relative", alignItems: "center" }}>
+                    <Image
+                      style={{ width: '100%', height: 80, marginBottom:10 }}
+                      resizeMode="contain"
+                      source={
+                      require("../.././assets/images/App/Home/new-service.png")
+                      }
+                    />
+                    <Text>CLICK HERE</Text>
+                  </View>
+                </Card>
+              </Pressable>
+
+              <View>
+              <Pressable
                 onPress={() => navigation.navigate("CarService")}
               >
-                <Text
-                  style={[
-                    AppStyle.selectText,
-                    {
-                      color: theme == "light" ? "black" : "white",
-                     
-                    },
-                  ]}
-                >
-                  Book Service
-                </Text>
-              </TouchableOpacity>
+                {/* <Text
+                style={[
+                  AppStyle.selectText,
+                  {
+                    color: theme == "light" ? "black" : "white",
+                   
+                  },
+                ]}
+              >
+                New Customer
+              </Text> */}
+
+                <Card containerStyle={{
+                  borderRadius: 20,
+                  padding: 10,                 
+                  borderColor: '#F0CE1B', borderWidth: 1,
+                  width: 150, height: 200,
+                }}>
+                  <Card.Title>FOR BOOKING</Card.Title>
+                  <Card.Divider />
+                  <View style={{ position: "relative", alignItems: "center" }}>
+                  <Image
+                      style={{ width: '100%', height: 80, marginBottom:10 }}
+                      resizeMode="contain"
+                      source={
+                      require("../.././assets/images/App/Home/book-service.png")
+                      }
+                    />
+                    <Text>CLICK HERE</Text>
+                  </View>
+                </Card>
+              </Pressable>
+              </View>
             </View>
           </View>
-          <View>
-            <FlatList
-              data={DATA}
-              numColumns={4}
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginVertical: verticalScale(20),
-                marginBottom: verticalScale(80),
-              }}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={AppStyle.cardSection} hoverStyle={AppStyle.cardHOver}>
-                  <View style={AppStyle.cardDetails}>
-                    <Text
-                      style={{ color: theme == "light" ? "black" : "white",marginBottom: verticalScale(5) }}
-                    >
-                      {item.icon}{" "}
-                    </Text>
-                    <Text
-                      style={[
-                        AppStyle.cardTextstyle,
-                        { color: theme == "light" ? "black" : "white",  },
-                      ]}
-                    >
-                      {item.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </View>
-      </ScrollView>
-     </View>
+        </ScrollView>
+      </View>
     </>
   );
 };
