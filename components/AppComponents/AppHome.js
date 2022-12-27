@@ -127,8 +127,14 @@ const AppHome = ({ navigation }) => {
                 style={AppStyle.homeImage}
               />
             </View>
-            
-            <View style={{flexDirection:'column',justifyContent:'flex-start', alignItems:'flex-start'}}>
+
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               <FlatList
                 data={DATA}
                 horizontal={toggle ? false : true}
@@ -138,7 +144,6 @@ const AppHome = ({ navigation }) => {
                   alignItems: "center",
                   flexDirection: "row",
                   marginVertical: verticalScale(20),
-                  
                 }}
                 renderItem={({ item }) => (
                   <TouchableOpacity style={AppStyle.cardSection}>
@@ -169,13 +174,11 @@ const AppHome = ({ navigation }) => {
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "space-evenly",
-                alignItems: "flex-start",
+                justifyContent:'space-around',
+                alignItems:'flex-start'
               }}
             >
-              <Pressable
-                onPress={() => navigation.navigate("NewCustomer")}
-              >
+              <Pressable onPress={() => navigation.navigate("NewCustomer")}>
                 {/* <Text
                 style={[
                   AppStyle.selectText,
@@ -188,21 +191,24 @@ const AppHome = ({ navigation }) => {
                 New Customer
               </Text> */}
 
-                <Card  containerStyle={{
-                  borderRadius: 20,
-                  padding: 10,                 
-                  borderColor: '#F0CE1B', borderWidth: 1,
-                  width: 150, height: 200,
-                }}>
-                  <Card.Title>NEW TO SERVICE</Card.Title>
-                  <Card.Divider />
+                <Card
+                  containerStyle={{
+                    borderRadius: 20,
+                    padding: 10,
+                    borderColor: "#F0CE1B",
+                    borderWidth: 1,
+                    width: 100,
+                    height: 120,
+                     
+                  }}
+                >
+                  {/* <Card.Title>NEW TO SERVICE</Card.Title>
+                  <Card.Divider /> */}
                   <View style={{ position: "relative", alignItems: "center" }}>
                     <Image
-                      style={{ width: '100%', height: 80, marginBottom:10 }}
+                      style={{ width: 100, height: 50, marginBottom: 10,padding: 0  }}
                       resizeMode="contain"
-                      source={
-                      require("../.././assets/images/App/Home/new-service.png")
-                      }
+                      source={require("../.././assets/images/App/Home/new-service.png")}
                     />
                     <Text>CLICK HERE</Text>
                   </View>
@@ -210,10 +216,8 @@ const AppHome = ({ navigation }) => {
               </Pressable>
 
               <View>
-              <Pressable
-                onPress={() => navigation.navigate("CarService")}
-              >
-                {/* <Text
+                <Pressable onPress={() => navigation.navigate("CarService")}>
+                  {/* <Text
                 style={[
                   AppStyle.selectText,
                   {
@@ -225,26 +229,30 @@ const AppHome = ({ navigation }) => {
                 New Customer
               </Text> */}
 
-                <Card containerStyle={{
-                  borderRadius: 20,
-                  padding: 10,                 
-                  borderColor: '#F0CE1B', borderWidth: 1,
-                  width: 150, height: 200,
-                }}>
-                  <Card.Title>FOR BOOKING</Card.Title>
-                  <Card.Divider />
-                  <View style={{ position: "relative", alignItems: "center" }}>
-                  <Image
-                      style={{ width: '100%', height: 80, marginBottom:10 }}
-                      resizeMode="contain"
-                      source={
-                      require("../.././assets/images/App/Home/book-service.png")
-                      }
-                    />
-                    <Text>CLICK HERE</Text>
-                  </View>
-                </Card>
-              </Pressable>
+                  <Card
+                    containerStyle={{
+                      borderRadius: 20,
+                      padding: 10,
+                      borderColor: "#F0CE1B",
+                      borderWidth: 1,
+                      width: 100,
+                      height: 120,
+                    }}
+                  >
+                    {/* <Card.Title>FOR BOOKING</Card.Title>
+                  <Card.Divider /> */}
+                    <View
+                      style={{ position: "relative", alignItems: "center" }}
+                    >
+                      <Image
+                        style={{ width: 100, height: 50, marginBottom: 10,  }}
+                        resizeMode="contain"
+                        source={require("../.././assets/images/App/Home/book-service.png")}
+                      />
+                      <Text>CLICK HERE</Text>
+                    </View>
+                  </Card>
+                </Pressable>
               </View>
             </View>
           </View>

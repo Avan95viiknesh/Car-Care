@@ -43,7 +43,7 @@ export default function CarService({ navigation, customer }) {
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
 
-  const [addItem, setAddItem] = useState([ ]);
+  const [addItem, setAddItem] = useState();
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -52,7 +52,7 @@ export default function CarService({ navigation, customer }) {
 
   const customerInfo = useSelector((state) => state.customerDataSlice.customerInfo);
   const dispatch = useDispatch();
-  dispatch(getServiceData());
+  // dispatch(getServiceData());
 //   useEffect(() => {
   
 //     dispatch(getServiceData());
