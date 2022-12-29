@@ -247,7 +247,7 @@ const AppHome = ({ navigation }) => {
                         resizeMode="contain"
                         source={require("../.././assets/images/App/Home/book-service.png")}
                       />
-                      <Text>Book service</Text>
+                      <Text>Book services</Text>
                     </View>
                   </Card>
                 </Pressable>
