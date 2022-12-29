@@ -15,6 +15,18 @@ export default StyleSheet.create({
     
   },
 
+homeCard: {
+  borderRadius: 20,
+  padding: 10,
+   borderWidth: 0,
+  width: 120,
+  height: 120,
+  shadowOffset: {width: -2, height: 4},  
+  shadowColor: '#52006A',  
+  elevation: 20,  
+   shadowOpacity: 0.2,  
+   shadowRadius: 3,
+},
 
   selectText: { padding: moderateScale(0), fontSize: moderateScale(12), fontWeight: "bold", },
 

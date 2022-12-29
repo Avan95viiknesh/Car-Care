@@ -39,11 +39,11 @@ export default function NewCustomer({ navigation }) {
   //   };
 
   const addCusData = async () => {
-    console.log(formVal,"check ob value");
+  //  console.log(formVal,"check ob value");
     let obj = formVal;
     dispatch(customerData(obj))
       .unwrap()
-      .then(() => {   dispatch(getServiceData());  navigation.navigate("CarService")});
+      .then(() => {  navigation.navigate("CarService")});
   };
 
   return (
@@ -93,7 +93,7 @@ export default function NewCustomer({ navigation }) {
                     <View style={styles.inputContainer}>
                       <Text style={styles.labelText}>Adress</Text>
                       <TextInput
-                        style={[LoginStyle.TextInput, { width: "100%" }]}
+                        style={[LoginStyle.TextInput ]}
                         placeholder="Enter your  Address"
                         onChangeText={(value) => {
                           handleChange(value, "Address");

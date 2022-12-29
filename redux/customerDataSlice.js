@@ -41,7 +41,7 @@ export const customerData = createAsyncThunk("customerData",
 
 export const serviceData = createAsyncThunk("serviceData",
   async (customer) => {
-     let userToken = await AsyncStorage.getItem("currentUser");
+     let userToken = await AsyncStorage.getItem("");
 
     let new_token = JSON.parse(userToken);
   //  console.log(new_token, "SERVICE TOKEN")
@@ -135,7 +135,7 @@ export const authSlice = createSlice({
 
 
     builder.addCase(serviceData.fulfilled, (state, action) => {
-     // AsyncStorage.getItem("currentUser", JSON.stringify(action.payload));
+      AsyncStorage.getItem("currentUser", JSON.stringify(action.payload));
 
      state.customerInfo = action.payload;
   });

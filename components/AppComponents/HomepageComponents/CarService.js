@@ -70,7 +70,7 @@ export default function CarService({ navigation, customer }) {
   //   setAddItem(customerInfo[customerInfo.length - 1]);
   // }, [customerInfo]);
   
-  console.log(customerInfo,"check vicky check 3uyb")
+ // console.log(customerInfo,"check vicky check 3uyb")
   const handleChange = (value, fieldName) => {
     setAddItem((prevState) => ({
       ...prevState,

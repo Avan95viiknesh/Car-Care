@@ -129,14 +129,23 @@ const AppHome = ({ navigation }) => {
             </View>
 
             <View
-              style={{
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
-              }}
+              
             >
+              <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+             alignItems:'center',
+           
+              }}>
+             
+                <Text>ServiceLists...</Text>
+           
+                {/* <Text>View all</Text> */}
+              </View>
+
               <FlatList
                 data={DATA}
+               // numColumns={4}
                 horizontal={toggle ? false : true}
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{
@@ -174,11 +183,14 @@ const AppHome = ({ navigation }) => {
             <View
               style={{
                 flexDirection: "row",
-                justifyContent:'space-around',
-                alignItems:'flex-start'
+                alignItems: "center",
+                justifyContent: "space-around",
               }}
             >
-              <Pressable onPress={() => navigation.navigate("NewCustomer")}>
+              <Pressable
+                onPress={() => navigation.navigate("NewCustomer")}
+                style={{ color: theme == "light" ? "black" : "white" }}
+              >
                 {/* <Text
                 style={[
                   AppStyle.selectText,
@@ -191,26 +203,21 @@ const AppHome = ({ navigation }) => {
                 New Customer
               </Text> */}
 
-                <Card
-                  containerStyle={{
-                    borderRadius: 20,
-                    padding: 10,
-                    borderColor: "#F0CE1B",
-                    borderWidth: 1,
-                    width: 100,
-                    height: 120,
-                     
-                  }}
-                >
+                <Card containerStyle={AppStyle.homeCard}>
                   {/* <Card.Title>NEW TO SERVICE</Card.Title>
                   <Card.Divider /> */}
                   <View style={{ position: "relative", alignItems: "center" }}>
                     <Image
-                      style={{ width: 100, height: 50, marginBottom: 10,padding: 0  }}
+                      style={{
+                        width: 100,
+                        height: 50,
+                        marginBottom: 10,
+                        padding: 0,
+                      }}
                       resizeMode="contain"
                       source={require("../.././assets/images/App/Home/new-service.png")}
                     />
-                    <Text>CLICK HERE</Text>
+                    <Text>New to service </Text>
                   </View>
                 </Card>
               </Pressable>
@@ -229,27 +236,18 @@ const AppHome = ({ navigation }) => {
                 New Customer
               </Text> */}
 
-                  <Card
-                    containerStyle={{
-                      borderRadius: 20,
-                      padding: 10,
-                      borderColor: "#F0CE1B",
-                      borderWidth: 1,
-                      width: 100,
-                      height: 120,
-                    }}
-                  >
+                  <Card containerStyle={AppStyle.homeCard}>
                     {/* <Card.Title>FOR BOOKING</Card.Title>
                   <Card.Divider /> */}
                     <View
                       style={{ position: "relative", alignItems: "center" }}
                     >
                       <Image
-                        style={{ width: 100, height: 50, marginBottom: 10,  }}
+                        style={{ width: 100, height: 50, marginBottom: 10 }}
                         resizeMode="contain"
                         source={require("../.././assets/images/App/Home/book-service.png")}
                       />
-                      <Text>CLICK HERE</Text>
+                      <Text>Book service</Text>
                     </View>
                   </Card>
                 </Pressable>

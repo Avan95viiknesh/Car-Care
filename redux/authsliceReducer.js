@@ -60,7 +60,7 @@ export const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
         AsyncStorage.setItem("currentUser", JSON.stringify(action.payload));
 
-       // AsyncStorage.getItem("currentUser", JSON.stringify(action.payload));
+        AsyncStorage.getItem("currentUser", JSON.stringify(action.payload));
 
       state.userInfo = action.payload;
     });
