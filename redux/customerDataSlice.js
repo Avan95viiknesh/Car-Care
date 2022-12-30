@@ -69,10 +69,10 @@ export const serviceData = createAsyncThunk("serviceData",
 
 export const getServiceData = createAsyncThunk("getServiceData",
   async (customer) => {
-    //  let userToken = await AsyncStorage.getItem("currentUser");
+     let userToken = await AsyncStorage.getItem("currentUser");
 
-    // let new_token = JSON.parse(userToken);
-    // console.log(new_token.access_token, "SERVICEGETttttttt TOKEN")
+    let new_token = JSON.parse(userToken);
+    console.log(new_token.access_token, "SERVICEGETttttttt TOKEN")
     try {
       const response = await axios({
         method: "GET",
@@ -80,9 +80,8 @@ export const getServiceData = createAsyncThunk("getServiceData",
         data: customer,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer
-          auYgzUxX_CJRHkNnhq6e_TO2z9eHAb4E7hVELLbE9C2y-1Q7nP62seJuwdkwev6gavyc14miDz_ZLOWPIiCFXfbeHWvX77dT6oTK4I7QxCjRtBP26sZu_927jPm7YBMmENVBUphTF3-N4H9HvXPJe_ohIreuDNVBSeC240xgybrm9bDEam17Ywh09OvxzA7nqvYsuQA-HUQRTVwVdHfoCuD5366rsHtvbfbExY-8xIQdwhlKyNflzH3FvsAhRmx9pQzrU_QxPA-4FQk3q0PGuzd0LhL-E-h5OqcwdSOKkZ3YRAavz_2LjrXj7WDGie4n`,
-         },
+          Authorization: `Bearer ${new_token.access_token}`,
+          },
        
       });
     //  console.log(response,"check resrrrr")

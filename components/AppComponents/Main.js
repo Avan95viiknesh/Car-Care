@@ -34,7 +34,7 @@ const Main = ({ navigation }) => {
   useEffect(() => {
   
     dispatch(getServiceData());
-console.log("effect call")
+ //console.log("effect call")
 
   },[])
 

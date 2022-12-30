@@ -8,8 +8,9 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
+  RefreshControl,
 } from "react-native";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import LoginStyle from "../../login/LoginStyle";
 import Icon from "react-native-vector-icons/Ionicons";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -18,10 +19,14 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { ServiceList } from "../../data/ServiceList";
 import { useSelector, useDispatch } from "react-redux";
 import { addToShedule } from "../../../redux/userDataSlice";
-import { serviceData,customerData,getServiceData } from "../../../redux/customerDataSlice";
+import {
+  serviceData,
+  customerData,
+  getServiceData,
+} from "../../../redux/customerDataSlice";
 import { Card } from "@rneui/themed";
 import { Dimensions } from "react-native";
- 
+import { ServiceCheckBox } from "../../data/ServiceCheckBox";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -32,9 +37,10 @@ export default function CarService({ navigation, customer }) {
   const [date, setDate] = useState("");
   const [data, setData] = useState("");
   const [open, setOpen] = useState(false);
+  const [openCheckbox, setOpenCheckbox] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([...ServiceList]);
-  // const [ownerName, setOwnerName] = useState();
+   const [checkItems, setCheckItems] = useState(...ServiceCheckBox);
   // const [vehNo, setVehNo] = useState();
   // const [contact, setContact] = useState();
   //const [adress, setAdress] = useState();
@@ -43,40 +49,35 @@ export default function CarService({ navigation, customer }) {
   const [show, setShow] = useState(false);
   const [textShow, setTextShow] = useState("...");
 
-  const [addItem, setAddItem] = useState();
+  const customerInfo = useSelector(
+    (state) => state.customerDataSlice.customerInfo
+  );
+  const dispatch = useDispatch();
+
+  const [addItem, setAddItem] = useState(customerInfo[customerInfo.length - 1]);
 
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
 
-  const customerInfo = useSelector((state) => state.customerDataSlice.customerInfo);
-  const dispatch = useDispatch();
-  // dispatch(getServiceData());
-//   useEffect(() => {
-  
-//     dispatch(getServiceData());
-// console.log("effect call")
-
-//   },[dispatch])
-
-
-
-  // const addItemAction = (item) => {
-  //   setAddItem(item)}
- 
-
-  // useEffect(() => {
-  //   setAddItem(customerInfo[customerInfo.length - 1]);
-  // }, [customerInfo]);
-  
- // console.log(customerInfo,"check vicky check 3uyb")
   const handleChange = (value, fieldName) => {
     setAddItem((prevState) => ({
       ...prevState,
       [fieldName]: value,
     }));
   };
+
+  // const [refreshing, setRefreshing] = useState(false);
+
+  // const wait = (timeout) => {
+  //   return new Promise((resolve) => setTimeout(resolve, timeout));
+  // };
+
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true);
+  //   wait(2000).then(() => setRefreshing(false));
+  // }, []);
 
   // console.log(textShow, "dateNow check");
 
@@ -97,23 +98,40 @@ export default function CarService({ navigation, customer }) {
 
   //   //console.log(addItem);
   // };
- 
-
 
   const handleSubmit = async () => {
-    let data = addItem;
-    dispatch(serviceData(data))
+    let data = {
+      ServiceCode: addItem.ServiceCode,
+      MobileNum: addItem.MobileNumber,
+      Dscription: addItem.Dscription,
+      RegNum: addItem.RegNumber,
+    };
+
+    dispatch(getServiceData(data))
       .unwrap()
       .then(() => {
-      
+        dispatch(serviceData());
         navigation.navigate("ScheduleApp");
-        
       })
       .catch(() => {
         error(true);
       });
-    console.log(data, "payload data");
   };
+
+  // const handleSubmit = async () => {
+  //   let data = addItem;
+  //   dispatch(serviceData(data))
+  //     .unwrap()
+  //     .then(() => {
+
+  //       navigation.navigate("ScheduleApp");
+
+  //     })
+  //     .catch(() => {
+  //       error(true);
+  //     });
+  //   console.log(data, "payload data");
+  // };
 
   // console.log(newObj);
 
@@ -163,13 +181,16 @@ export default function CarService({ navigation, customer }) {
     setData(output.dateString);
   };
 
-
-
   return (
     <>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <SafeAreaView>
-          <ScrollView enableOnAndroid={false}>
+          <ScrollView
+            enableOnAndroid={false}
+            // refreshControl={
+            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            // }
+          >
             <View style={styles.container}>
               <Card
                 containerStyle={{
@@ -193,13 +214,11 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "100%", borderWidth: 0 },
                         ]}
-                      //  value={  addItem.CustomerName }
+                        value={addItem.CustomerName}
                         placeholder="Enter your Name"
                         onChangeText={(value) => {
                           handleChange(value, "CustomerName");
                         }}
-
-                    
                       />
                     </View>
                     <View style={styles.inputContainer}>
@@ -209,12 +228,11 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "90%", borderWidth: 0 },
                         ]}
-                      
+                        value={addItem.RegNumber}
                         placeholder="Enter your Veh No"
                         onChangeText={(value) => {
                           handleChange(value, "RegNumber");
                         }}
- 
                       />
                     </View>
                   </View>
@@ -229,8 +247,7 @@ export default function CarService({ navigation, customer }) {
                         ]}
                         placeholderStyle={LoginStyle.placeholder}
                         placeholder=" Enter your number"
-                    
-                     //   value={addItem.length -1 ? addItem.MobileNumber : ''}
+                        value={addItem.MobileNumber}
                         onChangeText={(value) => {
                           handleChange(value, "MobileNum");
                         }}
@@ -251,6 +268,7 @@ export default function CarService({ navigation, customer }) {
                             borderWidth: 0,
                           },
                         ]}
+                        value={addItem.CarModel}
                         onChangeText={(value) => {
                           handleChange(value, "Model");
                         }}
@@ -307,6 +325,7 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "100%", borderWidth: 0 },
                         ]}
+                        value={addItem.Dscription}
                         onChangeText={(value) => {
                           handleChange(value, "Dscription");
                         }}
@@ -315,15 +334,53 @@ export default function CarService({ navigation, customer }) {
 
                     <View style={styles.inputContainer}>
                       <Text style={styles.labelText}>Service Code</Text>
-                      <TextInput
+                      {/* <TextInput
                         style={[
                           LoginStyle.TextInput,
                           { width: "90%", borderWidth: 0 },
                         ]}
+                        value={addItem.ServiceCode}
                         onChangeText={(value) => {
                           handleChange(parseInt(value), "ServiceCode");
                         }}
-                      />
+                      /> */}
+
+                       <DropDownPicker
+                        showTickIcon={true}
+                        dropDownContainerStyle={{
+                          backgroundColor: "#faf0e6",
+                        }}
+                        itemSeparator={true}
+                        style={[
+                          LoginStyle.TextInput,
+                          { width: "90%", height: 45, borderWidth: 0 },
+                        ]}
+                        showArrowIcon={true}
+                        listMode="SCROLLVIEW"
+                        autoScroll={true}
+                        value={addItem.ServiceCode}
+                        onChangeText={(value) => {
+                          handleChange(value, "ServiceCode");
+                        }}
+                        selectedItemContainerStyle={{
+                          backgroundColor: "#F0CE1B",
+                        }}
+                        checkItems={checkItems}
+                        openCheckbox={openCheckbox}
+                        setOpenCheckbox={setOpenCheckbox}
+                        setValue={setValue}
+                        setCheckItems={setCheckItems}
+                        multiple={true}
+                        closeAfterSelecting={true}
+                        min={0}
+                        max={3}
+                        textStyle={{
+                          fontSize: 15,
+                        }}
+                        disabledItemLabelStyle={{
+                          opacity: 0.5,
+                        }}
+                      />  
                     </View>
                   </View>
 
@@ -371,47 +428,44 @@ export default function CarService({ navigation, customer }) {
                     </View>
                     <View style={styles.inputContainer}>
                       <Text style={styles.labelText}>Service Type</Text>
-    
-     <DropDownPicker
-    // mode="BADGE"
-    showTickIcon={true}
-  //  hideSelectedItemIcon={true}
-  dropDownContainerStyle={{
-    backgroundColor: "#faf0e6"
-  }}
-  itemSeparator={true}
-    style={[LoginStyle.TextInput, { width: "90%", height: 45,borderWidth:0  }]}
-    //  searchable={true}
-    showArrowIcon={true}
-      listMode="SCROLLVIEW"
-    autoScroll={true}
-    open={open}
-    value={value}
-    onChangeText={(value) => {
-      handleChange(value, "ServiceCode");
-    }}
-    selectedItemContainerStyle={{
-      backgroundColor: "#F0CE1B"
-    }}
-    items={items}
-    setOpen={setOpen}
-    setValue={setValue}
-    setItems={setItems}
-    //  autoScroll={true}
-    multiple={true}
-    closeAfterSelecting={true}
-    min={0}
-    max={3}
-    textStyle={{
-      fontSize: 15,
-    }}
-    disabledItemLabelStyle={{
-      opacity: 0.5
-    }}
-    
-    
-  /> 
-    
+
+                      <DropDownPicker
+                        // mode="BADGE"
+                        showTickIcon={true}
+                        //  hideSelectedItemIcon={true}
+                        dropDownContainerStyle={{
+                          backgroundColor: "#faf0e6",
+                        }}
+                        itemSeparator={true}
+                        style={[
+                          LoginStyle.TextInput,
+                          { width: "90%", height: 45, borderWidth: 0 },
+                        ]}
+                        //  searchable={true}
+                        showArrowIcon={true}
+                        listMode="SCROLLVIEW"
+                        autoScroll={true}
+                        open={open}
+                        value={value}
+                        selectedItemContainerStyle={{
+                          backgroundColor: "#F0CE1B",
+                        }}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                        //  autoScroll={true}
+                        multiple={true}
+                        closeAfterSelecting={true}
+                        min={0}
+                        max={3}
+                        textStyle={{
+                          fontSize: 15,
+                        }}
+                        disabledItemLabelStyle={{
+                          opacity: 0.5,
+                        }}
+                      />
                     </View>
                   </View>
 
@@ -484,8 +538,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F0CE1B",
-    height:deviceHeight,
-    width:deviceWidth,
+    height: deviceHeight,
+    width: deviceWidth,
   },
 
   boxContainer: {
