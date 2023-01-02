@@ -10,6 +10,6 @@ export  const ServiceList = [
   { label: "Windshield & lights", value: "windsield",  },
   { label: "Clutches & brakes", value: "clutch & brake", },
   { label: "Insurance Claims", value: "insurance", },
-  { label: "Insurance Claims", value: "insurance",},
+  
   
 ]

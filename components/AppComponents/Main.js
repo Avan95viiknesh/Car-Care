@@ -32,8 +32,9 @@ const Main = ({ navigation }) => {
   const dispatch = useDispatch()
  
   useEffect(() => {
+      dispatch(getServiceData());
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   
-    dispatch(getServiceData());
  //console.log("effect call")
 
   },[])
@@ -42,13 +43,10 @@ const Main = ({ navigation }) => {
 
   const userName = useSelector((state) => state.authsliceReducer.userInfo )
 
-  console.log(userName.UserName,"user check");
+ // console.log(userName.UserName,"user check");
 
 
  
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
 
 
   const navigationView = () => (

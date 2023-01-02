@@ -64,7 +64,7 @@ export default function ScheduleApp({
   };
 
   useEffect(() => {
-    // LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
     if (serviceDetails) {
       console.log(serviceDetails, "serviceDetailsshed");
     }

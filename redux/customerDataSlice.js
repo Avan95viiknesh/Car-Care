@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // };
 
 
-export const customerData = createAsyncThunk("customerData",
+export const customerData =  createAsyncThunk("customerData",
   async (customer) => {
     let userToken = await AsyncStorage.getItem("currentUser");
 
@@ -41,7 +41,7 @@ export const customerData = createAsyncThunk("customerData",
 
 export const serviceData = createAsyncThunk("serviceData",
   async (customer) => {
-     let userToken = await AsyncStorage.getItem("");
+     let userToken = await AsyncStorage.getItem("currentUser");
 
     let new_token = JSON.parse(userToken);
   //  console.log(new_token, "SERVICE TOKEN")
@@ -150,7 +150,7 @@ export const authSlice = createSlice({
     builder.addCase(getServiceData.fulfilled, (state, action) => {
  
      state.customerInfo = action.payload;
-     console.log(action.payload,"checking function");
+    // console.log(action.payload,"checking function");
    });
  
      builder.addCase(getServiceData.pending, (state, action) => {});

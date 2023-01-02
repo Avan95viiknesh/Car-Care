@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   StatusBar,
   RefreshControl,
+  Pressable,
 } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
 import LoginStyle from "../../login/LoginStyle";
@@ -27,6 +28,7 @@ import {
 import { Card } from "@rneui/themed";
 import { Dimensions } from "react-native";
 import { ServiceCheckBox } from "../../data/ServiceCheckBox";
+import Dropdown from "../../data/Dropdown";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -40,7 +42,7 @@ export default function CarService({ navigation, customer }) {
   const [openCheckbox, setOpenCheckbox] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([...ServiceList]);
-   const [checkItems, setCheckItems] = useState(...ServiceCheckBox);
+  const [checkItems, setCheckItems] = useState(...ServiceCheckBox);
   // const [vehNo, setVehNo] = useState();
   // const [contact, setContact] = useState();
   //const [adress, setAdress] = useState();
@@ -67,6 +69,8 @@ export default function CarService({ navigation, customer }) {
       [fieldName]: value,
     }));
   };
+
+  const [selected, setSelected] = useState(undefined);
 
   // const [refreshing, setRefreshing] = useState(false);
 
@@ -186,10 +190,10 @@ export default function CarService({ navigation, customer }) {
       <View style={{ flex: 1 }}>
         <SafeAreaView>
           <ScrollView
-            enableOnAndroid={false}
-            // refreshControl={
-            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            // }
+          // enableOnAndroid={false}
+          // // refreshControl={
+          // //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          // // }
           >
             <View style={styles.container}>
               <Card
@@ -214,7 +218,7 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "100%", borderWidth: 0 },
                         ]}
-                        value={addItem.CustomerName}
+                     //   value={addItem.CustomerName}
                         placeholder="Enter your Name"
                         onChangeText={(value) => {
                           handleChange(value, "CustomerName");
@@ -228,7 +232,7 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "90%", borderWidth: 0 },
                         ]}
-                        value={addItem.RegNumber}
+                      //  value={addItem.RegNumber}
                         placeholder="Enter your Veh No"
                         onChangeText={(value) => {
                           handleChange(value, "RegNumber");
@@ -247,7 +251,7 @@ export default function CarService({ navigation, customer }) {
                         ]}
                         placeholderStyle={LoginStyle.placeholder}
                         placeholder=" Enter your number"
-                        value={addItem.MobileNumber}
+                     //   value={addItem.MobileNumber}
                         onChangeText={(value) => {
                           handleChange(value, "MobileNum");
                         }}
@@ -268,7 +272,7 @@ export default function CarService({ navigation, customer }) {
                             borderWidth: 0,
                           },
                         ]}
-                        value={addItem.CarModel}
+                       // value={addItem.CarModel}
                         onChangeText={(value) => {
                           handleChange(value, "Model");
                         }}
@@ -325,7 +329,7 @@ export default function CarService({ navigation, customer }) {
                           LoginStyle.TextInput,
                           { width: "100%", borderWidth: 0 },
                         ]}
-                        value={addItem.Dscription}
+                       // value={addItem.Dscription}
                         onChangeText={(value) => {
                           handleChange(value, "Dscription");
                         }}
@@ -333,7 +337,7 @@ export default function CarService({ navigation, customer }) {
                     </View>
 
                     <View style={styles.inputContainer}>
-                      <Text style={styles.labelText}>Service Code</Text>
+                      <Text style={styles.labelText}>Other Services</Text>
                       {/* <TextInput
                         style={[
                           LoginStyle.TextInput,
@@ -343,13 +347,32 @@ export default function CarService({ navigation, customer }) {
                         onChangeText={(value) => {
                           handleChange(parseInt(value), "ServiceCode");
                         }}
-                      /> */}
+                      />   */}
 
+                      {/* {!!selected && (
+        <Text>
+          Selected: label = {selected.label} and value = {selected.value}
+        </Text>
+      )} */}
+                     
+                     <Dropdown
+                  
+                        label="Select Item"
+                        data={ServiceCheckBox}
+                        onSelect={setSelected}
+                        autoScroll={true}
+                     //   value={addItem.ServiceCode}
+                        onChangeText={(value) => {
+                          handleChange(parseInt(value), "ServiceCode");
+                        }}
+                      />
+                   
+                    
+
+                      {/* 
                        <DropDownPicker
                         showTickIcon={true}
-                        dropDownContainerStyle={{
-                          backgroundColor: "#faf0e6",
-                        }}
+                      
                         itemSeparator={true}
                         style={[
                           LoginStyle.TextInput,
@@ -362,25 +385,13 @@ export default function CarService({ navigation, customer }) {
                         onChangeText={(value) => {
                           handleChange(value, "ServiceCode");
                         }}
-                        selectedItemContainerStyle={{
-                          backgroundColor: "#F0CE1B",
-                        }}
-                        checkItems={checkItems}
-                        openCheckbox={openCheckbox}
-                        setOpenCheckbox={setOpenCheckbox}
-                        setValue={setValue}
-                        setCheckItems={setCheckItems}
+                        
                         multiple={true}
                         closeAfterSelecting={true}
                         min={0}
                         max={3}
-                        textStyle={{
-                          fontSize: 15,
-                        }}
-                        disabledItemLabelStyle={{
-                          opacity: 0.5,
-                        }}
-                      />  
+                        
+                      />    */}
                     </View>
                   </View>
 
@@ -493,6 +504,10 @@ export default function CarService({ navigation, customer }) {
                 onChange={onChangeTimeDate}
                 onCancel={onCancel}
                 onConfirm={onConfirm}
+                // onChange={(value) => {
+                //   setDateInput(value);
+                //   handleChange(value, "DeliveryTime");
+                // }}
               />
             )}
             <DatePicker
@@ -510,6 +525,10 @@ export default function CarService({ navigation, customer }) {
               mode={"single"}
               onCancel={onCancelSingle}
               onConfirm={onConfirmSingle}
+              onChange={(value) => {
+                setDateInput(value);
+                handleChange(value, "EntryDate");
+              }}
             />
 
             <DatePicker
@@ -525,6 +544,10 @@ export default function CarService({ navigation, customer }) {
               mode={"single"}
               onCancel={onCancelSingle2}
               onConfirm={onConfirmSingle2}
+              onChange={(value) => {
+                setDateInput(value);
+                handleChange(value, "DeliveryDate");
+              }}
             />
           </ScrollView>
         </SafeAreaView>
@@ -535,6 +558,7 @@ export default function CarService({ navigation, customer }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F0CE1B",
